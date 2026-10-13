@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Scorching Astrology</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#2F2B4F;--muted:#8F8AA6;--card:rgba(255,255,255,.72);--line:#DAD3EE;
+--bg1:#F8F2FD;--bg2:#E6FBE2;--h1:#9DC8C4;--h2:#9CF0A8;
+--green:#A5F2A0;--lav:#D7C5F2;--btnt:#2F2B4F;--sel:#9B7AE0;--note:#1F1FE0;--red:#D8121C;
+--gold:#C9B63A;--moon:#B9B3C4;--venus:#E39BB0;--merc:#5CCB92;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#ECE9FA;--muted:#9F9AC0;--card:rgba(255,255,255,.07);--line:#3A3566;--bg1:#1C1938;--bg2:#15302F;--h1:#3F6A6B;--h2:#3E8A58;--note:#8FA0FF;--red:#FF6B72;--sel:#B79BF0;--gold:#E2CF63;--moon:#B9B3C4;--venus:#F0B1C3}}
+:root[data-theme="dark"]{--ink:#ECE9FA;--muted:#9F9AC0;--card:rgba(255,255,255,.07);--line:#3A3566;--bg1:#1C1938;--bg2:#15302F;--h1:#3F6A6B;--h2:#3E8A58;--note:#8FA0FF;--red:#FF6B72;--sel:#B79BF0;--gold:#E2CF63;--venus:#F0B1C3}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:var(--ink);font:400 1rem/1.55 Lexend,system-ui,sans-serif;background:linear-gradient(180deg,var(--bg1),var(--bg2)) fixed}
+.app{max-width:460px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
+.top{background:linear-gradient(100deg,var(--h1),var(--h2));padding:26px 20px;text-align:center;color:#fff;font-weight:500;letter-spacing:.32em;font-size:1.05rem}
+.planets{display:block;width:100%;height:auto;margin:26px 0 6px}
+.view{padding:6px 24px 28px;flex:1;animation:in .35s ease both}
+.view[hidden]{display:none}
+@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+h1{font-size:2.3rem;line-height:1.15;font-weight:600;margin:26px 0 56px}
+.row{display:flex;gap:14px;align-items:flex-start;margin:0 0 44px}
+.row p,.row div{margin:0;flex:1;font-size:1.08rem;font-weight:300}
+.row.r{flex-direction:row-reverse;text-align:right}
+.row.r .sym{text-align:left}
+.sym{font-size:2rem;line-height:1;width:44px;flex:none;text-align:right;font-family:"Segoe UI Symbol","Noto Sans Symbols 2","Apple Symbols",sans-serif}
+.row b{font-weight:600}
+.row h3{margin:0 0 8px;font-size:1.1rem;font-weight:600}
+.row ul{margin:0 0 14px;padding-left:20px;font-weight:500}
+.btn{appearance:none;border:0;border-radius:12px;font:500 .95rem Lexend,sans-serif;color:var(--btnt);padding:12px 26px;cursor:pointer;box-shadow:0 3px 8px rgba(60,50,110,.22);transition:transform .15s,filter .15s}
+.btn:active{transform:translateY(1px) scale(.98)}
+.btn:hover{filter:brightness(1.04)}
+.btn.g{background:var(--green)}.btn.l{background:var(--lav);text-decoration:underline}
+:focus-visible{outline:3px solid var(--sel);outline-offset:3px}
+.c{text-align:center;margin:26px 0}
+.pk{all:unset;box-sizing:border-box;display:flex;gap:14px;width:100%;padding:16px 8px;cursor:pointer;border-radius:16px;position:relative;margin-bottom:12px;transition:background .2s,box-shadow .2s}
+.pk:focus-visible{outline:3px solid var(--sel);outline-offset:2px}
+.pk[aria-pressed="true"]{background:var(--card);box-shadow:inset 0 0 0 2.5px var(--sel)}
+.bd{flex:none;position:relative;width:60px;height:44px;display:grid;place-items:center;font-weight:600;font-size:.92rem}
+.bd svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.bd b{position:relative;color:var(--tx)}
+.bd .pl{fill:var(--pf)}.bd .rg{fill:none;stroke:var(--rs);stroke-width:3}
+.g1{--pf:#7EF58A;--rs:#35C24B;--tx:#10551C}.g2{--pf:#A9DEF7;--rs:#5FAEE0;--tx:#1F62B8}.g3{--pf:#F5869F;--rs:#DD4D69;--tx:#8E0F2A}
+.pk h3{margin:0 0 6px;font-size:1.05rem;line-height:1.35;font-weight:500}
+.fmt{display:flex;gap:10px;align-items:center;font-style:italic;font-weight:300;margin-bottom:8px}
+.fmt svg{width:22px;height:22px;stroke:#3B6FD8;fill:none;stroke-width:1.8;flex:none}
+.nt{color:var(--note);font-style:italic;font-size:.82rem;font-weight:500;margin:0 0 10px}
+.pr{font-size:1.5rem;font-weight:600}
+.chk{position:absolute;right:10px;top:12px;width:24px;height:24px;border-radius:50%;background:var(--sel);color:#fff;display:none;place-items:center;font-size:.85rem}
+.pk[aria-pressed="true"] .chk{display:grid}
+.pk .tx{flex:1;min-width:0;padding-right:36px}
+.pk{transition:background .2s,box-shadow .2s,transform .2s}
+.pk::after{content:"";position:absolute;right:10px;top:12px;width:24px;height:24px;border-radius:50%;border:2px dashed var(--sel);opacity:0;transform:scale(.7);transition:opacity .2s,transform .2s}
+.pk[aria-pressed="true"]::after{display:none}
+.bd svg{transition:transform .3s}
+.pk:active{transform:scale(.99)}
+@media (hover:hover){
+.pk:not([aria-pressed="true"]):hover{background:var(--card);box-shadow:inset 0 0 0 1.5px var(--sel),0 10px 22px rgba(90,70,150,.16);transform:translateY(-2px)}
+.pk[aria-pressed="true"]:hover{transform:translateY(-2px)}
+.pk:hover::after{opacity:1;transform:none}
+.pk:hover .bd svg{transform:rotate(-14deg) scale(1.12)}
+.pk:not([aria-pressed="true"]):hover .pr{color:var(--sel)}
+}
+@media (prefers-reduced-motion:reduce){.pk,.bd svg,.pk::after{transition:none}.pk:hover{transform:none!important}}
+.dis{font-size:.75rem;font-style:italic;font-weight:400;margin:28px 0 0;padding-left:18px}
+.dis li{margin-bottom:6px}.dis .rd{color:var(--red);text-decoration:underline}
+.bar{position:sticky;bottom:0;display:flex;gap:12px;align-items:center;justify-content:space-between;padding:10px 24px calc(10px + env(safe-area-inset-bottom,0px));background:linear-gradient(180deg,transparent,var(--bg2) 40%)}
+.bar[hidden]{display:none}
+.bar span{font-weight:600}
+.zod{display:flex;justify-content:space-between;padding:10px 14px;color:var(--muted);font-size:1.25rem;font-family:"Segoe UI Symbol","Noto Sans Symbols 2","Apple Symbols",sans-serif}
+.end{height:34px;background:linear-gradient(100deg,var(--h1),var(--h2));opacity:.85}
+h2{font-size:1.6rem;margin:24px 0 8px;font-weight:600}
+label{display:block;font-weight:500;margin:16px 0 5px;font-size:.95rem}
+input{width:100%;font:inherit;color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:11px 12px}
+input:focus{outline:3px solid var(--sel);outline-offset:1px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cb{display:flex;gap:8px;align-items:center;font-weight:300;margin-top:8px}.cb input{width:auto}
+.sm{background:var(--card);border-radius:14px;padding:12px 14px;font-size:.92rem}
+.sm div{display:flex;justify-content:space-between;gap:12px;padding:3px 0}
+.sm .t{border-top:1px solid var(--line);margin-top:6px;padding-top:8px;font-weight:600}
+textarea{width:100%;font:inherit;font-size:.85rem;color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:10px}
+.msg{font-size:.9rem;color:var(--muted);min-height:1.4em}
+.stp{display:flex;flex-wrap:wrap;gap:4px 6px;align-items:center;margin:14px 0 4px;font-size:.78rem;color:var(--muted)}
+.stp i{width:10px;height:10px;border-radius:50%;background:var(--line);flex:none}
+.stp i.on{background:var(--sel)}
+.stp span{margin-right:10px}.stp span.cur{color:var(--ink);font-weight:500}
+.card{background:var(--card);border-radius:16px;padding:16px;margin:14px 0}
+.card h3{margin:0 0 10px;font-size:1.05rem;font-weight:600}
+.kv{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px solid var(--line);font-size:.92rem}
+.kv b{font-weight:500;text-align:right;word-break:break-all}
+.card .btn{margin-top:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.cc{position:relative;border-radius:20px;padding:18px 20px;margin:14px 0;min-height:176px;color:#fff;text-shadow:0 1px 3px rgba(40,30,90,.35);background:linear-gradient(120deg,var(--h1),var(--h2));box-shadow:0 10px 24px rgba(60,50,110,.22);display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.cc-t{letter-spacing:.28em;font-size:.8rem;font-weight:500}
+.cc-chip{width:38px;height:28px;border-radius:6px;background:linear-gradient(135deg,#FCE7A0,#FBBE5E);margin-top:12px}
+.cc-n{font-size:.85rem;font-weight:300}
+.cc-a{font-size:1.9rem;font-weight:600}
+.cc-p{position:absolute;right:18px;bottom:20px;display:flex;gap:6px;align-items:flex-end}
+.cc-p i{display:block;border-radius:50%}
+.lock{display:flex;gap:8px;align-items:center;justify-content:center;font-size:.8rem;color:var(--muted);text-align:center;margin:0 0 14px}
+.lock svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;flex:none}
+.ok{display:grid;place-items:center;margin:18px 0 6px}.ok svg{width:78px;height:78px}
+.ok circle{fill:#7EF58A;stroke:#35C24B;stroke-width:3}
+.ok path{fill:none;stroke:#10551C;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:50;animation:tick .6s .25s ease-out both}
+@keyframes tick{from{stroke-dashoffset:50}to{stroke-dashoffset:0}}
+#okh{text-align:center}
+.opt{all:unset;box-sizing:border-box;display:block;width:100%;background:var(--card);border-radius:16px;padding:16px 18px;margin-bottom:12px;cursor:pointer;box-shadow:inset 0 0 0 1.5px var(--line);transition:transform .2s,box-shadow .2s}
+.opt[hidden]{display:none}
+.opt:focus-visible{outline:3px solid var(--sel);outline-offset:2px}
+.opt b{display:block;font-weight:600;font-size:1.05rem}.opt span{color:var(--muted);font-size:.9rem}
+@media (hover:hover){.opt:hover{box-shadow:inset 0 0 0 1.5px var(--sel),0 10px 22px rgba(90,70,150,.16);transform:translateY(-2px)}}
+.chh{display:flex;gap:12px;align-items:center;justify-content:space-between;margin:14px 0 4px}.chh .btn{padding:8px 16px}
+.msgs{display:flex;flex-direction:column;gap:8px;min-height:40vh;max-height:56vh;overflow-y:auto;padding:12px;background:var(--card);border-radius:16px}
+.bb{max-width:80%;padding:9px 13px;border-radius:16px;font-size:.95rem;overflow-wrap:anywhere}
+.bb small{display:block;opacity:.6;font-size:.7rem;margin-top:3px}
+.me{align-self:flex-end;background:var(--lav);color:var(--btnt);border-bottom-right-radius:5px}
+.ot{align-self:flex-start;background:var(--bg1);border:1px solid var(--line);border-bottom-left-radius:5px}
+.chf{display:flex;gap:8px;margin-top:12px}.chf input{flex:1}.chf .btn{padding:10px 18px}
+.cd{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:8px 0 12px}
+.cd div{background:var(--bg1);border:1px solid var(--line);border-radius:14px;text-align:center;padding:10px 4px}
+.cd b{display:block;font:600 1.7rem Lexend,sans-serif;font-variant-numeric:tabular-nums}
+.cd span{font-size:.75rem;color:var(--muted)}
+.afm,.ah{display:flex;gap:8px;margin:12px 0}.afm input,.ah input{flex:1}
+.tw{overflow-x:auto;background:var(--card);border-radius:14px}
+#at{border-collapse:collapse;width:100%;min-width:860px;font-size:.85rem}
+#at th{text-align:left;font-weight:600;padding:10px 12px;border-bottom:2px solid var(--line);white-space:nowrap}
+#at td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.tg{display:inline-block;padding:2px 10px;border-radius:99px;background:var(--lav);color:var(--btnt);font-size:.75rem;white-space:nowrap}
+.tg.good{background:#7EF58A;color:#10551C}
+.tg.nk{background:#FCE7A0;color:#5C4400}
+.adm{all:unset;display:block;margin:6px auto 14px;font-size:.72rem;color:var(--muted);cursor:pointer;text-decoration:underline}
+.adm:focus-visible{outline:3px solid var(--sel);outline-offset:2px}
+.lgf{max-width:380px;margin:0 auto}
+.pw{position:relative}.pw input{padding-right:48px}
+.eye{all:unset;position:absolute;right:6px;top:50%;transform:translateY(-50%);width:38px;height:38px;display:grid;place-items:center;cursor:pointer;color:var(--muted);border-radius:10px}
+.eye:focus-visible{outline:3px solid var(--sel);outline-offset:1px}
+.eye svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.dh{display:flex;justify-content:space-between;align-items:center;gap:10px}.dh .btn{padding:8px 16px}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:12px 0}
+.st{background:var(--card);border-radius:16px;padding:14px 16px}.st b{display:block;font:600 1.5rem Lexend,sans-serif}.st span{font-size:.8rem;color:var(--muted)}
+.sh{font-size:1.1rem;margin:26px 0 8px;font-weight:600}
+.gh{display:flex;justify-content:space-between;margin:14px 0 4px;font-size:.9rem;font-weight:600}.gh span{font-weight:400;color:var(--muted)}
+.br{display:grid;grid-template-columns:120px 1fr 120px;gap:10px;align-items:center;margin:6px 0;font-size:.82rem}
+.bt{height:12px;border-radius:99px;background:var(--line);overflow:hidden}.bt i{display:block;height:100%;border-radius:99px}
+.bt i.g1{background:#7EF58A}.bt i.g2{background:#A9DEF7}.bt i.g3{background:#F5869F}
+.sbs{display:flex;gap:6px}
+.sb{appearance:none;border:1.5px solid var(--line);background:transparent;color:var(--muted);border-radius:999px;padding:5px 11px;font:500 .72rem Lexend,sans-serif;cursor:pointer;white-space:nowrap}
+.sb:focus-visible{outline:3px solid var(--sel);outline-offset:2px}
+.sb[aria-pressed="true"].s0{background:#7EF58A;border-color:#7EF58A;color:#10551C}
+.sb[aria-pressed="true"].s1{background:var(--lav);border-color:var(--lav);color:var(--btnt)}
+.sb[aria-pressed="true"].s2{background:#FCE7A0;border-color:#FCE7A0;color:#5C4400}
+@media (min-width:700px){.stats{grid-template-columns:repeat(4,1fr)}.br{grid-template-columns:170px 1fr 140px}}
+.kvb{padding:2px 18px 16px;max-height:55vh;overflow-y:auto}
+.kvb h3{font-size:1rem;margin:14px 0 4px;font-weight:600}.kvb p{margin:0 0 8px;font-size:.9rem}
+.nm{all:unset;cursor:pointer;font-weight:600;border-bottom:1.5px dotted var(--sel)}
+.nm:focus-visible{outline:3px solid var(--sel);outline-offset:2px}
+.acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+a.btn{display:inline-block;text-decoration:none}
+.btn[aria-disabled="true"]{opacity:.45;pointer-events:none}
+.calh{display:flex;align-items:center;justify-content:space-between;margin:14px 0 8px}
+.calb{all:unset;width:38px;height:38px;display:grid;place-items:center;border-radius:50%;cursor:pointer;font-size:1.4rem;background:var(--card)}
+.calb:focus-visible{outline:3px solid var(--sel);outline-offset:2px}.calb[disabled]{opacity:.35;cursor:default}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.cal .wd{text-align:center;font-size:.72rem;color:var(--muted);padding:4px 0}
+.cal .dy{all:unset;box-sizing:border-box;text-align:center;padding:10px 0;border-radius:12px;cursor:pointer;background:var(--card);font-size:.92rem}
+.cal .dy.we{font-weight:600;color:var(--sel)}
+.cal .dy.td{box-shadow:inset 0 0 0 1.5px var(--sel)}
+.cal .dy[disabled]{opacity:.3;cursor:default;background:transparent}
+.cal .dy[aria-pressed="true"]{background:var(--sel);color:#fff}
+.cal .dy:focus-visible{outline:3px solid var(--sel);outline-offset:2px}
+.chip[disabled]{opacity:.4;cursor:default}
+.cl{display:flex;flex-direction:column;gap:8px}
+.uc{display:flex;align-items:center;gap:10px;background:var(--card);border-radius:16px;padding:4px 12px 4px 4px;box-shadow:inset 0 0 0 1.5px var(--line);transition:box-shadow .2s,transform .2s}
+@media (hover:hover){.uc:hover{box-shadow:inset 0 0 0 1.5px var(--sel);transform:translateY(-1px)}}
+.uc .nm{border-bottom:0;font-weight:400;display:block;flex:1;min-width:0;padding:10px;text-align:left;border-radius:12px}
+.uc .nm b{display:block;font-weight:600;font-size:1rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.uc .nm span{display:block;color:var(--muted);font-size:.8rem}
+.planets .pl{transform-box:fill-box;transform-origin:center;transition:transform .18s ease-out}
+.planets .pl circle,.planets .pl ellipse{stroke:transparent;stroke-width:12}
+.planets .pl:hover{transform:scale(1.25)}
+.planets .sun{cursor:pointer}
+.planets{overflow:visible}
+.planets .pl{outline:none;-webkit-tap-highlight-color:transparent}
+.planets .sun:focus,.planets .sun:focus-visible{outline:none}
+.planets .sun:focus-visible circle{stroke:var(--sel);stroke-width:3}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.22)}}
+@media (prefers-reduced-motion:reduce){.planets .pl{transition:none}}
+.refund{text-align:center;font-size:.85rem;font-style:italic;margin:22px 0 4px}
+.refund b{font-weight:600}
+.calb[hidden]{display:none}
+.cal .dy{display:flex;flex-direction:column;align-items:center;gap:4px}
+.dts{display:flex;gap:3px;min-height:6px}
+.dt{display:inline-block;width:6px;height:6px;border-radius:50%}
+.dt.av{background:#35C24B}.dt.fu{background:var(--red)}.dt.na{background:var(--line)}
+.cal .dy[aria-pressed="true"] .dt.av{background:#fff}
+.leg{font-size:.78rem;color:var(--muted);display:flex;gap:6px;align-items:center;margin:8px 0 0}.leg .dt{margin-left:8px}
+.nt2{background:var(--card);border-radius:14px;padding:12px 14px;font-size:.88rem;margin:14px 0}
+.kod{font:600 1.8rem Lexend,monospace;letter-spacing:.25em;text-align:center;margin:6px 0;color:var(--sel)}
+select{width:100%;font:inherit;color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:11px 12px}
+select:focus{outline:3px solid var(--sel);outline-offset:1px}
+a.btn[hidden]{display:none}
+.top{position:relative}
+.hmb{all:unset;position:absolute;right:10px;top:50%;transform:translateY(-50%);width:44px;height:44px;display:grid;place-items:center;cursor:pointer;border-radius:12px;letter-spacing:0}
+.hmb svg{width:24px;height:24px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;filter:drop-shadow(0 1px 2px rgba(40,30,90,.35))}
+@media (hover:hover){.hmb:hover{background:rgba(255,255,255,.2)}}
+.hmb:focus-visible{outline:2px solid #fff;outline-offset:-2px}
+@media (max-width:400px){.top{letter-spacing:.2em;font-size:.95rem;padding:26px 54px}}
+.scrim{position:fixed;inset:0;background:rgba(10,8,30,.45);opacity:0;visibility:hidden;transition:opacity .28s,visibility 0s .28s;z-index:19}
+.scrim.open{opacity:1;visibility:visible;transition:opacity .28s}
+.drw{position:fixed;top:0;right:0;bottom:0;width:min(300px,82vw);background:linear-gradient(180deg,var(--bg1),var(--bg2));box-shadow:-8px 0 30px rgba(40,30,90,.25);transform:translateX(100%);visibility:hidden;transition:transform .28s ease,visibility 0s .28s;z-index:20;padding:calc(16px + env(safe-area-inset-top,0px)) 16px 16px;display:flex;flex-direction:column;gap:10px;box-sizing:border-box}
+.drw.open{transform:none;visibility:visible;transition:transform .28s ease}
+.dh2{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:1.05rem}
+.mx{all:unset;width:40px;height:40px;display:grid;place-items:center;cursor:pointer;border-radius:12px;font-size:1.1rem;color:var(--muted)}
+.mx:focus-visible,.mi:focus-visible{outline:3px solid var(--sel);outline-offset:2px}
+.mi{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:12px;padding:14px;border-radius:14px;cursor:pointer;font-weight:500;background:var(--card);box-shadow:inset 0 0 0 1.5px var(--line)}
+@media (hover:hover){.mi:hover{box-shadow:inset 0 0 0 1.5px var(--sel)}}
+.mi svg{width:22px;height:22px;stroke:var(--sel);fill:none;stroke-width:1.8;stroke-linecap:round;flex:none}
+@media (prefers-reduced-motion:reduce){.drw,.scrim{transition:none}}
+.lnk{all:unset;color:var(--note);text-decoration:underline;cursor:pointer;font-weight:500}
+.lnk:focus-visible{outline:3px solid var(--sel);outline-offset:2px}
+.kvl{text-align:center;margin:26px 0 8px;font-size:.85rem}
+.kt{background:var(--card);border-radius:16px;padding:6px 18px 16px}
+.kt h3{font-size:1rem;margin:18px 0 4px;font-weight:600}.kt p{margin:0 0 8px;font-size:.92rem}
+.kt h3.hl{background:var(--lav);color:var(--btnt);border-radius:8px;padding:4px 8px}
+.kvc{background:var(--card);border-radius:14px;margin:20px 0;overflow:hidden}
+.kvc summary{cursor:pointer;font-weight:600;padding:13px 16px;list-style:none;font-size:.95rem}
+.kvc summary::-webkit-details-marker{display:none}
+.kvc summary::after{content:"›";float:right;font-size:1.2rem;line-height:1;transition:transform .2s}
+.kvc[open] summary::after{transform:rotate(90deg)}
+.kvc summary:focus-visible{outline:3px solid var(--sel);outline-offset:-3px}
+.kvc .msg{padding:0 16px;margin:0 0 8px;min-height:0}
+.kvt{all:unset;box-sizing:border-box;display:flex;justify-content:space-between;gap:10px;width:100%;padding:11px 16px;border-top:1px solid var(--line);font-size:.9rem;cursor:pointer}
+.kvt:hover{background:var(--bg1)}
+.kvt:focus-visible{outline:3px solid var(--sel);outline-offset:-3px}
+.pbar{height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+.pbar i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(100deg,var(--h1),var(--h2));transition:width 1s linear}
+@media (prefers-reduced-motion:reduce){.ok path{animation:none}.opt{transition:none}.opt:hover{transform:none}.pbar i{transition:none}}
+.chip{appearance:none;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:400 .9rem Lexend,sans-serif;border-radius:999px;padding:9px 14px;cursor:pointer}
+.chip[aria-pressed="true"]{border-color:var(--sel);background:var(--lav);color:var(--btnt)}
+.nx{list-style:none;margin:16px 0;padding:0}.nx li{padding:10px 0;border-bottom:1px solid var(--line);font-size:.95rem}.nx b{font-weight:500}
+@media (prefers-reduced-motion:reduce){.view{animation:none}.btn{transition:none}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top">Scorching Astrology<button class="hmb" id="hmb" type="button" aria-label="Menü" aria-expanded="false" aria-controls="drw"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div>
+  <svg class="planets" viewBox="0 0 360 70">
+    <g class="pl"><circle cx="48" cy="34" r="7" fill="#A855F7"/></g>
+    <g class="pl"><circle cx="82" cy="34" r="9" fill="#9FE7EE"/></g>
+    <g class="pl"><circle cx="114" cy="36" r="3.5" fill="#7C8BEA"/></g>
+    <g class="pl"><circle cx="138" cy="38" r="3" fill="#F3D98B"/></g>
+    <g class="pl sun" id="sunb" role="button" tabindex="0" aria-label="Yönetici girişi"><circle cx="180" cy="34" r="30" fill="#FCE7A0"/></g>
+    <g class="pl"><circle cx="224" cy="38" r="2" fill="#F59FA8"/></g>
+    <g class="pl"><circle cx="246" cy="36" r="2.6" fill="#F26D6D"/></g>
+    <g class="pl"><circle cx="276" cy="34" r="13" fill="#FBBE5E"/></g>
+    <g class="pl"><ellipse cx="316" cy="38" rx="11" ry="4.2" fill="#CFC9C0"/><circle cx="316" cy="37" r="5" fill="#D9D3CA"/></g>
+    <g class="pl"><circle cx="346" cy="38" r="1.6" fill="#B9B3C4"/></g>
+  </svg>
+
+  <section class="view" id="v1">
+    <h1>Doğum Haritası’nın Okunması</h1>
+    <div class="row l"><p>Bir haritanın doğru ve anlamlı sonuçlar verebilmesinin temeli <b>“Yükselen Burca”</b> dayanmaktadır.</p><span class="sym" style="color:var(--gold)">☉&#xFE0E;</span></div>
+    <div class="row r"><p>Çünkü <b>“Yükselen Burç”</b> haritanın nasıl inşa edildiğine dair en önemli bilgidir.</p><span class="sym" style="color:var(--moon)">☽&#xFE0E;</span></div>
+    <div class="row l"><div><h3>Yükselen Burç</h3><ul><li>Doğum tarihi ve saati</li><li>Doğum Yeri (İl yeterlidir.)</li></ul>bilgileriyle tayin edilmekte olup yakınlarımızdan öğrendiğimiz doğum saatlerinin çoğunlukla doğruyu yansıtmadığını söylemek gerekir.</div><span class="sym" style="color:var(--venus)">♀&#xFE0E;</span></div>
+    <div class="row r"><p>Kesin yargı soru cevap biçimindeki bilgi alışverişiyle ortaya çıkmaktadır. Astrolojideki tekniklerin yanı sıra Yükselen derecesinin kesinliğini tayin etmenin başka yolları da mevcuttur.</p><span class="sym" style="color:var(--merc)">☿&#xFE0E;</span></div>
+    <div class="c"><button class="btn g" data-go="v2">PAKETLERİ GÖR</button></div>
+  </section>
+
+  <section class="view" id="v2" hidden>
+    <div id="list"></div>
+    
+    <p class="msg c" id="warn" role="status">Bir veya birkaç paket seçerek devam edebilirsin.</p>
+    <p class="refund">Seans sonrasında memnuniyet olmazsa tutarın <b>%60’ı geri ödenecektir.</b></p>
+    <div class="kvm"></div>
+    <div class="dcm" data-doc="ms"></div>
+    <div class="dcm" data-doc="iade"></div>
+    <div class="c"><button class="btn g" data-go="v1">BİLGİLENDİRMEYE DÖN</button></div>
+  </section>
+
+  <section class="view" id="v3" hidden>
+    <div class="stp" data-s="form"></div>
+    <h2>Formu Doldur</h2>
+    <div class="sm" id="sum"></div>
+    <div id="form">
+      <label for="ad">Ad Soyad</label><input id="ad" required autocomplete="name">
+      <label for="ik">Telefon</label><input id="ik" type="tel" inputmode="tel" autocomplete="tel" required>
+      <label for="mail">E-posta (isteğe bağlı)</label><input id="mail" type="email" autocomplete="email">
+      <label for="tar">Doğum tarihi</label><input id="tar" type="date" required>
+      <div class="two"><div><label for="saat">Doğum saati</label><input id="saat" type="time"></div><div><label for="yer">Doğum yeri (İl)</label><input id="yer" required></div></div>
+      <label class="cb"><input type="checkbox" id="bil"> Doğum saatimi bilmiyorum</label>
+      <div id="fq"><label for="fan">Hayranı olduğunuz bir ünlü ya da hayatınızdaki biri veya bu kişinin burcu</label><input id="fan" required></div>
+      <label class="cb"><input type="checkbox" id="kv" required> <span><button class="lnk" type="button" data-kvkk>KVKK Aydınlatma Metni</button>’ni okudum.</span></label>
+      <label class="cb"><input type="checkbox" id="oz" required> <span><button class="lnk" type="button" data-docs>Mesafeli Satış Sözleşmesi, Ön Bilgilendirme ve İade Koşulları</button>’nı okudum; hizmetin cayma süresi dolmadan başlamasını onaylıyorum.</span></label>
+      <p class="msg c" id="fm" role="status"></p>
+      <div class="c"><button class="btn l" type="button" id="fsub">Gönder</button></div>
+      <div class="c"><button class="btn g" type="button" data-go="v2">Paketlere dön</button></div>
+    </div>
+  </section>
+
+  <section class="view" id="v5" hidden>
+    <div class="stp" data-s="odeme"></div>
+    <h2>Ödeme</h2>
+    <div class="cc" aria-hidden="true"><div><div class="cc-t">Scorching Astrology</div><div class="cc-chip"></div></div><div><div class="cc-n" id="ccn"></div><div class="cc-a" id="cca"></div></div><div class="cc-p"><i style="width:14px;height:14px;background:#A855F7"></i><i style="width:14px;height:14px;background:#9FE7EE"></i><i style="width:26px;height:26px;background:#FCE7A0"></i></div></div>
+    <div class="sm" id="sum2"></div>
+    <p class="refund">Seans sonrasında memnuniyet olmazsa tutarın <b>%60’ı geri ödenecektir.</b></p>
+    <p class="nt2" id="vnote" hidden>Ödeme yapılan işlem yüz yüze (video) görüşme ise, görüşme takvim müsaitliğine göre yapılacaktır. Görüşme aynı hafta içinde, en geç ise ertesi hafta gerçekleşir. Randevular doluluğa göre ayarlanır.</p>
+    <p class="nt2" id="hnote" hidden>Seçtiğin randevu, ödemen tamamlanınca kesinleşir. Ödeme yapılmazsa bu saat yaklaşık 30 dakika sonra tekrar başkalarına açılır.</p>
+    <div class="kvm"></div>
+    <div class="dcm" data-doc="ms"></div>
+    <div class="dcm" data-doc="iade"></div>
+    
+    <div class="card" id="hv">
+      <h3>Havale / EFT</h3>
+      <div class="kv"><span>Hesap sahibi</span><b id="pn"></b></div>
+      <div class="kv"><span>IBAN</span><b id="pi"></b></div>
+      <div class="kv"><span>Açıklama</span><b id="pd"></b></div>
+      <button class="btn l" type="button" id="cpi">IBAN’ı kopyala</button>
+      <button class="btn g" type="button" id="hvc">Havale ile devam et</button>
+    </div>
+    <div class="c"><button class="btn g" type="button" id="pay">Kredi / Banka Kartı ile Öde</button></div>
+    <p class="lock"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>Kart bilgilerini bu sayfada girmezsin. Güvenli ödeme sayfasına yönlendirilirsin.</span></p>
+    <div class="c"><button class="btn l" type="button" id="prev" hidden>Önizleme: ödeme başarılı sayfasını gör</button></div>
+    <p class="msg c" id="pm" role="status"></p>
+    
+    <div class="c"><button class="btn l" type="button" id="pbk" hidden>Randevuyu değiştir</button></div>
+    <div class="c"><button class="btn g" type="button" data-go="v3">Forma dön</button></div>
+  </section>
+
+  <section class="view" id="v6" hidden>
+    <div class="stp" data-s="randevu"></div>
+    <h2>Görüşme zamanı</h2>
+    <p class="msg">Video görüşme paketin için uygun bir gün ve saat aralığı seç. Seçtiğin saat, ödemeni tamamlayınca kesinleşir.</p>
+    <div class="calh"><button type="button" class="calb" id="cprev" hidden aria-label="Önceki ay">‹</button><b id="cmon"></b><button type="button" class="calb" id="cnext" hidden aria-label="Sonraki ay">›</button></div>
+    <div class="cal" id="cal" aria-label="Randevu günü"></div>
+    <p class="leg"><i class="dt av"></i> Müsait <i class="dt fu"></i> Dolu</p>
+    <label>Seçilen gün: <span id="sday"></span></label>
+    <div class="chips" id="chips"></div>
+    <p class="msg">Hafta içi 21:00–23:00, hafta sonu 13:00–15:00 ve 21:00–23:00 saatleri arasında görüşme yapılıyor. Bu saatler dışında randevu verilmiyor.</p>
+    <p class="msg">Randevular doluluğa göre ayarlanır. Görüşme, bu hafta içinde ya da en geç ertesi hafta yapıldığı için yalnızca bu hafta ve gelecek hafta gösteriliyor.</p>
+    <p class="msg" id="dnote" hidden>Örnek doluluk gösteriliyor. Gerçek doluluk, kayıt adresi bağlanınca burada görünür.</p>
+    <label for="bn">Not (isteğe bağlı)</label><input id="bn">
+    <div class="c" id="bk" hidden><a class="btn g" id="bkl" target="_blank" rel="noopener">Takvimden seç</a></div>
+    <p class="msg c" id="bm" role="status"></p>
+    <div class="c"><button class="btn l" id="book" type="button">Ödemeye geç</button></div>
+      <div class="c"><button class="btn g" type="button" data-go="v3">Forma dön</button></div>
+  </section>
+
+  <section class="view" id="v13" hidden>
+    <h2>Randevum</h2>
+    <div id="pfL">
+      <p class="msg">Ödeme sonrası aldığın takip kodunu ve telefon numaranın son 4 hanesini gir.</p>
+      <label for="pfKod">Takip kodu</label><input id="pfKod" autocomplete="off" autocapitalize="characters" maxlength="8">
+      <label for="pfT4">Telefon numaranın son 4 hanesi</label><input id="pfT4" inputmode="numeric" maxlength="4" autocomplete="off">
+      <p class="msg c" id="pfMsg" role="status"></p>
+      <div class="c"><button class="btn g" type="button" id="pfGo">Görüntüle</button></div>
+    </div>
+    <div id="pfV" hidden>
+      <div class="sm" id="pfInfo"></div>
+      <p class="nt2" id="pfCd" hidden></p>
+      <div class="acts"><a class="btn g" id="pfMeet" target="_blank" rel="noopener" hidden>Görüşmeye katıl</a></div>
+      <p class="msg" id="pfNote"></p>
+    </div>
+    <div class="c"><button class="btn l" type="button" id="pfBack">Geri dön</button></div>
+  </section>
+
+  <section class="view" id="v12" hidden>
+    <h2>Sözleşme ve İade Koşulları</h2>
+    <div class="dcm" data-doc="ms" data-open></div>
+    <div class="dcm" data-doc="iade" data-open></div>
+    <div class="c"><button class="btn g" type="button" id="dkb">Geri dön</button></div>
+  </section>
+
+  <section class="view" id="v10" hidden>
+    <h2>KVKK Aydınlatma Metni</h2>
+    <div class="kt">
+      <h3>Veri sorumlusu</h3><p>6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında veri sorumlusu <b class="vs"></b>’dur. İletişim: <b class="vm"></b></p>
+      <h3>İşlenen kişisel veriler</h3><p>Ad soyad, telefon, e-posta (verirsen), doğum tarihi, saati ve yeri, forma yazdığın ek bilgiler (örneğin hayranı olduğun ya da hayatındaki bir kişi veya burcu), seçtiğin paket, ödeme durumu ve randevu tercihin. Kart bilgilerin bu sayfada alınmaz ve tarafımızca saklanmaz. Ödeme, ödeme kuruluşunun güvenli sayfasında yapılır.</p>
+      <h3>İşleme amaçları</h3><p>Seçtiğin astroloji hizmetinin sunulması ve harita okumasının hazırlanması, randevu ve iletişim süreçlerinin yürütülmesi, ödeme ve iade işlemlerinin takibi ile yasal yükümlülüklerin yerine getirilmesi.</p>
+      <h3>Toplama yöntemi ve hukuki sebep</h3><p>Verilerin bu internet sitesindeki form aracılığıyla elektronik ortamda toplanır. Hukuki sebepler; sözleşmenin kurulması veya ifasıyla doğrudan ilgili olması (KVKK m.5/2-c), hukuki yükümlülüğün yerine getirilmesi (m.5/2-ç) ve temel hak ve özgürlüklerine zarar vermemek kaydıyla veri sorumlusunun meşru menfaatidir (m.5/2-f).</p>
+      <h3>Verilerin aktarılması</h3><p>Verilerin, yukarıdaki amaçlarla sınırlı olarak; kayıtların tutulduğu bulut hizmet sağlayıcısına, ödeme kuruluşuna ve mevzuat gereği yetkili kurum ve kuruluşlara aktarılabilir. Bu hizmet sağlayıcıların sunucuları yurt dışında bulunabilir.</p>
+      <h3>Saklama süresi</h3><p>Verilerin, işleme amacının gerektirdiği süre ve ilgili mevzuattaki saklama süreleri boyunca saklanır, sonrasında silinir, yok edilir veya anonim hale getirilir.</p>
+      <h3>Hakların</h3><p>KVKK’nın 11. maddesi uyarınca; verilerinin işlenip işlenmediğini öğrenme, işlenmişse bilgi talep etme, işleme amacını ve amacına uygun kullanılıp kullanılmadığını öğrenme, aktarıldığı kişileri bilme, eksik veya yanlış işlenmişse düzeltilmesini, şartları oluşmuşsa silinmesini veya yok edilmesini isteme, bu işlemlerin aktarılan kişilere bildirilmesini isteme, otomatik sistemlerle analiz sonucu aleyhine bir sonuca itiraz etme ve kanuna aykırı işleme nedeniyle zarara uğraman halinde zararın giderilmesini talep etme haklarına sahipsin. Başvurularını <b class="vm"></b> adresine iletebilirsin.</p>
+    </div>
+    <div class="c"><button class="btn g" type="button" id="kvb">Geri dön</button></div>
+  </section>
+
+  <section class="view" id="v11" hidden>
+    <div class="dh"><h2 id="cn"></h2><button class="btn l" type="button" id="cb">‹ Panele dön</button></div>
+    <div class="sm" id="cinfo"></div>
+    <p class="msg" id="nov" hidden>Bu müşterinin paketinde video görüşme yok. Ses kaydı veya metin dosyası hazırlanacak.</p>
+    <div class="card" id="rsc" hidden>
+      <h3>Randevuyu değiştir</h3>
+      <p class="msg" id="rcur"></p>
+      <label for="rgun">Yeni gün</label><input id="rgun" type="date">
+      <label for="rsl">Saat aralığı</label><select id="rsl"></select>
+      <div class="acts"><button class="btn l" type="button" id="rsave">Randevuyu güncelle</button></div>
+      <p class="msg" id="rst" role="status"></p>
+    </div>
+    <div class="card" id="mt" hidden>
+      <h3>Google Meet görüşmesi</h3>
+      <a class="btn g" id="mnew" href="https://meet.new" target="_blank" rel="noopener">Yeni Meet oluştur</a>
+      <p class="msg" id="mh">Yeni Meet oluştur’a bas, açılan sayfadaki bağlantıyı kopyala ve aşağıya yapıştır.</p>
+      <label for="mlink">Meet linki</label>
+      <input id="mlink" placeholder="https://meet.google.com/abc-defg-hij" inputmode="url" autocomplete="off">
+      <div class="acts">
+        <button class="btn l" type="button" id="msave">Linki kaydet</button>
+        <a class="btn g" id="mgo" target="_blank" rel="noopener" aria-disabled="true">Görüşmeyi başlat</a>
+      </div>
+      <p class="msg" id="mst" role="status"></p>
+      <h3 style="margin-top:14px">Linki müşteriye gönder</h3>
+      <div class="acts">
+        <a class="btn l" id="mwa" target="_blank" rel="noopener" aria-disabled="true">WhatsApp ile gönder</a>
+        <a class="btn l" id="mml" target="_blank" rel="noopener" aria-disabled="true">E-posta ile gönder</a>
+      </div>
+      <p class="msg" id="msh" role="status"></p>
+    </div>
+  </section>
+
+  <section class="view" id="v9" hidden>
+    <div id="lg">
+      <h2>Yönetici girişi</h2>
+      <div id="af" class="lgf">
+        <label for="au">Kullanıcı adı</label>
+        <input id="au" autocomplete="username" required>
+        <label for="ak">Şifre</label>
+        <div class="pw"><input id="ak" type="password" autocomplete="current-password" required><button type="button" id="eye" class="eye" aria-pressed="false" aria-label="Şifreyi göster"></button></div>
+        <p class="msg" id="am" role="status"></p>
+        <div class="c"><button class="btn g" type="button" id="alog">Giriş yap</button></div>
+      </div>
+    </div>
+    <div id="dash" hidden>
+      <div class="dh"><h2>Panel</h2><button class="btn l" type="button" id="out2">Çıkış yap</button></div>
+      <p class="msg" id="dm"></p>
+      <div class="stats" id="stats"></div>
+      <h3 class="sh">Hangi haritalara baktım</h3>
+      <div class="card" id="bars"></div>
+      <h3 class="sh">Müşteri listesi</h3>
+      <div class="ah"><input id="aq" placeholder="Ara: ad, telefon, il…" aria-label="Ara"></div>
+      <div class="chips" id="fl"></div>
+      <p class="msg" id="ac"></p>
+      <div class="cl" id="at"></div>
+      <div class="c"><button class="btn l" type="button" id="more" hidden>Daha fazla göster</button></div>
+    </div>
+    <div class="c"><button class="btn g" type="button" data-go="v1">Siteye dön</button></div>
+  </section>
+
+  <section class="view" id="v7" hidden>
+    <div class="stp" data-s="tamam"></div>
+    <div class="ok" aria-hidden="true"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="28"/><path d="M20 33l8 8 17-18"/></svg></div>
+    <h2 id="okh"></h2>
+    <p class="msg c" id="okp"></p>
+    <div class="sm" id="sum3"></div>
+    <div class="card" id="prep" hidden>
+      <h3>Paketiniz hazırlanıyor</h3>
+      <p class="msg" id="pt"></p>
+      <div id="cd"><div class="cd"><div><b id="ch">00</b><span>saat</span></div><div><b id="cm2">00</b><span>dakika</span></div><div><b id="cs">00</b><span>saniye</span></div></div><div class="pbar" aria-hidden="true"><i id="pb"></i></div></div>
+    </div>
+    <div class="card" id="kodc">
+      <h3>Takip kodun</h3>
+      <div class="kod" id="kod7"></div>
+      <p class="msg">Randevunu ve paketini bu kodla (ve telefon numaranın son 4 haneyle) görüntüleyebilirsin. Kodu sakla.</p>
+      <div class="acts"><button class="btn l" type="button" id="kcp">Kodu kopyala</button><button class="btn g" type="button" id="oProf">Randevumu görüntüle</button></div>
+    </div>
+    <div style="height:18px"></div>
+    <button class="opt" type="button" id="oBook" hidden><b>Randevu al</b><span>Birebir video görüşmen için gün ve saat seç.</span></button>
+    <button class="opt" type="button" id="oChat" hidden><b>Görüşmeye git</b><span>Benimle birebir yazışabileceğin sohbet ekranı.</span></button>
+  </section>
+
+  <section class="view" id="v8" hidden>
+    <div class="chh"><button class="btn l" type="button" id="chb">‹ Geri</button><b>Birebir görüşme</b></div>
+    <p class="msg" id="chn"></p>
+    <div class="msgs" id="msgs" role="log" aria-live="polite"></div>
+    <div class="chf" id="chf"><input id="chi" placeholder="Mesajını yaz" autocomplete="off" aria-label="Mesaj"><button class="btn g" type="button" id="chs">Gönder</button></div>
+  </section>
+
+  <section class="view" id="v4" hidden>
+    <div class="stp" data-s="tamam"></div>
+    <h2>Teşekkürler</h2>
+    <p id="okt" class="msg"></p>
+    <ul class="nx"><li><b>Formun alındı.</b></li><li>Ödemen kontrol edilir.</li><li>Randevun kesinleşir ve sana iletilir.</li></ul>
+    <textarea id="out" rows="8" readonly></textarea>
+    <div class="c"><button class="btn l" id="cp" type="button">Özeti kopyala</button></div>
+    <p class="msg" id="cm" role="status"></p>
+    <div class="c" hidden><button class="btn l" type="button" id="fchat">Görüşmeye git</button></div>
+    <div class="c" id="b7" hidden><button class="btn l" type="button" data-go="v7">Paket durumuna dön</button></div>
+    <p class="msg c">Takip kodun: <b id="kod4"></b></p>
+    <div class="c"><button class="btn g" type="button" id="fprof">Randevumu görüntüle</button></div>
+    <div class="kvm"></div>
+    
+    <div class="c"><button class="btn g" data-go="v1">BİLGİLENDİRMEYE DÖN</button></div>
+  </section>
+
+  <div class="bar" id="bar" hidden><span id="bt"></span><button class="btn l" id="fill2">Formu Doldur</button></div>
+  <div class="zod" aria-hidden="true"><span>♈&#xFE0E;</span><span>♉&#xFE0E;</span><span>♊&#xFE0E;</span><span>♋&#xFE0E;</span><span>♌&#xFE0E;</span><span>♍&#xFE0E;</span><span>♎&#xFE0E;</span><span>♏&#xFE0E;</span><span>♐&#xFE0E;</span><span>♑&#xFE0E;</span><span>♒&#xFE0E;</span><span>♓&#xFE0E;</span></div>
+  <div class="end"></div>
+  <div class="scrim" id="scr"></div>
+  <aside class="drw" id="drw" role="dialog" aria-modal="true" aria-label="Menü">
+    <div class="dh2"><b>Menü</b><button class="mx" id="mclose" type="button" aria-label="Menüyü kapat">✕</button></div>
+    <button class="mi" id="mprof" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Randevumu gör</span></button>
+  </aside>
+</div>
+
+<script>
+/* AYAR: Google Sheets / Supabase vb. kayıt adresini buraya yaz. Boşsa form kaydı yapmaz, özet ekranda gösterilir. */
+const CFG={endpoint:"https://script.google.com/macros/s/AKfycbzVoXaRrqfwAZxv6AMVPlcXWLBYdCPspFrQgiAckVSWLaw-VncU3TZ5SwGhXJJoenNxRQ/exec",hesap:"",iban:"",odemeLinki:"",takvimLinki:"",chatUrl:"",hazirlikSaat:5,vs:"",vsMail:"aiwerasun@gmail.com",vergiNo:"",adres:"",tel:"",kdv:""};
+const N1="(Temel Harita İncelemesi Olup Diğer Seçeneklerden Önce Gereklidir.)";
+const N3="1 No’lu Ile 2 No’lu Seçeneklerden Sonra Ya Da Temel Doğum Haritası Analizi Yapılmışsa Alınması Tavsiye Edilir.";
+const T1="Doğum Haritası Ile Güncel Transitleri İçeren Temel Harita İnceleme",T2="Mini Doğum Harita Ve Transit İnceleme";
+const P=[
+ {n:"1.0",g:1,t:T1,k:"video",d:"Video Meeting (Yaklaşık 2 Saat)",nt:N1,p:3000},
+ {n:"1.1",g:1,t:T1,k:"ses",d:"Ses Kaydı (Yaklaşık 2 Saat)",nt:N1,p:2300},
+ {n:"2.0",g:2,t:T2,k:"ses",d:"Ses Kaydı (Yaklaşık 40 Dk)",nt:N1,p:1500},
+ {n:"2.1",g:2,t:T2,k:"metin",d:"Metin Dosyası",nt:N1,p:1100},
+ {n:"3.0",g:3,t:"İkincil, Birincil İlerletilmiş Ve Directed Haritalar İle Transit Güncel Analizi",k:"video",d:"Video Meeting (Yaklaşık 1 Saat)",nt:N3,p:2700},
+ {n:"3.1",g:3,t:"İkincil, Birincil İlerletilmiş Ve Directed Haritalar",k:"ses",d:"Ses Kaydı (Yaklaşık 1 Saat)",nt:N3,p:1800},
+ {n:"3.2",g:3,t:"Birincil, İkincil İlerletilmiş Ve Directed Haritalar",k:"metin",d:"Metin Dosyası",nt:N3,p:1100}
+];
+const IC={video:'<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z"/></svg>',
+ ses:'<svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>',
+ metin:'<svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>'};
+const tl=n=>n.toLocaleString("tr-TR")+"₺",$=s=>document.querySelector(s);
+const sel=new Set();
+$("#list").innerHTML=P.map(p=>`<button class="pk" data-n="${p.n}" aria-pressed="false"><span class="bd g${p.g}"><svg viewBox="0 0 60 44" aria-hidden="true"><g transform="rotate(-18 30 22)"><ellipse class="rg" cx="30" cy="22" rx="28" ry="8"/></g><circle class="pl" cx="30" cy="22" r="14"/><g transform="rotate(-18 30 22)"><path class="rg" d="M2 22A28 8 0 0 0 58 22"/></g></svg><b>${p.n}</b></span><span class="tx"><h3>${p.t}</h3><div class="fmt">${IC[p.k]}<span>${p.d}</span></div><p class="nt">${p.nt}</p><span class="pr">${tl(p.p)}</span></span><span class="chk" aria-hidden="true">✓</span></button>`).join("");
+
+function go(id){document.querySelectorAll(".view").forEach(v=>v.hidden=v.id!==id);drawStp();$(".app").style.maxWidth=id==="v9"?"720px":"";$("#bar").hidden=!(id==="v2"&&sel.size);window.scrollTo({top:0,behavior:"auto"})}
+function upd(){const c=[...sel],tot=P.filter(p=>sel.has(p.n)).reduce((a,p)=>a+p.p,0);$("#bt").textContent=c.length?`${c.join(" + ")} · ${tl(tot)}`:"";$("#bar").hidden=!(c.length&&!$("#v2").hidden);$("#warn").textContent=""}
+document.addEventListener("click",e=>{
+ const g=e.target.closest("[data-go]");if(g){go(g.dataset.go);upd();return}
+ const k=e.target.closest(".pk");if(k){const n=k.dataset.n;sel.has(n)?sel.delete(n):sel.add(n);k.setAttribute("aria-pressed",sel.has(n));upd()}
+});
+function toForm(){
+ if(!sel.size){$("#warn").textContent="Önce en az bir paket seç.";return}
+ const rows=P.filter(p=>sel.has(p.n)),tot=rows.reduce((a,p)=>a+p.p,0);
+ $("#sum").innerHTML=rows.map(p=>`<div><span>${p.n} · ${p.d}</span><span>${tl(p.p)}</span></div>`).join("")+`<div class="t"><span>Toplam</span><span>${tl(tot)}</span></div>`;
+ go("v3")}
+$("#fill2").onclick=toForm;
+const fq=()=>{};
+$("#bil").onchange=e=>{$("#saat").disabled=e.target.checked;if(e.target.checked)$("#saat").value="";fq()};
+$("#saat").addEventListener("input",fq);
+function okf(c){for(const el of c.querySelectorAll("[required]")){if(!el.checkValidity()){el.reportValidity();return false}}return true}
+function onEnter(c,fn){c.addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.tagName==="INPUT"&&e.target.type!=="checkbox"){e.preventDefault();fn()}})}
+async function submitForm(){
+ if(!okf($("#form"))){$("#fm").textContent="Lütfen zorunlu alanları doldur ve KVKK ile sözleşme metinlerini okuduğunu onayla.";return}
+ $("#fm").textContent="";
+ const rows=P.filter(p=>sel.has(p.n)),tot=rows.reduce((a,p)=>a+p.p,0),
+ d={zaman:new Date().toISOString(),ad:$("#ad").value,iletisim:$("#ik").value,eposta:$("#mail").value,tarih:$("#tar").value,saat:$("#bil").checked?"bilmiyor":$("#saat").value,yer:$("#yer").value,fan:$("#fan").value,paketler:rows.map(p=>p.n).join(", "),toplam:tot};
+ const m=`Ad Soyad: ${d.ad}\nTelefon: ${d.iletisim}\nPaketler: ${d.paketler} (${tl(tot)})\nDoğum tarihi: ${d.tarih.split("-").reverse().join(".")}\nDoğum saati: ${d.saat||"belirtilmedi"}\nDoğum yeri: ${d.yer}${d.fan?`\nHayranı olduğunuz bir ünlü ya da hayatınızdaki biri veya bu kişinin burcu: ${d.fan}`:""}`;
+ cur={d,m,rows,tot,slot:"",kod:genKod(),room:(self.crypto&&crypto.randomUUID)?crypto.randomUUID():String(Date.now())+Math.random().toString(36).slice(2)};await send("form");if(rows.some(p=>p.k==="video")){buildBook();go("v6")}else toPay()}
+$("#fsub").onclick=submitForm;onEnter($("#form"),submitForm);
+let cur=null,slot="";
+async function send(stage,x){const pl={...cur.d,room:cur.room,kod:cur.kod,asama:stage,...(x||{})};if(!CFG.endpoint){localUpsert(pl);return false}try{await fetch(CFG.endpoint,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain"},body:JSON.stringify(pl)});return true}catch(_){return false}}
+function drawStp(){
+ const v=(cur&&cur.rows?cur.rows:P.filter(p=>sel.has(p.n))).some(p=>p.k==="video"),seq=v?["form","randevu","odeme","tamam"]:["form","odeme","tamam"],LB={form:"Form",randevu:"Randevu",odeme:"Ödeme",tamam:"Tamam"};
+ document.querySelectorAll(".stp").forEach(e=>{const ci=seq.indexOf(e.dataset.s);e.innerHTML=seq.map((k,i)=>`<i class="${i<=ci?"on":""}"></i><span class="${i===ci?"cur":""}">${LB[k]}</span>`).join("")})}
+drawStp();
+function toPay(){
+ $("#sum2").innerHTML=cur.rows.map(p=>`<div><span>${p.n} · ${p.d}</span><span>${tl(p.p)}</span></div>`).join("")+(cur.slot?`<div><span>Randevu</span><span>${cur.slot}</span></div>`:"")+`<div class="t"><span>Toplam</span><span>${tl(cur.tot)}</span></div>`;
+ const ib=CFG.iban,ln=CFG.odemeLinki;
+ $("#hv").hidden=!ib;$("#pn").textContent=CFG.hesap;$("#pi").textContent=ib;$("#pd").textContent=cur.d.ad+" "+cur.rows.map(p=>p.n).join("+");
+ $("#vnote").hidden=!cur.rows.some(p=>p.k==="video");$("#hnote").hidden=!cur.slot;$("#pbk").hidden=!cur.rows.some(p=>p.k==="video");$("#prev").hidden=!!CFG.odemeLinki;$("#ccn").textContent=cur.d.ad;$("#cca").textContent=tl(cur.tot);$("#pm").textContent="";try{localStorage.setItem("sa_cur",JSON.stringify(cur))}catch(_){}
+ 
+ go("v5")}
+$("#cpi").onclick=async()=>{try{await navigator.clipboard.writeText(CFG.iban);$("#pm").textContent="IBAN kopyalandı."}catch(_){$("#pm").textContent="IBAN’ı seçip kopyalayabilirsin."}};
+const MN=["Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık"],DN=["Pazar","Pazartesi","Salı","Çarşamba","Perşembe","Cuma","Cumartesi"];
+const SLW=["21:00–23:00"],SLE=["13:00–15:00","21:00–23:00"];
+let cm=null,sd=null;
+const slotsFor=d=>(d.getDay()===0||d.getDay()===6)?SLE:SLW;
+const sameDay=(a,b)=>a.getFullYear()===b.getFullYear()&&a.getMonth()===b.getMonth()&&a.getDate()===b.getDate();
+const slotPast=(d,sl)=>new Date(d.getFullYear(),d.getMonth(),d.getDate(),+sl.slice(0,2),0)<=new Date();
+let DOLU=new Set(),cw0=null;
+const p2s=n=>String(n).padStart(2,"0");
+const skey=(x,q)=>p2s(x.getDate())+"."+p2s(x.getMonth()+1)+"."+x.getFullYear()+" "+q;
+const isDolu=(x,q)=>DOLU.has(skey(x,q));
+const dkey=t=>String(t).replace(/^(\d{2}\.\d{2}\.\d{4}) \S+ /,"$1 ");
+function weekStart(d){const x=new Date(d.getFullYear(),d.getMonth(),d.getDate());x.setDate(x.getDate()-((x.getDay()+6)%7));return x}
+function demoDolu(){const w0=weekStart(new Date()),st=new Set();for(let i=0;i<14;i++){const x=new Date(w0);x.setDate(w0.getDate()+i);slotsFor(x).forEach((q,k)=>{if((x.getDate()+k*2)%3===0)st.add(skey(x,q))})}return st}
+async function loadDolu(){
+ if(!CFG.endpoint){DOLU=demoDolu();$("#dnote").hidden=false;return}
+ try{const r=await fetch(CFG.endpoint+"?islem=dolu&room="+encodeURIComponent((cur&&cur.room)||"")),j=await r.json();DOLU=new Set((j.dolu||[]).map(dkey))}catch(_){DOLU=new Set()}}
+function drawCal(){
+ const t0=new Date();t0.setHours(0,0,0,0);cw0=weekStart(t0);
+ const end=new Date(cw0);end.setDate(end.getDate()+13);
+ $("#cmon").textContent=cw0.getDate()+" "+MN[cw0.getMonth()]+" – "+end.getDate()+" "+MN[end.getMonth()]+" "+end.getFullYear();
+ let h=["Pzt","Sal","Çar","Per","Cum","Cmt","Paz"].map(x=>`<div class="wd">${x}</div>`).join("");
+ for(let i=0;i<14;i++){
+  const x=new Date(cw0);x.setDate(cw0.getDate()+i);
+  const sl=slotsFor(x),wk=x.getDay()===0||x.getDay()===6,free=sl.filter(q=>!slotPast(x,q)&&!isDolu(x,q)),dis=x<t0||free.length===0;
+  const dots=sl.map(q=>`<i class="dt ${slotPast(x,q)?"na":isDolu(x,q)?"fu":"av"}"></i>`).join("");
+  h+=`<button type="button" class="dy${wk?" we":""}${sameDay(x,t0)?" td":""}" data-i="${i}" ${dis?"disabled":""} aria-pressed="${!!sd&&sameDay(x,sd)}" title="${free.length?free.length+" müsait saat":"Müsait saat yok"}"><span>${x.getDate()}</span><span class="dts">${dots}</span></button>`}
+ $("#cal").innerHTML=h}
+function drawSlots(){
+ if(!sd){$("#chips").innerHTML="";$("#sday").textContent="henüz seçilmedi";return}
+ $("#sday").textContent=sd.getDate()+" "+MN[sd.getMonth()]+" "+sd.getFullYear()+" "+DN[sd.getDay()];
+ $("#chips").innerHTML=slotsFor(sd).map(q=>{const fu=isDolu(sd,q);return `<button type="button" class="chip" aria-pressed="${slot===q}" ${(fu||slotPast(sd,q))?"disabled":""}>${q}${fu?" · Dolu":""}</button>`}).join("")}
+$("#cal").addEventListener("click",e=>{const b=e.target.closest(".dy");if(!b||b.disabled)return;sd=new Date(cw0);sd.setDate(cw0.getDate()+ +b.dataset.i);slot="";drawCal();drawSlots()});
+$("#cprev").onclick=()=>{cm=new Date(cm.getFullYear(),cm.getMonth()-1,1);drawCal()};
+$("#cnext").onclick=()=>{cm=new Date(cm.getFullYear(),cm.getMonth()+1,1);drawCal()};
+function buildBook(){slot="";$("#bm").textContent="";$("#bk").hidden=!CFG.takvimLinki;if(CFG.takvimLinki)$("#bkl").href=CFG.takvimLinki;sd=null;DOLU=new Set();drawCal();drawSlots();loadDolu().then(()=>{drawCal();drawSlots()})}
+$("#chips").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b||b.disabled)return;slot=b.textContent;document.querySelectorAll("#chips .chip").forEach(c=>c.setAttribute("aria-pressed",c===b))});
+function fin(){const r=cur.slot?`\nGörüşme tercihi: ${cur.slot}`:"";$("#out").value=cur.m+r+"\nTakip kodu: "+cur.kod;$("#kod4").textContent=cur.kod||"";$("#okt").textContent=CFG.endpoint?"Bilgilerin alındı. Harita okuman planlanacak.":"Bilgilerin aşağıda. Özeti kopyalayıp DM’den iletebilirsin.";$("#b7").hidden=!cur.rows.some(p=>p.k!=="video");go("v4")}
+function next(){buildSuccess();go("v7")}
+$("#pay").onclick=async()=>{if(!CFG.odemeLinki){$("#pm").textContent="Kartla ödeme henüz aktif değil. Havale/EFT ile ödeyebilir ya da DM’den yazabilirsin.";return}await send("kart-odemesi-baslatildi");location.href=CFG.odemeLinki};
+$("#prev").onclick=()=>{cur.pay="kart";if(!CFG.endpoint)send("kart-odemesi-tamam");next()};
+$("#pbk").onclick=()=>{buildBook();go("v6")};
+$("#hvc").onclick=async()=>{cur.pay="havale";await send("havale-secildi");next()};
+if(location.hash==="#odendi"){try{cur=JSON.parse(localStorage.getItem("sa_cur"))}catch(_){}if(cur){cur.pay="kart";send("kart-odemesi-tamam");next()}}
+$("#book").onclick=async()=>{if(!sd||!slot){$("#bm").textContent="Gün ve saat aralığı seç.";return}
+ await loadDolu();if(isDolu(sd,slot)){$("#bm").textContent="Bu saat az önce doldu. Lütfen başka bir saat seç.";slot="";drawCal();drawSlots();return}cur.slot=String(sd.getDate()).padStart(2,"0")+"."+String(sd.getMonth()+1).padStart(2,"0")+"."+sd.getFullYear()+" "+DN[sd.getDay()]+" "+slot;await send("randevu-talebi",{randevu:cur.slot,not:$("#bn").value});toPay()};
+function buildSuccess(){const k=cur.pay==="kart";$("#kod7").textContent=cur.kod||"";
+ $("#okh").textContent=k?"Ödemen başarıyla tamamlandı":"Havale seçimin alındı";
+ const hv=cur.rows.some(p=>p.k==="video"),ho=cur.rows.some(p=>p.k!=="video");$("#okp").textContent=k?(hv?"Teşekkürler. Randevun kaydedildi, onaylanınca Meet bağlantısı sana iletilecek.":"Teşekkürler."):"Ödemen kontrol edildikten sonra sana bilgi verilecek.";
+ $("#sum3").innerHTML=cur.rows.map(p=>`<div><span>${p.n} · ${p.d}</span><span>${tl(p.p)}</span></div>`).join("")+(cur.slot?`<div><span>Randevu</span><span>${cur.slot}</span></div>`:"")+`<div class="t"><span>Toplam</span><span>${tl(cur.tot)}</span></div>`;
+ $("#oBook").hidden=!(hv&&!cur.slot);prep(k,ho)}
+var tm=null;
+function prep(k,ho){clearInterval(tm);const b=$("#prep");b.hidden=!ho;if(!ho)return;
+ const H=CFG.hazirlikSaat||5;
+ if(!k){$("#pt").textContent="Ödemen kontrol edildikten sonra paketin hazırlanmaya başlayacak. Hazırlık yaklaşık "+H+" saat sürer.";$("#cd").hidden=true;return}
+ if(!cur.ready){cur.ready=Date.now()+H*3600000;try{localStorage.setItem("sa_cur",JSON.stringify(cur))}catch(_){}if(CFG.odemeLinki||!CFG.endpoint)send("kart-odemesi-tamam",{hazir:new Date(cur.ready).toISOString()})}
+ $("#cd").hidden=false;$("#pt").textContent="Paketin hazırlanıyor. Yaklaşık "+H+" saat içinde hazır olacak.";
+ const tot=H*3600000,tick=()=>{const l=Math.max(0,cur.ready-Date.now()),s=Math.floor(l/1000),p=n=>String(n).padStart(2,"0");
+  $("#ch").textContent=p(Math.floor(s/3600));$("#cm2").textContent=p(Math.floor(s%3600/60));$("#cs").textContent=p(s%60);
+  $("#pb").style.width=Math.min(100,(1-l/tot)*100)+"%";
+  if(!l){clearInterval(tm);$("#pt").textContent="Hazırlık süresi doldu. Paketin sana iletilecek, ulaşmadıysa DM’den yazabilirsin."}};
+ tick();tm=setInterval(tick,1000)}
+const esc=s=>{const d=document.createElement("div");d.textContent=s;return d.innerHTML};
+const role=()=>location.hash==="#yonetici"?"o":"c";
+const rk=()=>"sa_chat_"+(cur&&cur.room||"x");
+function getMsgs(){try{return JSON.parse(localStorage.getItem(rk())||"[]")}catch(_){return[]}}
+function drawChat(){const r=role(),a=getMsgs(),e=$("#msgs");
+ e.innerHTML=a.length?a.map(m=>`<div class="bb ${m.f===r?"me":"ot"}">${esc(m.t)}<small>${m.h}</small></div>`).join(""):`<p class="msg c">Henüz mesaj yok. İlk mesajını yazabilirsin.</p>`;
+ e.scrollTop=e.scrollHeight}
+function openChat(){drawChat();$("#chn").textContent=role()==="o"?"Yönetici görünümü (demo): "+cur.d.ad:(CFG.chatUrl?"":"Canlı sohbet henüz bağlı değil. Mesajların bu cihazda saklanır.");go("v8")}
+$("#oChat").onclick=openChat;$("#fchat").onclick=openChat;
+$("#oBook").onclick=()=>{buildBook();go("v6")};
+$("#chb").onclick=()=>go(role()==="o"?"v1":"v7");
+function sendChat(){const t=$("#chi").value.trim();if(!t)return;const a=getMsgs();a.push({f:role(),t,h:new Date().toLocaleTimeString("tr-TR",{hour:"2-digit",minute:"2-digit"})});try{localStorage.setItem(rk(),JSON.stringify(a))}catch(_){}$("#chi").value="";drawChat();if(role()==="c")send("mesaj",{mesaj:t})}
+$("#chs").onclick=sendChat;onEnter($("#chf"),sendChat);
+window.addEventListener("storage",e=>{if(cur&&e.key===rk()&&!$("#v8").hidden)drawChat()});
+if(location.hash==="#yonetici"){try{cur=JSON.parse(localStorage.getItem("sa_cur"))}catch(_){}if(cur)openChat()}
+const FM={video:"Video meeting",ses:"Ses kaydı",metin:"Metin dosyası"};
+const DUR=["Tamamlandı","Görüşme bekleniyor","Hizmet bekleniyor"];
+let AR=[],AU="",AK="",demo=false,flt="",shown=20;
+const dt=s=>(s||"").split("-").reverse().join(".");
+const fd=s=>{const d=new Date(s);return isNaN(d)?"":d.toLocaleString("tr-TR",{dateStyle:"short",timeStyle:"short"})};
+const ea=s=>esc(String(s==null?"":s)).replace(/"/g,"&quot;");
+const pk=r=>String(r.paketler||"").split(",").map(x=>x.trim()).filter(Boolean);
+const hasV=r=>pk(r).some(n=>n==="1.0"||n==="3.0");
+const durOf=r=>r.durum||(hasV(r)?"Görüşme bekleniyor":"Hizmet bekleniyor");
+const paid=r=>r.asama==="kart-odemesi-tamam"||r.asama==="havale-secildi";
+const EYE="<svg viewBox='0 0 24 24'><path d='M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z'/><circle cx='12' cy='12' r='3'/></svg>";
+const EYE0="<svg viewBox='0 0 24 24'><path d='M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z'/><circle cx='12' cy='12' r='3'/><path d='M3 3l18 18'/></svg>";
+function setEye(v){$("#ak").type=v?"text":"password";$("#eye").innerHTML=v?EYE0:EYE;$("#eye").setAttribute("aria-pressed",v);$("#eye").setAttribute("aria-label",v?"Şifreyi gizle":"Şifreyi göster")}
+function makeSample(){
+ let s=7;const R=()=>(s=s*16807%2147483647)/2147483647,pick=a=>a[Math.floor(R()*a.length)],p2=n=>String(n).padStart(2,"0");
+ const fn=["Elif","Zeynep","Ayşe","Merve","Selin","Deniz","Ece","Burcu","Cansu","Gizem","Ahmet","Mehmet","Can","Emre","Burak","Kerem","Mert","Yusuf","Seda","İpek"];
+ const ln=["Yılmaz","Kaya","Demir","Şahin","Çelik","Yıldız","Aydın","Öztürk","Arslan","Doğan","Kılıç","Aslan","Çetin","Koç","Kurt"];
+ const il=["İstanbul","Ankara","İzmir","Bursa","Antalya","Adana","Konya","Eskişehir","Samsun","Trabzon","Mersin","Kayseri"];
+ const fan=["Koç burcu","Sevdiğim bir şarkıcı","Aslan burcu","Annem","Balık burcu","Eşim","Başak burcu","Bir oyuncu","Terazi burcu","Kardeşim","Yengeç burcu",""];
+ const out=[],asc=x=>x.toLowerCase().replace(/\u0307/g,"").replace(/ı/g,"i").replace(/ğ/g,"g").replace(/ü/g,"u").replace(/ş/g,"s").replace(/ö/g,"o").replace(/ç/g,"c");
+ for(let i=0;i<100;i++){
+  const ps=[pick(P)];if(R()<.3){const b=pick(P);if(b!==ps[0])ps.push(b)}
+  ps.sort((a,b)=>a.n<b.n?-1:1);
+  const v=ps.some(p=>p.k==="video"),age=Math.floor(R()*90),t=new Date(Date.now()-age*864e5-R()*864e5);
+  const as=R()<.08?"form":(R()<.15?"havale-secildi":"kart-odemesi-tamam");
+  const a1=pick(fn),b1=pick(ln),row={room:"s"+i,zaman:t.toISOString(),ad:a1+" "+b1,eposta:asc(a1+"."+b1)+"@example.com",iletisim:"05"+(30+Math.floor(R()*20))+" XXX "+p2(Math.floor(R()*100))+" "+p2(Math.floor(R()*100)),tarih:(1975+Math.floor(R()*29))+"-"+p2(1+Math.floor(R()*12))+"-"+p2(1+Math.floor(R()*28)),saat:R()<.2?"bilmiyor":p2(Math.floor(R()*24))+":"+p2(Math.floor(R()*60)),yer:pick(il),fan:pick(fan),paketler:ps.map(p=>p.n).join(", "),toplam:ps.reduce((a,p)=>a+p.p,0),asama:as};
+  if(age>30&&as!=="form")row.durum="Tamamlandı";
+  if(v&&as!=="form"){const dd=1+Math.floor(R()*28),wk=new Date(2026,9,dd).getDay();row.randevu=p2(dd)+".10.2026 "+DN[wk]+" "+(wk===0||wk===6?pick(["13:00–15:00","21:00–23:00"]):"21:00–23:00")}
+  out.push(row)}
+ return out.sort((a,b)=>a.zaman<b.zaman?1:-1)}
+async function adminLogin(u,k){
+ if(!CFG.endpoint){AR=[...lsGet(),...makeSample()];demo=true;return true}
+ try{const r=await fetch(CFG.endpoint+"?user="+encodeURIComponent(u)+"&key="+encodeURIComponent(k)),j=await r.json();if(!j.ok)return false;AR=j.rows;demo=false;return true}catch(_){return false}}
+function drawDash(){
+ const rows=AR,cnt={};P.forEach(p=>cnt[p.n]=0);rows.forEach(r=>pk(r).forEach(n=>{if(n in cnt)cnt[n]++}));
+ const maps=Object.values(cnt).reduce((a,b)=>a+b,0),gain=rows.filter(paid).reduce((a,r)=>a+(+r.toplam||0),0),done=rows.filter(r=>durOf(r)==="Tamamlandı").length;
+ $("#stats").innerHTML=[[rows.length,"Müşteri"],[maps,"Toplam harita"],[tl(gain),"Toplam kazanç"],[done,"Tamamlanan"]].map(([v,l])=>`<div class="st"><b>${v}</b><span>${l}</span></div>`).join("");
+ const G=[[1,"Temel harita incelemesi"],[2,"Mini doğum haritası ve transit"],[3,"İlerletilmiş ve directed haritalar"]],mx=Math.max(1,...Object.values(cnt));
+ $("#bars").innerHTML=G.map(([g,t])=>{const ps=P.filter(p=>p.g===g);return `<div class="gh"><b>${t}</b><span>${ps.reduce((a,p)=>a+cnt[p.n],0)} harita</span></div>`+ps.map(p=>`<div class="br"><span>${p.n} ${FM[p.k]}</span><div class="bt"><i class="g${g}" style="width:${cnt[p.n]/mx*100}%"></i></div><span>${cnt[p.n]} · ${tl(cnt[p.n]*p.p)}</span></div>`).join("")}).join("");
+ $("#fl").innerHTML=[["","Tümü"],...DUR.map(d=>[d,d])].map(([v,l])=>`<button type="button" class="chip" data-f="${ea(v)}" aria-pressed="${flt===v}">${l} (${v?rows.filter(r=>durOf(r)===v).length:rows.length})</button>`).join("");
+ const q=$("#aq").value.toLowerCase(),f=rows.filter(r=>(!flt||durOf(r)===flt)&&(!q||Object.values(r).join(" ").toLowerCase().includes(q)));
+ $("#ac").textContent=f.length+" müşteri · Detay için karta, durumu değiştirmek için duruma dokun";$("#more").hidden=f.length<=shown;
+ $("#at").innerHTML=f.slice(0,shown).map(r=>`<div class="uc"><button type="button" class="nm" data-open="${ea(r.room)}"><b>${esc(r.ad||"")}</b><span>${esc(fd(r.zaman))} · ${esc(r.paketler||"")}</span></button><button type="button" class="sb s${DUR.indexOf(durOf(r))}" aria-pressed="true" data-id="${ea(r.room)}" title="Durumu değiştirmek için dokun">${durOf(r)}</button></div>`).join("")||'<p class="msg c">Müşteri bulunamadı.</p>'}
+$("#eye").onclick=()=>setEye($("#ak").type==="password");setEye(false);
+async function doLogin(){
+ if(!$("#au").value.trim()||!$("#ak").value){$("#am").textContent="Kullanıcı adı ve şifre gerekli.";return}
+ AU=$("#au").value.trim();AK=$("#ak").value;$("#am").textContent="Kontrol ediliyor…";
+ if(!await adminLogin(AU,AK)){$("#am").textContent="Kullanıcı adı veya şifre hatalı.";return}
+ $("#am").textContent="";$("#lg").hidden=true;$("#dash").hidden=false;
+ $("#dm").textContent=demo?"Örnek veri gösteriliyor. Kayıt adresi bağlanınca gerçek müşterilerin burada görünür.":"";
+ flt="";shown=20;$("#aq").value="";$("#ak").value="";setEye(false);drawDash()}
+$("#alog").onclick=doLogin;onEnter($("#af"),doLogin);
+$("#out2").onclick=()=>{AK="";AU="";AR=[];$("#dash").hidden=true;$("#lg").hidden=false;$("#au").value=""};
+$("#fl").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;flt=b.dataset.f;shown=20;drawDash()});
+$("#aq").addEventListener("input",()=>{shown=20;drawDash()});
+$("#more").onclick=()=>{shown+=20;drawDash()};
+function toggleDur(r){
+ r.durum=durOf(r)==="Tamamlandı"?(hasV(r)?"Görüşme bekleniyor":"Hizmet bekleniyor"):"Tamamlandı";
+ if(demo)localUpdate(r.room,{durum:r.durum});
+ if(!demo&&CFG.endpoint)fetch(CFG.endpoint,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain"},body:JSON.stringify({islem:"durum",room:r.room,durum:r.durum,kullanici:AU,anahtar:AK})}).catch(()=>{})}
+$("#at").addEventListener("click",e=>{
+ const o=e.target.closest(".nm");if(o){openCust(o.dataset.open);return}
+ const b=e.target.closest(".sb");if(!b)return;const r=AR.find(x=>String(x.room)===b.dataset.id);if(!r)return;
+ toggleDur(r);drawDash()});
+$("#cinfo").addEventListener("click",e=>{if(!e.target.closest("#cst")||!CU)return;toggleDur(CU);infoRows()});
+let CU=null;
+const norm=ph=>{let d=String(ph||"").replace(/\D/g,"");if(d.length===11&&d[0]==="0")d="9"+d;else if(d.length===10&&d[0]==="5")d="90"+d;return d.length===12&&d.startsWith("90")?d:""};
+const okMeet=u=>/^https:\/\/meet\.google\.com\/[a-z0-9-]{3,}/i.test(String(u||"").trim());
+function meetUI(){
+ const u=$("#mlink").value.trim(),ok=okMeet(u),r=CU,ph=norm(r.iletisim);
+ const msg="Merhaba "+r.ad+", Scorching Astrology görüşmemiz için Google Meet bağlantın: "+u+(r.randevu?" (Randevu: "+r.randevu+")":"");
+ const set=(a,h)=>{if(ok&&h){a.href=h;a.removeAttribute("aria-disabled")}else{a.removeAttribute("href");a.setAttribute("aria-disabled","true")}};
+ set($("#mgo"),u);
+ set($("#mwa"),ph?"https://wa.me/"+ph+"?text="+encodeURIComponent(msg):"");
+ set($("#mml"),r.eposta?"mailto:"+r.eposta+"?subject="+encodeURIComponent("Scorching Astrology görüşme bağlantısı")+"&body="+encodeURIComponent(msg):"");
+ const h=[];if(!ok)h.push("Önce yukarıya geçerli bir Google Meet linki yapıştır.");else{if(!ph)h.push("WhatsApp için geçerli bir telefon numarası gerekli"+(demo?" (örnek veride numaralar gizli).":"."));if(!r.eposta)h.push("Bu müşterinin e-posta adresi yok.")}
+ $("#msh").textContent=h.join(" ")}
+function infoRows(){
+ const r=CU,pkt=pk(r).map(n=>{const p=P.find(x=>x.n===n);return p?n+" "+FM[p.k]:n}).join(", "),d=durOf(r);
+ const rows=[["Form tarihi",esc(fd(r.zaman))],["Ad Soyad",esc(r.ad||"")],["Telefon",esc(r.iletisim||"")],["E-posta",esc(r.eposta||"")],["Doğum tarihi",esc(dt(r.tarih))],
+  ["Doğum saati",r.saat==="bilmiyor"?'<span class="tg nk">Saatini bilmiyor</span>':esc(r.saat||"")],["Doğum ili",esc(r.yer||"")],["En sevdiği ünlü",esc(r.fan||"")],["Seçtiği paket",esc(pkt)]];
+ if(r.kod)rows.push(["Takip kodu",esc(r.kod)]);
+ if(r.randevu)rows.push(["Randevu tarihi ve saati",esc(r.randevu)]);
+ rows.push(["Durum",`<button type="button" class="sb s${DUR.indexOf(d)}" id="cst" aria-pressed="true" title="Durumu değiştirmek için dokun">${d}</button>`]);
+ $("#cinfo").innerHTML=rows.map(([a,b])=>`<div><span>${a}</span><span>${b||"—"}</span></div>`).join("")}
+function openCust(id){
+ const r=AR.find(x=>String(x.room)===String(id));if(!r)return;CU=r;
+ $("#cn").textContent=r.ad||"Müşteri";infoRows();
+ const v=hasV(r);$("#mt").hidden=!v;$("#nov").hidden=v;
+ $("#mlink").value=r.meet||"";$("#mst").textContent="";meetUI();rscUI();go("v11")}
+$("#mlink").addEventListener("input",()=>{if(CU)meetUI()});
+$("#msave").onclick=()=>{
+ const u=$("#mlink").value.trim();
+ if(!okMeet(u)){$("#mst").textContent="Geçerli bir Google Meet linki yapıştır (https://meet.google.com/…).";return}
+ CU.meet=u;if(demo)localUpdate(CU.room,{meet:u});$("#mst").textContent=demo?"Link kaydedildi (örnek veri, sayfa yenilenince silinir).":"Link kaydedildi.";meetUI();
+ if(!demo&&CFG.endpoint)fetch(CFG.endpoint,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain"},body:JSON.stringify({islem:"meet",room:CU.room,meet:u,kullanici:AU,anahtar:AK})}).catch(()=>{})};
+var ORD=[];
+const KA="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+function genKod(){const a=new Uint32Array(6);if(self.crypto&&crypto.getRandomValues)crypto.getRandomValues(a);else a.forEach((_,i)=>a[i]=Math.random()*4294967296);let k="";for(let i=0;i<6;i++)k+=KA[a[i]%KA.length];return k}
+function lsGet(){try{const v=localStorage.getItem("sa_orders");return v?JSON.parse(v):ORD}catch(_){return ORD}}
+function lsSet(a){ORD=a;try{localStorage.setItem("sa_orders",JSON.stringify(a))}catch(_){}}
+function localUpsert(o){const a=lsGet(),i=a.findIndex(x=>x.room===o.room);if(i<0)a.unshift({zaman:new Date().toISOString(),...o});else Object.assign(a[i],o);lsSet(a)}
+function localUpdate(room,patch){const a=lsGet(),i=a.findIndex(x=>String(x.room)===String(room));if(i>=0){Object.assign(a[i],patch);lsSet(a)}}
+const last4=ph=>String(ph||"").replace(/\D/g,"").slice(-4);
+let pb="v1",pfTm=null;
+async function lookup(kod,t4){
+ if(!CFG.endpoint)return lsGet().find(x=>x.kod===kod&&last4(x.iletisim)===t4)||null;
+ try{const r=await fetch(CFG.endpoint+"?islem=takip&kod="+encodeURIComponent(kod)+"&tel="+encodeURIComponent(t4)),j=await r.json();return j.ok?j.row:null}catch(_){return null}}
+function renderProf(r){
+ clearInterval(pfTm);
+ const pkt=pk(r).map(n=>{const p=P.find(x=>x.n===n);return p?n+" "+FM[p.k]:n}).join(", "),d=durOf(r),v=hasV(r),ho=pk(r).some(n=>n!=="1.0"&&n!=="3.0");
+ const rows=[["Ad",esc(String(r.ad||"").split(" ")[0])],["Seçtiğin paket",esc(pkt)],["Durum",`<span class="tg ${d==="Tamamlandı"?"good":""}">${d}</span>`]];
+ if(v)rows.push(["Randevu",r.randevu?esc(r.randevu):"Henüz seçilmedi"]);
+ $("#pfInfo").innerHTML=rows.map(([a,b])=>`<div><span>${a}</span><span>${b}</span></div>`).join("");
+ const m=$("#pfMeet"),ok=v&&r.randevu&&okMeet(r.meet);m.hidden=!ok;if(ok)m.href=r.meet;
+ $("#pfNote").textContent=v?(r.randevu?"Randevun değişirse bu sayfada güncellenir. Görüşme linki hazır olduğunda burada görünür.":"Randevu tarihini henüz seçmedin."):"";
+ const cd=$("#pfCd"),hz=r.hazir?new Date(r.hazir).getTime():0;
+ cd.hidden=!(ho&&hz&&d!=="Tamamlandı");
+ if(!cd.hidden){const tk=()=>{const l=Math.max(0,hz-Date.now()),s=Math.floor(l/1000);cd.textContent=l?"Paketin hazırlanıyor. Kalan süre: "+p2s(Math.floor(s/3600))+":"+p2s(Math.floor(s%3600/60))+":"+p2s(s%60):"Hazırlık süresi doldu. Paketin sana iletilecek, ulaşmadıysa DM’den yazabilirsin.";if(!l)clearInterval(pfTm)};tk();pfTm=setInterval(tk,1000)}
+ $("#pfL").hidden=true;$("#pfV").hidden=false}
+function profFrom(){const cu=[...document.querySelectorAll(".view")].find(v=>!v.hidden);pb=cu&&cu.id!=="v13"?cu.id:"v1"}
+function profAsk(msg){$("#pfL").hidden=false;$("#pfV").hidden=true;$("#pfMsg").textContent=msg||"";go("v13")}
+async function profMine(){
+ profFrom();
+ if(!cur||!cur.kod){profAsk();return}
+ const r=await lookup(cur.kod,last4(cur.d&&cur.d.iletisim));
+ if(r){renderProf(r);go("v13")}else{$("#pfKod").value=cur.kod;profAsk("Kayıt henüz görünmüyor. Biraz sonra tekrar dene.")}}
+$("#oProf").onclick=profMine;$("#fprof").onclick=profMine;
+document.addEventListener("click",e=>{if(!e.target.closest("[data-prof]"))return;profFrom();profAsk()});
+$("#pfGo").onclick=async()=>{
+ const kod=$("#pfKod").value.trim().toUpperCase(),t4=$("#pfT4").value.replace(/\D/g,"");
+ if(!kod||t4.length!==4){$("#pfMsg").textContent="Takip kodunu ve telefonunun son 4 hanesini gir.";return}
+ $("#pfMsg").textContent="Aranıyor…";const r=await lookup(kod,t4);
+ if(!r){$("#pfMsg").textContent="Kayıt bulunamadı. Kodu ve telefon numaranı kontrol et.";return}
+ $("#pfMsg").textContent="";renderProf(r)};
+$("#pfBack").onclick=()=>go(pb);
+$("#kcp").onclick=async()=>{try{await navigator.clipboard.writeText(cur.kod);$("#kcp").textContent="Kopyalandı"}catch(_){$("#kcp").textContent="Kodu not al: "+cur.kod}};
+function admDolu(room){const st=new Set();AR.forEach(x=>{if(x.randevu&&String(x.room)!==String(room))st.add(dkey(x.randevu))});return st}
+function rscUI(){
+ $("#rsc").hidden=!hasV(CU);$("#rcur").textContent=CU.randevu?"Mevcut randevu: "+CU.randevu:"Randevu henüz seçilmedi.";
+ $("#rgun").min=new Date().toISOString().slice(0,10);$("#rgun").value="";$("#rsl").innerHTML="";$("#rst").textContent=""}
+function rsFill(){
+ const v=$("#rgun").value,sl=$("#rsl");if(!v){sl.innerHTML="";return}
+ const d=new Date(v+"T00:00:00"),od=admDolu(CU.room);
+ sl.innerHTML=slotsFor(d).map(q=>{const fu=od.has(skey(d,q)),pa=slotPast(d,q);return `<option value="${q}" ${(fu||pa)?"disabled":""}>${q}${fu?" · Dolu":pa?" · Geçti":""}</option>`}).join("");
+ const f=[...sl.options].find(o=>!o.disabled);if(f)sl.value=f.value}
+$("#rgun").addEventListener("input",rsFill);
+$("#rsave").onclick=()=>{
+ const v=$("#rgun").value,sl=$("#rsl");
+ if(!v||!sl.value||sl.selectedOptions[0].disabled){$("#rst").textContent="Geçerli bir gün ve boş bir saat seç.";return}
+ const d=new Date(v+"T00:00:00");CU.randevu=p2s(d.getDate())+"."+p2s(d.getMonth()+1)+"."+d.getFullYear()+" "+DN[d.getDay()]+" "+sl.value;
+ if(demo)localUpdate(CU.room,{randevu:CU.randevu});
+ else if(CFG.endpoint)fetch(CFG.endpoint,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain"},body:JSON.stringify({islem:"randevu",room:CU.room,randevu:CU.randevu,kullanici:AU,anahtar:AK})}).catch(()=>{});
+ infoRows();meetUI();$("#rcur").textContent="Mevcut randevu: "+CU.randevu;$("#rgun").value="";$("#rsl").innerHTML="";
+ $("#rst").textContent="Randevu güncellendi. Müşterinin profilinde de güncel görünür; yeni zamanı müşteriye ayrıca bildirmeyi unutma."};
+function menu(o){
+ $("#drw").classList.toggle("open",o);$("#scr").classList.toggle("open",o);$("#hmb").setAttribute("aria-expanded",o);
+ if(o)setTimeout(()=>$("#mclose").focus(),0);else $("#hmb").focus()}
+$("#hmb").onclick=()=>menu(!$("#drw").classList.contains("open"));
+$("#mclose").onclick=()=>menu(false);$("#scr").onclick=()=>menu(false);
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("#drw").classList.contains("open"))menu(false)});
+$("#drw").addEventListener("keydown",e=>{if(e.key!=="Tab")return;const f=[...$("#drw").querySelectorAll("button")],i=f.indexOf(document.activeElement);if(e.shiftKey&&i<=0){e.preventDefault();f[f.length-1].focus()}else if(!e.shiftKey&&i===f.length-1){e.preventDefault();f[0].focus()}});
+$("#mprof").onclick=()=>{menu(false);if(cur&&cur.kod)profMine();else{profFrom();profAsk()}};
+$("#cb").onclick=()=>{drawDash();go("v9")};
+function openAdmin(){
+ if(AR.length){drawDash();$("#dash").hidden=false;$("#lg").hidden=true}
+ else{$("#dash").hidden=true;$("#lg").hidden=false;$("#am").textContent=""}
+ go("v9")}
+$("#sunb").onclick=openAdmin;
+$("#sunb").addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openAdmin()}});
+if(location.hash==="#admin")openAdmin();
+let kb="v2";
+function fillKv(){document.querySelectorAll(".vs").forEach(e=>e.textContent=CFG.vs||"[Ad Soyad / Ticari Ünvan]");document.querySelectorAll(".vm").forEach(e=>e.textContent=CFG.vsMail||"[e-posta adresi]");document.querySelectorAll(".vn").forEach(e=>e.textContent=CFG.vergiNo||"[vergi dairesi ve vergi numarası]");document.querySelectorAll(".va").forEach(e=>e.textContent=CFG.adres||"[adres]");document.querySelectorAll(".vt").forEach(e=>e.textContent=CFG.tel||"[telefon]");document.querySelectorAll(".vk").forEach(e=>e.textContent=CFG.kdv||"[KDV dahil / KDV hariç]")}
+const KVHTML=$(".kt").innerHTML;$(".kt").outerHTML='<div class="kvm" data-open></div>';
+document.querySelectorAll(".kvm").forEach(m=>{m.outerHTML=`<details class="kvc"${m.hasAttribute("data-open")?" open":""}><summary>KVKK Aydınlatma Metni</summary><div class="kvb">${KVHTML}</div></details>`});
+const DOCS={
+ ms:["Mesafeli Satış Sözleşmesi ve Ön Bilgilendirme",`<h3>Satıcı</h3><p><b class="vs"></b>. Vergi dairesi ve numarası: <b class="vn"></b>. Adres: <b class="va"></b>. Telefon: <b class="vt"></b>. E-posta: <b class="vm"></b></p>
+<h3>Sözleşmenin konusu</h3><p>Alıcının bu sitedeki formu doldurarak seçtiği astroloji danışmanlığı hizmetlerinin (doğum haritası incelemesi, mini doğum haritası ve transit incelemesi, ilerletilmiş ve directed harita analizi) satışı ve ifasıdır. Seçilen paketin numarası, hizmetin şekli (video görüşme, ses kaydı veya metin dosyası), süresi ve fiyatı ödeme öncesinde sipariş özetinde gösterilir.</p>
+<h3>Hizmetin niteliği</h3><p>Hizmet, kişisel farkındalık ve eğlence amacıyla sunulan bir astroloji yorumudur. Tıbbi, hukuki ya da finansal tavsiye değildir ve kesin bir sonuç garantisi içermez. Alıcı, vereceği kararlardan kendisi sorumludur.</p>
+<h3>Fiyat ve ödeme</h3><p>Fiyatlar Türk lirası cinsindendir ve <b class="vk"></b>. Ödeme, ödeme kuruluşunun güvenli sayfasında kredi veya banka kartı ile ya da havale/EFT ile yapılır. Kart bilgileri satıcı tarafından görülmez ve saklanmaz.</p>
+<h3>Hizmetin ifası</h3><p>Video (yüz yüze) görüşmeler, takvim müsaitliğine göre, alıcının seçtiği ve satıcının onayladığı gün ve saatte Google Meet üzerinden yapılır. Görüşme, ödemenin yapıldığı hafta içinde ya da en geç ertesi hafta gerçekleşir; randevular doluluğa göre ayarlanır. Ses kaydı ve metin dosyası paketleri, ödemenin tamamlanmasından sonra yaklaşık 5 saat içinde hazırlanır ve alıcının bildirdiği telefon ya da e-posta ile iletilir. Bu süre bir tahmindir, olağanüstü durumlarda uzayabilir.</p>
+<h3>Cayma hakkı</h3><p>Alıcı, sözleşmenin kurulduğu tarihten itibaren 14 gün içinde herhangi bir gerekçe göstermeden cayabilir. Alıcı hizmetin cayma süresi dolmadan başlamasını açıkça onaylamışsa, hizmet tamamen ifa edildikten sonra cayma hakkı kullanılamaz. İfasına başlanmış bir hizmette cayma halinde, cayma bildirimine kadar ifa edilen kısmın bedeli ödenir. Ayrıca satıcının taahhüdü olarak, hizmet sonrasında memnuniyet olmazsa ödenen tutarın %60’ı geri ödenecektir. Ayrıntılar “İade ve Cayma Koşulları” bölümündedir.</p>
+<h3>Uyuşmazlıklar</h3><p>Uyuşmazlık halinde alıcının yerleşim yerindeki Tüketici Hakem Heyetine veya Tüketici Mahkemesine başvuru hakkı saklıdır.</p>
+<h3>Onay</h3><p>Alıcı, formu göndererek ve ödemeyi yaparak bu ön bilgilendirmeyi ve sözleşmeyi elektronik ortamda okuduğunu ve kabul ettiğini beyan eder.</p>`],
+ iade:["İade ve Cayma Koşulları",`<h3>Cayma hakkı</h3><p>Sözleşmenin kurulduğu tarihten itibaren 14 gün içinde gerekçe göstermeden cayma hakkın vardır. Cayma talebini <b class="vm"></b> adresine yazılı olarak iletmen yeterlidir.</p>
+<h3>Hizmetin başlaması</h3><p>Hizmetin cayma süresi dolmadan başlamasını onayladıysan ve hizmet tamamen verildiyse (ses kaydı ya da metin dosyası teslim edildiyse, video görüşme yapıldıysa) yasal cayma hakkı sona erer. Hizmet başlamış ama tamamlanmamışsa, cayma bildirimine kadar yapılan kısmın bedeli düşülerek iade yapılır.</p>
+<h3>Memnuniyet iadesi</h3><p>Yasal haklarından ayrı olarak satıcının taahhüdü: Seans sonrasında memnuniyet olmazsa ödediğin tutarın %60’ı geri ödenecektir. Bu taahhüt yasal cayma hakkını sınırlamaz; cayma hakkını kullanman halinde yukarıdaki cayma koşulları geçerlidir.</p>
+<h3>İade süreci</h3><p>İade talebin ulaştıktan sonra en geç 14 gün içinde, ödemeyi yaptığın yöntemle (kart ya da havale/EFT) iade yapılır. Kartlı ödemelerde bankanın iadeyi hesabına yansıtma süresi değişebilir.</p>`]};
+document.querySelectorAll(".dcm").forEach(m=>{const d=DOCS[m.dataset.doc];m.outerHTML=`<details class="kvc"${m.hasAttribute("data-open")?" open":""}><summary>${d[0]}</summary><div class="kvb">${d[1]}</div></details>`});
+fillKv();
+document.addEventListener("click",e=>{if(!e.target.closest("[data-docs]"))return;const cu=[...document.querySelectorAll(".view")].find(v=>!v.hidden);kb=cu?cu.id:"v2";go("v12")});
+$("#dkb").onclick=()=>{go(kb);upd()};
+document.addEventListener("click",e=>{if(!e.target.closest("[data-kvkk]"))return;const cu=[...document.querySelectorAll(".view")].find(v=>!v.hidden);kb=cu?cu.id:"v2";go("v10")});
+$("#kvb").onclick=()=>{go(kb);upd()};
+$("#cp").onclick=async()=>{const t=$("#out");try{await navigator.clipboard.writeText(t.value);$("#cm").textContent="Özet kopyalandı."}catch(_){t.select();try{document.execCommand("copy");$("#cm").textContent="Özet kopyalandı."}catch(__){$("#cm").textContent="Metni seçip kopyalayabilirsin."}}};
+</script>
+</body>
+</html>
