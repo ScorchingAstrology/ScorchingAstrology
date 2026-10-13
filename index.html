@@ -243,6 +243,23 @@ a.btn[hidden]{display:none}
 .chip[aria-pressed="true"]{border-color:var(--sel);background:var(--lav);color:var(--btnt)}
 .nx{list-style:none;margin:16px 0;padding:0}.nx li{padding:10px 0;border-bottom:1px solid var(--line);font-size:.95rem}.nx b{font-weight:500}
 @media (prefers-reduced-motion:reduce){.view{animation:none}.btn{transition:none}}
+.mdl{position:fixed;inset:0;z-index:30;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(10,8,30,.55);opacity:0;visibility:hidden;transition:opacity .2s,visibility 0s .2s}
+.mdl.open{opacity:1;visibility:visible;transition:opacity .2s}
+.mdb{width:min(360px,100%);background:var(--bg1);color:var(--ink);border-radius:20px;padding:22px 20px 18px;box-shadow:0 20px 50px rgba(20,15,60,.4);transform:translateY(10px) scale(.97);transition:transform .2s}
+.mdl.open .mdb{transform:none}
+.mdb h3{margin:0 0 8px;font-size:1.15rem;font-weight:600}.mdb p{margin:0;font-size:.92rem;color:var(--muted)}
+.mdb .acts{justify-content:flex-end}
+.btn.dg{background:var(--red);color:#fff}
+@media (prefers-reduced-motion:reduce){.mdl,.mdb{transition:none}}
+.uc .ck{width:22px;height:22px;flex:none;margin-left:8px;accent-color:var(--sel)}
+.uc.on{box-shadow:inset 0 0 0 2px var(--sel)}
+.bulk{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}
+.bulk .btn{padding:8px 14px;font-size:.85rem}
+.mdb input{margin-top:14px}
+.mdb .er{color:var(--red);min-height:1.3em;margin-top:6px!important;font-size:.85rem}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--ink);color:var(--bg1);padding:12px 20px;border-radius:14px;font-size:.92rem;font-weight:500;box-shadow:0 10px 30px rgba(20,15,60,.35);opacity:0;visibility:hidden;transition:opacity .25s,transform .25s,visibility 0s .25s;z-index:40;max-width:90vw;text-align:center}
+.toast.show{opacity:1;visibility:visible;transform:translate(-50%,0);transition:opacity .25s,transform .25s}
+@media (prefers-reduced-motion:reduce){.toast{transition:none}}
 </style>
 </head>
 <body>
@@ -288,7 +305,8 @@ a.btn[hidden]{display:none}
     <div id="form">
       <label for="ad">Ad Soyad</label><input id="ad" required autocomplete="name">
       <label for="ik">Telefon</label><input id="ik" type="tel" inputmode="tel" autocomplete="tel" required>
-      <label for="mail">E-posta (isteğe bağlı)</label><input id="mail" type="email" autocomplete="email">
+      <label for="mail">E-posta</label><input id="mail" type="email" autocomplete="email" required>
+      <p class="nt2" style="margin:8px 0 0">E-posta adresinin doğru yazılması önemlidir. Randevu onayı, değişiklik ve iptal bilgilendirmeleri bu adrese gönderilir. Yanlış yazılan adrese ulaşamayız.</p>
       <label for="tar">Doğum tarihi</label><input id="tar" type="date" required>
       <div class="two"><div><label for="saat">Doğum saati</label><input id="saat" type="time"></div><div><label for="yer">Doğum yeri (İl)</label><input id="yer" required></div></div>
       <label class="cb"><input type="checkbox" id="bil"> Doğum saatimi bilmiyorum</label>
@@ -378,7 +396,7 @@ a.btn[hidden]{display:none}
     <h2>KVKK Aydınlatma Metni</h2>
     <div class="kt">
       <h3>Veri sorumlusu</h3><p>6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında veri sorumlusu <b class="vs"></b>’dur. İletişim: <b class="vm"></b></p>
-      <h3>İşlenen kişisel veriler</h3><p>Ad soyad, telefon, e-posta (verirsen), doğum tarihi, saati ve yeri, forma yazdığın ek bilgiler (örneğin hayranı olduğun ya da hayatındaki bir kişi veya burcu), seçtiğin paket, ödeme durumu ve randevu tercihin. Kart bilgilerin bu sayfada alınmaz ve tarafımızca saklanmaz. Ödeme, ödeme kuruluşunun güvenli sayfasında yapılır.</p>
+      <h3>İşlenen kişisel veriler</h3><p>Ad soyad, telefon, e-posta, doğum tarihi, saati ve yeri, forma yazdığın ek bilgiler (örneğin hayranı olduğun ya da hayatındaki bir kişi veya burcu), seçtiğin paket, ödeme durumu ve randevu tercihin. Kart bilgilerin bu sayfada alınmaz ve tarafımızca saklanmaz. Ödeme, ödeme kuruluşunun güvenli sayfasında yapılır.</p>
       <h3>İşleme amaçları</h3><p>Seçtiğin astroloji hizmetinin sunulması ve harita okumasının hazırlanması, randevu ve iletişim süreçlerinin yürütülmesi, ödeme ve iade işlemlerinin takibi ile yasal yükümlülüklerin yerine getirilmesi.</p>
       <h3>Toplama yöntemi ve hukuki sebep</h3><p>Verilerin bu internet sitesindeki form aracılığıyla elektronik ortamda toplanır. Hukuki sebepler; sözleşmenin kurulması veya ifasıyla doğrudan ilgili olması (KVKK m.5/2-c), hukuki yükümlülüğün yerine getirilmesi (m.5/2-ç) ve temel hak ve özgürlüklerine zarar vermemek kaydıyla veri sorumlusunun meşru menfaatidir (m.5/2-f).</p>
       <h3>Verilerin aktarılması</h3><p>Verilerin, yukarıdaki amaçlarla sınırlı olarak; kayıtların tutulduğu bulut hizmet sağlayıcısına, ödeme kuruluşuna ve mevzuat gereği yetkili kurum ve kuruluşlara aktarılabilir. Bu hizmet sağlayıcıların sunucuları yurt dışında bulunabilir.</p>
@@ -399,6 +417,13 @@ a.btn[hidden]{display:none}
       <label for="rsl">Saat aralığı</label><select id="rsl"></select>
       <div class="acts"><button class="btn l" type="button" id="rsave">Randevuyu güncelle</button></div>
       <p class="msg" id="rst" role="status"></p>
+      <div class="acts"><button class="btn g" type="button" id="rcancel" hidden>Randevuyu iptal et</button></div>
+    </div>
+    <div class="card" id="dz">
+      <h3>Kaydı yönet</h3>
+      <p class="msg">Silinen kayıt E-Tablodan da kalıcı olarak kaldırılır ve geri alınamaz.</p>
+      <div class="acts"><button class="btn g" type="button" id="rdel">Müşteri kaydını sil</button></div>
+      <p class="msg" id="dzs" role="status"></p>
     </div>
     <div class="card" id="mt" hidden>
       <h3>Google Meet görüşmesi</h3>
@@ -441,6 +466,7 @@ a.btn[hidden]{display:none}
       <h3 class="sh">Müşteri listesi</h3>
       <div class="ah"><input id="aq" placeholder="Ara: ad, telefon, il…" aria-label="Ara"></div>
       <div class="chips" id="fl"></div>
+      <div class="bulk"><button class="btn l" type="button" id="bsel">Çoklu seç</button><button class="btn g" type="button" id="ball" hidden>Listedekilerin hepsini seç</button><button class="btn dg" type="button" id="bdel" hidden>Seçilenleri sil (0)</button></div>
       <p class="msg" id="ac"></p>
       <div class="cl" id="at"></div>
       <div class="c"><button class="btn l" type="button" id="more" hidden>Daha fazla göster</button></div>
@@ -497,6 +523,8 @@ a.btn[hidden]{display:none}
   <div class="bar" id="bar" hidden><span id="bt"></span><button class="btn l" id="fill2">Formu Doldur</button></div>
   <div class="zod" aria-hidden="true"><span>♈&#xFE0E;</span><span>♉&#xFE0E;</span><span>♊&#xFE0E;</span><span>♋&#xFE0E;</span><span>♌&#xFE0E;</span><span>♍&#xFE0E;</span><span>♎&#xFE0E;</span><span>♏&#xFE0E;</span><span>♐&#xFE0E;</span><span>♑&#xFE0E;</span><span>♒&#xFE0E;</span><span>♓&#xFE0E;</span></div>
   <div class="end"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="mdl" id="mdl" role="dialog" aria-modal="true" aria-labelledby="mdt" aria-describedby="mdp"><div class="mdb"><h3 id="mdt"></h3><p id="mdp"></p><input id="mdk" type="password" autocomplete="current-password" placeholder="Yönetici şifren" aria-label="Yönetici şifresi" hidden><p class="er" id="mde" role="alert"></p><div class="acts"><button class="btn l" type="button" id="mdn">Vazgeç</button><button class="btn dg" type="button" id="mdy">Evet</button></div></div></div>
   <div class="scrim" id="scr"></div>
   <aside class="drw" id="drw" role="dialog" aria-modal="true" aria-label="Menü">
     <div class="dh2"><b>Menü</b><button class="mx" id="mclose" type="button" aria-label="Menüyü kapat">✕</button></div>
@@ -543,13 +571,15 @@ $("#bil").onchange=e=>{$("#saat").disabled=e.target.checked;if(e.target.checked)
 $("#saat").addEventListener("input",fq);
 function okf(c){for(const el of c.querySelectorAll("[required]")){if(!el.checkValidity()){el.reportValidity();return false}}return true}
 function onEnter(c,fn){c.addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.tagName==="INPUT"&&e.target.type!=="checkbox"){e.preventDefault();fn()}})}
+let subBusy=false;
 async function submitForm(){
+ if(subBusy)return;
  if(!okf($("#form"))){$("#fm").textContent="Lütfen zorunlu alanları doldur ve KVKK ile sözleşme metinlerini okuduğunu onayla.";return}
  $("#fm").textContent="";
  const rows=P.filter(p=>sel.has(p.n)),tot=rows.reduce((a,p)=>a+p.p,0),
  d={zaman:new Date().toISOString(),ad:$("#ad").value,iletisim:$("#ik").value,eposta:$("#mail").value,tarih:$("#tar").value,saat:$("#bil").checked?"bilmiyor":$("#saat").value,yer:$("#yer").value,fan:$("#fan").value,paketler:rows.map(p=>p.n).join(", "),toplam:tot};
  const m=`Ad Soyad: ${d.ad}\nTelefon: ${d.iletisim}\nPaketler: ${d.paketler} (${tl(tot)})\nDoğum tarihi: ${d.tarih.split("-").reverse().join(".")}\nDoğum saati: ${d.saat||"belirtilmedi"}\nDoğum yeri: ${d.yer}${d.fan?`\nHayranı olduğunuz bir ünlü ya da hayatınızdaki biri veya bu kişinin burcu: ${d.fan}`:""}`;
- cur={d,m,rows,tot,slot:"",kod:genKod(),room:(self.crypto&&crypto.randomUUID)?crypto.randomUUID():String(Date.now())+Math.random().toString(36).slice(2)};await send("form");if(rows.some(p=>p.k==="video")){buildBook();go("v6")}else toPay()}
+ cur={d,m,rows,tot,slot:"",kod:genKod(),room:(self.crypto&&crypto.randomUUID)?crypto.randomUUID():String(Date.now())+Math.random().toString(36).slice(2)};subBusy=true;try{await send("form")}finally{setTimeout(()=>{subBusy=false},1500)}if(rows.some(p=>p.k==="video")){buildBook();go("v6")}else toPay()}
 $("#fsub").onclick=submitForm;onEnter($("#form"),submitForm);
 let cur=null,slot="";
 async function send(stage,x){const pl={...cur.d,room:cur.room,kod:cur.kod,asama:stage,...(x||{})};if(!CFG.endpoint){localUpsert(pl);return false}try{await fetch(CFG.endpoint,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain"},body:JSON.stringify(pl)});return true}catch(_){return false}}
@@ -643,7 +673,7 @@ window.addEventListener("storage",e=>{if(cur&&e.key===rk()&&!$("#v8").hidden)dra
 if(location.hash==="#yonetici"){try{cur=JSON.parse(localStorage.getItem("sa_cur"))}catch(_){}if(cur)openChat()}
 const FM={video:"Video meeting",ses:"Ses kaydı",metin:"Metin dosyası"};
 const DUR=["Tamamlandı","Görüşme bekleniyor","Hizmet bekleniyor"];
-let AR=[],AU="",AK="",demo=false,flt="",shown=20;
+let AR=[],AU="",AK="",demo=false,flt="",shown=20,selMode=false;const SEL=new Set();
 const dt=s=>(s||"").split("-").reverse().join(".");
 const fd=s=>{const d=new Date(s);return isNaN(d)?"":d.toLocaleString("tr-TR",{dateStyle:"short",timeStyle:"short"})};
 const ea=s=>esc(String(s==null?"":s)).replace(/"/g,"&quot;");
@@ -673,7 +703,7 @@ function makeSample(){
  return out.sort((a,b)=>a.zaman<b.zaman?1:-1)}
 async function adminLogin(u,k){
  if(!CFG.endpoint){AR=[...lsGet(),...makeSample()];demo=true;return true}
- try{const r=await fetch(CFG.endpoint+"?user="+encodeURIComponent(u)+"&key="+encodeURIComponent(k)),j=await r.json();if(!j.ok)return false;AR=j.rows;demo=false;return true}catch(_){return false}}
+ try{const r=await fetch(CFG.endpoint+"?user="+encodeURIComponent(u)+"&key="+encodeURIComponent(k)),j=await r.json();if(!j.ok)return false;AR=j.rows;demo=false;return true}catch(_){return "net"}}
 function drawDash(){
  const rows=AR,cnt={};P.forEach(p=>cnt[p.n]=0);rows.forEach(r=>pk(r).forEach(n=>{if(n in cnt)cnt[n]++}));
  const maps=Object.values(cnt).reduce((a,b)=>a+b,0),gain=rows.filter(paid).reduce((a,r)=>a+(+r.toplam||0),0),done=rows.filter(r=>durOf(r)==="Tamamlandı").length;
@@ -682,18 +712,19 @@ function drawDash(){
  $("#bars").innerHTML=G.map(([g,t])=>{const ps=P.filter(p=>p.g===g);return `<div class="gh"><b>${t}</b><span>${ps.reduce((a,p)=>a+cnt[p.n],0)} harita</span></div>`+ps.map(p=>`<div class="br"><span>${p.n} ${FM[p.k]}</span><div class="bt"><i class="g${g}" style="width:${cnt[p.n]/mx*100}%"></i></div><span>${cnt[p.n]} · ${tl(cnt[p.n]*p.p)}</span></div>`).join("")}).join("");
  $("#fl").innerHTML=[["","Tümü"],...DUR.map(d=>[d,d])].map(([v,l])=>`<button type="button" class="chip" data-f="${ea(v)}" aria-pressed="${flt===v}">${l} (${v?rows.filter(r=>durOf(r)===v).length:rows.length})</button>`).join("");
  const q=$("#aq").value.toLowerCase(),f=rows.filter(r=>(!flt||durOf(r)===flt)&&(!q||Object.values(r).join(" ").toLowerCase().includes(q)));
- $("#ac").textContent=f.length+" müşteri · Detay için karta, durumu değiştirmek için duruma dokun";$("#more").hidden=f.length<=shown;
- $("#at").innerHTML=f.slice(0,shown).map(r=>`<div class="uc"><button type="button" class="nm" data-open="${ea(r.room)}"><b>${esc(r.ad||"")}</b><span>${esc(fd(r.zaman))} · ${esc(r.paketler||"")}</span></button><button type="button" class="sb s${DUR.indexOf(durOf(r))}" aria-pressed="true" data-id="${ea(r.room)}" title="Durumu değiştirmek için dokun">${durOf(r)}</button></div>`).join("")||'<p class="msg c">Müşteri bulunamadı.</p>'}
+ $("#ac").textContent=f.length+" müşteri · "+(selMode?"Silmek istediklerini işaretle":"Detay için karta, durumu değiştirmek için duruma dokun");
+ FIL=f.map(r=>String(r.room));$("#bsel").textContent=selMode?"Seçimi kapat":"Çoklu seç";$("#ball").hidden=!selMode;$("#bdel").hidden=!selMode;$("#bdel").textContent="Seçilenleri sil ("+SEL.size+")";$("#bdel").disabled=!SEL.size;$("#more").hidden=f.length<=shown;
+ $("#at").innerHTML=f.slice(0,shown).map(r=>`<div class="uc${SEL.has(String(r.room))?" on":""}">${selMode?`<input type="checkbox" class="ck" data-ck="${ea(r.room)}" aria-label="${ea(r.ad||"Müşteri")} seç"${SEL.has(String(r.room))?" checked":""}>`:""}<button type="button" class="nm" data-open="${ea(r.room)}"><b>${esc(r.ad||"")}</b><span>${esc(fd(r.zaman))} · ${esc(r.paketler||"")}</span></button><button type="button" class="sb s${DUR.indexOf(durOf(r))}" aria-pressed="true" data-id="${ea(r.room)}" title="Durumu değiştirmek için dokun">${durOf(r)}</button></div>`).join("")||'<p class="msg c">Müşteri bulunamadı.</p>'}
 $("#eye").onclick=()=>setEye($("#ak").type==="password");setEye(false);
 async function doLogin(){
  if(!$("#au").value.trim()||!$("#ak").value){$("#am").textContent="Kullanıcı adı ve şifre gerekli.";return}
  AU=$("#au").value.trim();AK=$("#ak").value;$("#am").textContent="Kontrol ediliyor…";
- if(!await adminLogin(AU,AK)){$("#am").textContent="Kullanıcı adı veya şifre hatalı.";return}
+ const lr=await adminLogin(AU,AK);if(lr==="net"){$("#am").textContent="Sunucuya bağlanılamadı. İnternetini kontrol edip tekrar dene.";return}if(!lr){$("#am").textContent="Kullanıcı adı veya şifre hatalı.";return}
  $("#am").textContent="";$("#lg").hidden=true;$("#dash").hidden=false;
  $("#dm").textContent=demo?"Örnek veri gösteriliyor. Kayıt adresi bağlanınca gerçek müşterilerin burada görünür.":"";
  flt="";shown=20;$("#aq").value="";$("#ak").value="";setEye(false);drawDash()}
 $("#alog").onclick=doLogin;onEnter($("#af"),doLogin);
-$("#out2").onclick=()=>{AK="";AU="";AR=[];$("#dash").hidden=true;$("#lg").hidden=false;$("#au").value=""};
+$("#out2").onclick=()=>{SEL.clear();selMode=false;AK="";AU="";AR=[];$("#dash").hidden=true;$("#lg").hidden=false;$("#au").value=""};
 $("#fl").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;flt=b.dataset.f;shown=20;drawDash()});
 $("#aq").addEventListener("input",()=>{shown=20;drawDash()});
 $("#more").onclick=()=>{shown+=20;drawDash()};
@@ -702,11 +733,12 @@ function toggleDur(r){
  if(demo)localUpdate(r.room,{durum:r.durum});
  if(!demo&&CFG.endpoint)fetch(CFG.endpoint,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain"},body:JSON.stringify({islem:"durum",room:r.room,durum:r.durum,kullanici:AU,anahtar:AK})}).catch(()=>{})}
 $("#at").addEventListener("click",e=>{
- const o=e.target.closest(".nm");if(o){openCust(o.dataset.open);return}
+ const ck=e.target.closest(".ck");if(ck){const k=ck.dataset.ck;ck.checked?SEL.add(k):SEL.delete(k);drawDash();return}
+ const o=e.target.closest(".nm");if(o){if(selMode){const k=String(o.dataset.open);SEL.has(k)?SEL.delete(k):SEL.add(k);drawDash();return}openCust(o.dataset.open);return}
  const b=e.target.closest(".sb");if(!b)return;const r=AR.find(x=>String(x.room)===b.dataset.id);if(!r)return;
  toggleDur(r);drawDash()});
 $("#cinfo").addEventListener("click",e=>{if(!e.target.closest("#cst")||!CU)return;toggleDur(CU);infoRows()});
-let CU=null;
+let CU=null,FIL=[];
 const norm=ph=>{let d=String(ph||"").replace(/\D/g,"");if(d.length===11&&d[0]==="0")d="9"+d;else if(d.length===10&&d[0]==="5")d="90"+d;return d.length===12&&d.startsWith("90")?d:""};
 const okMeet=u=>/^https:\/\/meet\.google\.com\/[a-z0-9-]{3,}/i.test(String(u||"").trim());
 function meetUI(){
@@ -780,6 +812,7 @@ $("#pfBack").onclick=()=>go(pb);
 $("#kcp").onclick=async()=>{try{await navigator.clipboard.writeText(cur.kod);$("#kcp").textContent="Kopyalandı"}catch(_){$("#kcp").textContent="Kodu not al: "+cur.kod}};
 function admDolu(room){const st=new Set();AR.forEach(x=>{if(x.randevu&&String(x.room)!==String(room))st.add(dkey(x.randevu))});return st}
 function rscUI(){
+ $("#rcancel").hidden=!CU.randevu;$("#dzs").textContent="";
  $("#rsc").hidden=!hasV(CU);$("#rcur").textContent=CU.randevu?"Mevcut randevu: "+CU.randevu:"Randevu henüz seçilmedi.";
  $("#rgun").min=new Date().toISOString().slice(0,10);$("#rgun").value="";$("#rsl").innerHTML="";$("#rst").textContent=""}
 function rsFill(){
@@ -796,6 +829,42 @@ $("#rsave").onclick=()=>{
  else if(CFG.endpoint)fetch(CFG.endpoint,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain"},body:JSON.stringify({islem:"randevu",room:CU.room,randevu:CU.randevu,kullanici:AU,anahtar:AK})}).catch(()=>{});
  infoRows();meetUI();$("#rcur").textContent="Mevcut randevu: "+CU.randevu;$("#rgun").value="";$("#rsl").innerHTML="";
  $("#rst").textContent="Randevu güncellendi. Müşterinin profilinde de güncel görünür; yeni zamanı müşteriye ayrıca bildirmeyi unutma."};
+function adm(p){if(!demo&&CFG.endpoint)fetch(CFG.endpoint,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain"},body:JSON.stringify({room:CU&&CU.room,kullanici:AU,anahtar:AK,...p})}).catch(()=>{})}
+let mdFn=null,mdPrev=null,mdPw=false,toastT=null;
+function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>e.classList.remove("show"),3500)}
+function ask(title,text,yes,fn,pw){$("#mdt").textContent=title;$("#mdp").textContent=text;$("#mdy").textContent=yes;mdFn=fn;mdPw=!!pw;mdPrev=document.activeElement;$("#mdk").hidden=!pw;$("#mdk").value="";$("#mde").textContent="";$("#mdl").classList.add("open");setTimeout(()=>(pw?$("#mdk"):$("#mdn")).focus(),0)}
+function closeAsk(){$("#mdl").classList.remove("open");mdFn=null;mdPw=false;$("#mdk").value="";if(mdPrev&&mdPrev.focus)mdPrev.focus()}
+$("#mdn").onclick=closeAsk;
+$("#mdl").addEventListener("click",e=>{if(e.target.id==="mdl")closeAsk()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("#mdl").classList.contains("open"))closeAsk()});
+async function pwOk(k){
+ if(demo)return k.length>0;
+ try{const r=await fetch(CFG.endpoint+"?user="+encodeURIComponent(AU)+"&key="+encodeURIComponent(k)),j=await r.json();return !!j.ok}catch(_){return "net"}}
+async function mdYes(){
+ const f=mdFn;let pw="";
+ if(mdPw){pw=$("#mdk").value;if(!pw){$("#mde").textContent="Şifreni yaz.";return}
+  $("#mde").textContent="Kontrol ediliyor…";const ok=await pwOk(pw);
+  if(ok==="net"){$("#mde").textContent="Sunucuya bağlanılamadı, tekrar dene.";return}
+  if(!ok){$("#mde").textContent="Şifre hatalı.";return}}
+ $("#mdl").classList.remove("open");mdFn=null;$("#mdk").value="";mdPw=false;if(f)f(pw)}
+$("#mdy").onclick=mdYes;$("#mdk").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();mdYes()}});
+$("#bsel").onclick=()=>{selMode=!selMode;if(!selMode)SEL.clear();drawDash()};
+$("#ball").onclick=()=>{const all=FIL.length&&FIL.every(k=>SEL.has(k));FIL.forEach(k=>all?SEL.delete(k):SEL.add(k));drawDash()};
+$("#bdel").onclick=()=>{if(!SEL.size)return;const n=SEL.size;ask(n+" müşteri silinsin mi?","Seçilen "+n+" müşteri kaydı panelden ve E-Tablodan kalıcı olarak silinecek. Bu işlem geri alınamaz. Devam etmek için yönetici şifreni yaz.","Evet, "+n+" kaydı sil",pw=>{
+  const ids=[...SEL];
+  if(demo)lsSet(lsGet().filter(x=>!SEL.has(String(x.room))));
+  else if(CFG.endpoint)fetch(CFG.endpoint,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain"},body:JSON.stringify({islem:"topluSil",odalar:ids,kullanici:AU,anahtar:pw})}).catch(()=>{});
+  AR=AR.filter(x=>!SEL.has(String(x.room)));SEL.clear();selMode=false;drawDash();toast("Kayıtlar silindi ("+ids.length+")")},true)};
+function bindAdm(){
+ $("#rcancel").onclick=()=>ask("Randevu iptal edilsin mi?",(CU.ad||"Müşteri")+" için "+(CU.randevu||"")+" randevusu iptal edilecek, o saat tekrar boşalacak ve müşteriye e-posta ile haber verilecek.","Evet, iptal et",()=>{
+  CU.randevu="";CU.meet="";if(demo)localUpdate(CU.room,{randevu:"",meet:""});
+  adm({islem:"iptal"});
+  $("#mlink").value="";infoRows();meetUI();rscUI();$("#rst").textContent="Randevu iptal edildi, o saat tekrar boşaldı. "+(demo?"(Örnek veri: e-posta gönderilmez.)":(CU.eposta?"Müşteriye "+CU.eposta+" adresine bilgilendirme e-postası gönderiliyor.":"Müşterinin e-postası kayıtlı değil, ona ayrıca haber vermelisin."))});
+ $("#rdel").onclick=()=>ask("Kayıt silinsin mi?",(CU.ad||"Müşteri")+" kaydı panelden ve E-Tablodan kalıcı olarak silinecek. Bu işlem geri alınamaz.","Evet, sil",pw=>{
+  const id=CU.room;adm({islem:"sil",anahtar:pw});
+  if(demo){lsSet(lsGet().filter(x=>String(x.room)!==String(id)))}
+  SEL.delete(String(id));AR=AR.filter(x=>String(x.room)!==String(id));CU=null;drawDash();go("v9");toast("Kayıt silindi")},true)}
+bindAdm();
 function menu(o){
  $("#drw").classList.toggle("open",o);$("#scr").classList.toggle("open",o);$("#hmb").setAttribute("aria-expanded",o);
  if(o)setTimeout(()=>$("#mclose").focus(),0);else $("#hmb").focus()}
