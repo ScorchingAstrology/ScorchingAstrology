@@ -694,7 +694,7 @@ function mText(){const d=cur.d,en=LANG==="en",dd=d.tarih.split("-").reverse().jo
 function finText(){$("#out").value=mText();$("#kod4").textContent=cur.kod||"";$("#okt").textContent=T(CFG.endpoint?"Bilgilerin alındı. Harita okuman planlanacak.":"Bilgilerin aşağıda. Özeti kopyalayıp DM’den iletebilirsin.")}
 function fin(){finText();$("#b7").hidden=!cur.rows.some(p=>p.k!=="video");go("v4")}
 function next(){buildSuccess();go("v7")}
-$("#pay").onclick=async()=>{if(!CFG.odemeLinki&&!CFG.endpoint){cur.pay="kart";next();return}if(!CFG.odemeLinki){$("#pm").textContent=LANG==="en"?T("Kartla ödeme henüz aktif değil. Havale/EFT ile ödeyebilir ya da DM’den yazabilirsin."):"Kartla ödeme henüz aktif değil. Havale/EFT ile ödeyebilir ya da DM’den yazabilirsin.";return}await send("kart-odemesi-baslatildi");location.href=CFG.odemeLinki};
+$("#pay").onclick=async()=>{if(!CFG.odemeLinki&&!CFG.endpoint){cur.pay="kart";next();return}if(!CFG.odemeLinki){const m=LANG==="en"?T("Kartla ödeme henüz aktif değil. Havale/EFT ile ödeyebilir ya da DM’den yazabilirsin."):"Kartla ödeme henüz aktif değil. Havale/EFT ile ödeyebilir ya da DM’den yazabilirsin.";$("#pm").textContent=m;try{toast(m)}catch(_){}$("#pm").scrollIntoView({behavior:"smooth",block:"center"});return}await send("kart-odemesi-baslatildi");location.href=CFG.odemeLinki};
 $("#pbk").onclick=()=>{buildBook();go("v6")};
 $("#hvc").onclick=async()=>{cur.pay="havale";await send("havale-secildi");next()};
 if(location.hash==="#odendi"){try{cur=JSON.parse(localStorage.getItem("sa_cur"))}catch(_){}if(cur){cur.pay="kart";send("kart-odemesi-tamam");next()}}
