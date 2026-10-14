@@ -724,9 +724,8 @@ function buildSuccess(){const k=cur.pay==="kart";$("#kod7").textContent=cur.kod|
 var tm=null;
 function prep(k,ho){clearInterval(tm);const b=$("#prep");b.hidden=!ho;if(!ho)return;
  const H=CFG.hazirlikSaat||5;
- if(!k){$("#pt").textContent=L("Ödemen kontrol edildikten sonra paketin hazırlanmaya başlayacak. Hazırlık yaklaşık "+H+" saat sürer.","Preparation of your package will start after your payment has been checked. It takes about "+H+" hours.");$("#cd").hidden=true;return}
- if(!cur.ready){cur.ready=Date.now()+H*3600000;try{localStorage.setItem("sa_cur",JSON.stringify(cur))}catch(_){}if(CFG.odemeLinki||!CFG.endpoint)send("kart-odemesi-tamam",{hazir:new Date(cur.ready).toISOString()})}
- $("#cd").hidden=false;$("#pt").textContent=L("Paketin hazırlanıyor. Yaklaşık "+H+" saat içinde hazır olacak.","Your package is being prepared. It will be ready in about "+H+" hours.");
+ if(!cur.ready){cur.ready=Date.now()+H*3600000;try{localStorage.setItem("sa_cur",JSON.stringify(cur))}catch(_){}if(CFG.endpoint)send(k?"kart-odemesi-tamam":"havale-secildi",{hazir:new Date(cur.ready).toISOString()})}
+ $("#cd").hidden=false;$("#pt").textContent=k?L("Paketin hazırlanıyor. Yaklaşık "+H+" saat içinde hazır olacak.","Your package is being prepared. It will be ready in about "+H+" hours."):L("Paketin yaklaşık "+H+" saat içinde hazır olacak. Havale/EFT ödemen kontrol edildikten sonra sana iletilir.","Your package will be ready in about "+H+" hours. It will be delivered to you once your bank transfer has been checked.");
  const tot=H*3600000,tick=()=>{const l=Math.max(0,cur.ready-Date.now()),s=Math.floor(l/1000),p=n=>String(n).padStart(2,"0");
   $("#ch").textContent=p(Math.floor(s/3600));$("#cm2").textContent=p(Math.floor(s%3600/60));$("#cs").textContent=p(s%60);
   $("#pb").style.width=Math.min(100,(1-l/tot)*100)+"%";
