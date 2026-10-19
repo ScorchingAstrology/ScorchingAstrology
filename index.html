@@ -281,6 +281,16 @@ a.btn[hidden]{display:none}
 @media (prefers-reduced-motion:reduce){.lng button{transition:none}}
 @media (max-width:380px){.top{font-size:.85rem;letter-spacing:.14em;padding-left:52px}}
 .ph{display:flex;gap:8px}.ph select{width:44%;flex:none;text-overflow:ellipsis}.ph input{flex:1;min-width:0}
+.hcth{all:unset;display:block;width:100%;box-sizing:border-box;border-radius:12px;overflow:hidden;cursor:zoom-in;background:#fff;box-shadow:inset 0 0 0 1.5px var(--line)}
+.hcth img{display:block;width:100%;max-height:340px;object-fit:contain}
+.hcth:focus-visible{outline:2px solid var(--sel);outline-offset:2px}
+.zm{position:fixed;inset:0;z-index:120;background:rgba(15,12,35,.94);display:flex;flex-direction:column}
+.zm[hidden]{display:none}
+.zt{display:flex;gap:8px;justify-content:flex-end;padding:10px 12px}
+.zt button{all:unset;box-sizing:border-box;min-width:44px;height:44px;padding:0 14px;border-radius:22px;background:rgba(255,255,255,.14);color:#fff;font:500 1.1rem Lexend,sans-serif;text-align:center;line-height:44px;cursor:pointer}
+.zt button:focus-visible{outline:2px solid #fff}
+.zs{flex:1;position:relative;overflow:hidden;touch-action:none;cursor:grab}
+.zs img{position:absolute;left:50%;top:50%;max-width:100%;max-height:100%;transform-origin:center;user-select:none;-webkit-user-drag:none;will-change:transform}
 .nopay #v5 .cc,.nopay #hv,.nopay #v5 .lock,.nopay #v5 .refund,.nopay #hnote,.nopay #vnote,.nopay #pm{display:none!important}
 </style>
 </head>
@@ -447,6 +457,13 @@ a.btn[hidden]{display:none}
   <section class="view" id="v11" hidden>
     <div class="dh"><h2 id="cn"></h2><button class="btn l" type="button" id="cb">‹ Panele dön</button></div>
     <div class="sm" id="cinfo"></div>
+    <div class="card" id="hc">
+      <h3>Doğum haritası</h3>
+      <div id="hcBox"></div>
+      <input type="file" id="hcFile" accept="image/*" hidden>
+      <div class="acts"><button class="btn l" type="button" id="hcAdd">Harita görseli ekle</button><button class="btn g" type="button" id="hcDel" hidden>Görseli sil</button></div>
+      <p class="msg" id="hcSt" role="status"></p>
+    </div>
     <p class="msg" id="nov" hidden>Bu müşterinin paketinde video görüşme yok. Ses kaydı veya metin dosyası hazırlanacak.</p>
     <div class="card" id="rsc" hidden>
       <h3>Randevuyu değiştir</h3>
@@ -562,6 +579,7 @@ a.btn[hidden]{display:none}
   <div class="zod" aria-hidden="true"><span>♈&#xFE0E;</span><span>♉&#xFE0E;</span><span>♊&#xFE0E;</span><span>♋&#xFE0E;</span><span>♌&#xFE0E;</span><span>♍&#xFE0E;</span><span>♎&#xFE0E;</span><span>♏&#xFE0E;</span><span>♐&#xFE0E;</span><span>♑&#xFE0E;</span><span>♒&#xFE0E;</span><span>♓&#xFE0E;</span></div>
   <div class="end"></div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="zm" id="zm" hidden role="dialog" aria-modal="true" aria-label="Doğum haritası"><div class="zt"><button type="button" id="zout" aria-label="Uzaklaştır">−</button><button type="button" id="zin" aria-label="Yakınlaştır">+</button><button type="button" id="zrs">Sığdır</button><button type="button" id="zx" aria-label="Kapat">✕</button></div><div class="zs" id="zs"><img id="zi" alt="Doğum haritası" draggable="false"></div></div>
   <div class="mdl" id="mdl" role="dialog" aria-modal="true" aria-labelledby="mdt" aria-describedby="mdp"><div class="mdb"><h3 id="mdt"></h3><p id="mdp"></p><input id="mdk" type="password" autocomplete="current-password" placeholder="Yönetici şifren" aria-label="Yönetici şifresi" hidden><p class="er" id="mde" role="alert"></p><div class="acts"><button class="btn l" type="button" id="mdn">Vazgeç</button><button class="btn dg" type="button" id="mdy">Evet</button></div></div></div>
   <div class="scrim" id="scr"></div>
   <aside class="drw" id="drw" role="dialog" aria-modal="true" aria-label="Menü">
@@ -794,7 +812,7 @@ function drawDash(){
  const q=$("#aq").value.toLowerCase(),f=rows.filter(r=>(!flt||durOf(r)===flt)&&(!q||Object.values(r).join(" ").toLowerCase().includes(q)));
  $("#ac").textContent=f.length+" müşteri · "+(selMode?"Silmek istediklerini işaretle":"Detay için karta, durumu değiştirmek için duruma dokun");
  FIL=f.map(r=>String(r.room));$("#bsel").textContent=selMode?"Seçimi kapat":"Çoklu seç";$("#ball").hidden=!selMode;$("#bdel").hidden=!selMode;$("#bdel").textContent="Seçilenleri sil ("+SEL.size+")";$("#bdel").disabled=!SEL.size;$("#more").hidden=f.length<=shown;
- $("#at").innerHTML=f.slice(0,shown).map(r=>`<div class="uc${SEL.has(String(r.room))?" on":""}">${selMode?`<input type="checkbox" class="ck" data-ck="${ea(r.room)}" aria-label="${ea(r.ad||"Müşteri")} seç"${SEL.has(String(r.room))?" checked":""}>`:""}<button type="button" class="nm" data-open="${ea(r.room)}"><b>${esc(r.ad||"")}</b><span>${esc(fd(r.zaman))} · ${esc(r.paketler||"")}</span></button><button type="button" class="sb s${DUR.indexOf(durOf(r))}" aria-pressed="true" data-id="${ea(r.room)}" title="Durumu değiştirmek için dokun">${durOf(r)}</button></div>`).join("")||'<p class="msg c">Müşteri bulunamadı.</p>'}
+ $("#at").innerHTML=f.slice(0,shown).map(r=>`<div class="uc${SEL.has(String(r.room))?" on":""}">${selMode?`<input type="checkbox" class="ck" data-ck="${ea(r.room)}" aria-label="${ea(r.ad||"Müşteri")} seç"${SEL.has(String(r.room))?" checked":""}>`:""}<button type="button" class="nm" data-open="${ea(r.room)}"><b>${esc(r.ad||"")}</b><span>${esc(fd(r.zaman))} · ${esc(pk(r).map(n=>{const p=P.find(x=>x.n===n);return p?n+" "+FM[p.k]:n}).join(", "))}</span></button><button type="button" class="sb s${DUR.indexOf(durOf(r))}" aria-pressed="true" data-id="${ea(r.room)}" title="Durumu değiştirmek için dokun">${durOf(r)}</button></div>`).join("")||'<p class="msg c">Müşteri bulunamadı.</p>'}
 $("#eye").onclick=()=>setEye($("#ak").type==="password");setEye(false);
 async function doLogin(){
  if(!$("#au").value.trim()||!$("#ak").value){$("#am").textContent="Kullanıcı adı ve şifre gerekli.";return}
@@ -843,7 +861,7 @@ function openCust(id){
  const r=AR.find(x=>String(x.room)===String(id));if(!r)return;CU=r;
  $("#cn").textContent=r.ad||"Müşteri";infoRows();
  const v=hasV(r);$("#mt").hidden=!v;$("#nov").hidden=v;
- $("#mlink").value=r.meet||"";$("#mst").textContent="";meetUI();rscUI();go("v11")}
+ $("#mlink").value=r.meet||"";$("#mst").textContent="";meetUI();rscUI();hcUI();go("v11")}
 $("#mlink").addEventListener("input",()=>{if(CU)meetUI()});
 $("#msave").onclick=()=>{
  const u=$("#mlink").value.trim();
@@ -946,6 +964,62 @@ function bindAdm(){
   if(demo){lsSet(lsGet().filter(x=>String(x.room)!==String(id)))}
   SEL.delete(String(id));AR=AR.filter(x=>String(x.room)!==String(id));CU=null;drawDash();go("v9");toast("Kayıt silindi")},true)}
 bindAdm();
+/* ---------- Doğum haritası görseli (Google Drive) ve yakınlaştırma ---------- */
+const IMGC={};
+const hMeta=r=>{try{return JSON.parse(r.dosyalar||"[]").find(x=>x.tur==="harita")||null}catch(_){return null}};
+function hcUI(){
+ const r=CU,m=r&&hMeta(r),box=$("#hcBox");if(!r)return;
+ $("#hcSt").textContent="";$("#hcAdd").textContent=m?"Görseli değiştir":"Harita görseli ekle";$("#hcDel").hidden=!m;
+ if(!m){box.innerHTML='<p class="msg">Henüz harita görseli eklenmedi.</p>';return}
+ const src=IMGC[m.id];
+ if(src){box.innerHTML='<button type="button" class="hcth" id="hcOpen" aria-label="Haritayı büyüt"><img alt="Doğum haritası" src="'+src+'"></button><p class="msg">Büyütmek ve yakınlaştırmak için görsele dokun.</p>';$("#hcOpen").onclick=()=>zmOpen(src)}
+ else if(demo||!CFG.endpoint)box.innerHTML='<p class="msg">Örnek veride görsel yalnızca eklendiği oturumda saklanır.</p>';
+ else{box.innerHTML='<p class="msg">Görsel yükleniyor…</p>';hcLoad(m,r)}}
+async function hcLoad(m,r){
+ try{const x=await fetch(CFG.endpoint+"?islem=dosya&room="+encodeURIComponent(r.room)+"&id="+encodeURIComponent(m.id)+"&user="+encodeURIComponent(AU)+"&key="+encodeURIComponent(AK)),j=await x.json();
+  if(!j.ok)throw 0;IMGC[m.id]="data:"+j.mime+";base64,"+j.veri}
+ catch(_){if(CU===r)$("#hcBox").innerHTML='<p class="msg">Görsel yüklenemedi. Sayfayı yenileyip tekrar dene.</p>';return}
+ if(CU===r)hcUI()}
+function hcPrep(file){return new Promise((ok,no)=>{const u=URL.createObjectURL(file),im=new Image();
+ im.onload=()=>{const M=2400,k=Math.min(1,M/Math.max(im.naturalWidth,im.naturalHeight)),c=document.createElement("canvas");c.width=Math.round(im.naturalWidth*k);c.height=Math.round(im.naturalHeight*k);
+  const g=c.getContext("2d");g.fillStyle="#fff";g.fillRect(0,0,c.width,c.height);g.drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);ok(c.toDataURL("image/jpeg",.9))};
+ im.onerror=()=>{URL.revokeObjectURL(u);no()};im.src=u})}
+$("#hcAdd").onclick=()=>$("#hcFile").click();
+$("#hcFile").onchange=async e=>{
+ const f=e.target.files[0];e.target.value="";if(!f)return;
+ if(!/^image\//.test(f.type)){$("#hcSt").textContent="Lütfen bir görsel dosyası seç (JPG veya PNG).";return}
+ const r=CU;$("#hcSt").textContent="Hazırlanıyor…";let d;
+ try{d=await hcPrep(f)}catch(_){$("#hcSt").textContent="Görsel okunamadı. Başka bir dosya dene.";return}
+ if(demo||!CFG.endpoint){const id="demo"+Date.now();r.dosyalar=JSON.stringify([{id,tur:"harita",ad:f.name,mime:"image/jpeg"}]);IMGC[id]=d;if(demo)localUpdate(r.room,{dosyalar:r.dosyalar});hcUI();$("#hcSt").textContent="Görsel eklendi (örnek veri, sayfa yenilenince silinir).";return}
+ const old=hMeta(r),oldId=old?old.id:"";
+ $("#hcSt").textContent="Yükleniyor…";$("#hcAdd").disabled=true;
+ fetch(CFG.endpoint,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain"},body:JSON.stringify({islem:"dosyaYukle",room:r.room,tur:"harita",ad:f.name,mime:"image/jpeg",veri:d.split(",")[1],kullanici:AU,anahtar:AK})}).catch(()=>{});
+ let done=false;
+ for(let i=0;i<15&&!done;i++){
+  await new Promise(x=>setTimeout(x,2000));
+  try{const x=await fetch(CFG.endpoint+"?user="+encodeURIComponent(AU)+"&key="+encodeURIComponent(AK)),j=await x.json();
+   const row=j.ok&&j.rows.find(z=>String(z.room)===String(r.room)),m=row&&hMeta(row);
+   if(m&&m.id!==oldId){r.dosyalar=row.dosyalar;IMGC[m.id]=d;done=true}}catch(_){}}
+ $("#hcAdd").disabled=false;
+ if(CU===r){if(done){hcUI();$("#hcSt").textContent="Görsel kaydedildi.";toast("Harita görseli kaydedildi")}else $("#hcSt").textContent="Yükleme doğrulanamadı. Biraz bekleyip kartı yeniden aç, görsel yoksa tekrar dene."}};
+$("#hcDel").onclick=()=>ask("Görsel silinsin mi?","Doğum haritası görseli Google Drive’dan da kalıcı olarak silinecek.","Evet, sil",()=>{
+ const m=hMeta(CU);if(!m)return;adm({islem:"dosyaSil",id:m.id});CU.dosyalar="[]";if(demo)localUpdate(CU.room,{dosyalar:"[]"});hcUI();toast("Görsel silindi")});
+const Z={s:1,x:0,y:0,p:new Map(),d0:0,s0:1};
+function zT(){$("#zi").style.transform="translate(-50%,-50%) translate("+Z.x+"px,"+Z.y+"px) scale("+Z.s+")"}
+function zAt(cx,cy,f){const s=Math.min(8,Math.max(1,Z.s*f)),k=s/Z.s;Z.x=cx-(cx-Z.x)*k;Z.y=cy-(cy-Z.y)*k;Z.s=s;if(s===1){Z.x=0;Z.y=0}zT()}
+function zRect(){const b=$("#zs").getBoundingClientRect();return{x:b.left+b.width/2,y:b.top+b.height/2}}
+function zmOpen(src){Z.s=1;Z.x=0;Z.y=0;Z.p.clear();$("#zi").src=src;zT();$("#zm").hidden=false;document.body.style.overflow="hidden";$("#zx").focus()}
+function zmClose(){$("#zm").hidden=true;document.body.style.overflow="";$("#zi").removeAttribute("src");const o=$("#hcOpen");if(o)o.focus()}
+$("#zx").onclick=zmClose;$("#zin").onclick=()=>zAt(0,0,1.4);$("#zout").onclick=()=>zAt(0,0,1/1.4);$("#zrs").onclick=()=>{Z.s=1;Z.x=0;Z.y=0;zT()};
+document.addEventListener("keydown",e=>{if($("#zm").hidden)return;if(e.key==="Escape")zmClose();else if(e.key==="+"||e.key==="=")zAt(0,0,1.4);else if(e.key==="-")zAt(0,0,1/1.4)});
+$("#zs").addEventListener("wheel",e=>{e.preventDefault();const c=zRect();zAt(e.clientX-c.x,e.clientY-c.y,Math.exp(-e.deltaY*.0015))},{passive:false});
+$("#zs").addEventListener("dblclick",e=>{const c=zRect();if(Z.s>1){Z.s=1;Z.x=0;Z.y=0;zT()}else zAt(e.clientX-c.x,e.clientY-c.y,3)});
+$("#zs").addEventListener("pointerdown",e=>{$("#zs").setPointerCapture(e.pointerId);Z.p.set(e.pointerId,{x:e.clientX,y:e.clientY});if(Z.p.size===2){const a=[...Z.p.values()];Z.d0=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);Z.s0=Z.s}});
+$("#zs").addEventListener("pointermove",e=>{const o=Z.p.get(e.pointerId);if(!o)return;
+ if(Z.p.size===2){Z.p.set(e.pointerId,{x:e.clientX,y:e.clientY});const a=[...Z.p.values()],d=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y),c=zRect();if(Z.d0)zAt((a[0].x+a[1].x)/2-c.x,(a[0].y+a[1].y)/2-c.y,Z.s0*d/Z.d0/Z.s)}
+ else if(Z.s>1){Z.x+=e.clientX-o.x;Z.y+=e.clientY-o.y;Z.p.set(e.pointerId,{x:e.clientX,y:e.clientY});zT()}
+ else Z.p.set(e.pointerId,{x:e.clientX,y:e.clientY})});
+["pointerup","pointercancel"].forEach(t=>$("#zs").addEventListener(t,e=>{Z.p.delete(e.pointerId)}));
 function menu(o){
  $("#drw").classList.toggle("open",o);$("#scr").classList.toggle("open",o);$("#hmb").setAttribute("aria-expanded",o);
  if(o)setTimeout(()=>$("#mclose").focus(),0);else $("#hmb").focus()}
