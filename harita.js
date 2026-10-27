@@ -224,7 +224,7 @@ function ciz(h,o){
   const adm=22+11*Math.abs(Math.cos(a)),r1=Rg,r2=r1-adm-8,r3=r2-adm,r4=r3-adm;
   const [gx,gy]=yay_(C,0,r1,p.phi);
   const renk=({Sun:1,Moon:1,Mercury:1,Venus:1,Mars:1,Jupiter:1,Saturn:1,Uranus:1,Neptune:1,Pluto:1})[g.id]?null:"#111";
-  s+=GL_PL(g.id,gx,gy,renk);
+  s+=`<g class="pl" data-p="${g.id}">`+GL_PL(g.id,gx,gy,renk)+`</g>`;
   const [dx,dy]=yay_(C,0,r2,p.phi),[sx,sy]=yay_(C,0,r3,p.phi),[mx,my]=yay_(C,0,r4,p.phi);
   s+=`<text x="${f2(dx)}" y="${f2(dy+6)}" font-size="17" text-anchor="middle" fill="#111">${g.der}°</text>`;
   s+=glif_("burc",g.burc,sx,sy,25,"#111");
