@@ -140,8 +140,14 @@ textarea{width:100%;font:inherit;font-size:.85rem;color:var(--ink);background:va
 #nite{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:0;transition:opacity 1.3s ease;background:radial-gradient(120% 70% at 50% 0%,#2a2358 0,transparent 60%),linear-gradient(180deg,#171434,#0d1f21)}
 body.nite #nite{opacity:1}
 body.nite{--ink:#ECE9FA;--muted:#A9A4C8;--card:rgba(255,255,255,.08);--line:#3A3566;--note:#8FA0FF;--sel:#B79BF0;--gold:#E2CF63}
-body.nitetr,body.nitetr *{transition:color 1.1s ease,background-color 1.1s ease,border-color 1.1s ease}
-body.nitetr .btn{transition:transform .15s,filter .15s,color 1.1s ease}
+@property --ink{syntax:"<color>";inherits:true;initial-value:#2F2B4F}
+@property --muted{syntax:"<color>";inherits:true;initial-value:#8F8AA6}
+@property --card{syntax:"<color>";inherits:true;initial-value:rgba(255,255,255,.72)}
+@property --line{syntax:"<color>";inherits:true;initial-value:#DAD3EE}
+@property --note{syntax:"<color>";inherits:true;initial-value:#1F1FE0}
+@property --sel{syntax:"<color>";inherits:true;initial-value:#9B7AE0}
+@property --gold{syntax:"<color>";inherits:true;initial-value:#C9B63A}
+body{transition:--ink 1.3s ease,--muted 1.3s ease,--card 1.3s ease,--line 1.3s ease,--note 1.3s ease,--sel 1.3s ease,--gold 1.3s ease}
 .anBand{position:relative;width:100vw;margin:18px 0 0 calc(50% - 50vw);padding:22px 0;background:rgba(255,255,255,.2);overflow:hidden}
 .anBand .cws{position:relative;z-index:1;margin:0 auto;max-width:520px;padding:0 24px}
 .anBand .cws svg{background:none;box-shadow:none;border-radius:0}
@@ -411,7 +417,7 @@ a.btn[hidden]{display:none}
     <div class="row l"><div><h3>Yükselen Burç</h3><ul><li>Doğum tarihi ve saati</li><li>Doğum Yeri (İl yeterlidir.)</li></ul>bilgileriyle tayin edilmekte olup yakınlarımızdan öğrendiğimiz doğum saatlerinin çoğunlukla doğruyu yansıtmadığını söylemek gerekir.</div><span class="sym" style="color:var(--venus)">♀&#xFE0E;</span></div>
     <div class="row r"><p>Kesin yargı soru cevap biçimindeki bilgi alışverişiyle ortaya çıkmaktadır. Astrolojideki tekniklerin yanı sıra Yükselen derecesinin kesinliğini tayin etmenin başka yolları da mevcuttur.</p><span class="sym" style="color:var(--merc)">☿&#xFE0E;</span></div>
     <div class="c fr"><button class="btn l" data-go="v15"><span>Ücretsiz Doğum Haritanı Oluştur</span></button></div>
-    <div id="anSec" style="margin-top:34px;padding-top:44px">
+    <div id="anSec" style="margin-top:110px;padding-top:60px">
     <h2 class="c" style="text-align:center;margin-top:38px;margin-bottom:12px">Anın Haritası</h2>
     <p class="msg c" id="anSub"></p>
     <div class="two"><div><label for="anYer">Yer (İl)</label><input id="anYer" placeholder="İstanbul" autocomplete="off"></div><div style="display:flex;align-items:flex-end"><button class="btn g" type="button" id="anGeo" style="width:100%">Konumumu Kullan</button></div></div>
@@ -1419,8 +1425,7 @@ function smoothTo(y,dur){
 let niteOn=false,niteT=0;
 function niteUpd(){
  const sec=$("#anSec"),on=!$("#v1").hidden&&sec.getBoundingClientRect().top<innerHeight*.8;
- if(on===niteOn)return;niteOn=on;document.body.classList.add("nitetr");clearTimeout(niteT);
- document.body.classList.toggle("nite",on);niteT=setTimeout(()=>document.body.classList.remove("nitetr"),1300)}
+ if(on===niteOn)return;niteOn=on;document.body.classList.toggle("nite",on)}
 let niteQ=0;addEventListener("scroll",()=>{if(niteQ)return;niteQ=requestAnimationFrame(()=>{niteQ=0;niteUpd()})},{passive:true});
 addEventListener("resize",niteUpd);
 
