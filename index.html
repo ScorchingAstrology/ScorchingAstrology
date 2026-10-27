@@ -165,6 +165,7 @@ textarea{width:100%;font:inherit;font-size:.85rem;color:var(--ink);background:va
 .sb:focus-visible{outline:3px solid var(--sel);outline-offset:2px}
 .sb[aria-pressed="true"].s0{background:#7EF58A;border-color:#7EF58A;color:#10551C}
 .sb[aria-pressed="true"].s1{background:var(--lav);border-color:var(--lav);color:var(--btnt)}
+.sb[aria-pressed="true"].s3{background:#CFE6FF;border-color:#CFE6FF;color:#12426E;cursor:default}
 .sb[aria-pressed="true"].s2{background:#FCE7A0;border-color:#FCE7A0;color:#5C4400}
 @media (min-width:700px){.stats{grid-template-columns:repeat(4,1fr)}.br{grid-template-columns:170px 1fr 140px}}
 .kvb{padding:2px 18px 16px;max-height:55vh;overflow-y:auto}
@@ -858,7 +859,7 @@ $("#chs").onclick=sendChat;onEnter($("#chf"),sendChat);
 window.addEventListener("storage",e=>{if(cur&&e.key===rk()&&!$("#v8").hidden)drawChat()});
 if(location.hash==="#yonetici"){try{cur=JSON.parse(localStorage.getItem("sa_cur"))}catch(_){}if(cur)openChat()}
 const FM={video:"Video meeting",ses:"Ses kaydı",metin:"Metin dosyası"};
-const DUR=["Tamamlandı","Görüşme bekleniyor","Hizmet bekleniyor"];
+const DUR=["Tamamlandı","Görüşme bekleniyor","Hizmet bekleniyor","Yalnızca harita"];
 let lastProf=null;
 let AR=[],AU="",AK="",demo=false,flt="",shown=20,selMode=false;const SEL=new Set();
 const dt=s=>(s||"").split("-").reverse().join(".");
@@ -866,7 +867,7 @@ const fd=s=>{const d=new Date(s);return isNaN(d)?"":d.toLocaleString("tr-TR",{da
 const ea=s=>esc(String(s==null?"":s)).replace(/"/g,"&quot;");
 const pk=r=>String(r.paketler||"").split(",").map(x=>x.trim()).filter(Boolean);
 const hasV=r=>pk(r).some(n=>n==="1.0"||n==="3.0");
-const durOf=r=>r.durum||(r.asama==="ucretsiz-harita"?"Tamamlandı":hasV(r)?"Görüşme bekleniyor":"Hizmet bekleniyor");
+const durOf=r=>r.durum||(r.asama==="ucretsiz-harita"?"Yalnızca harita":hasV(r)?"Görüşme bekleniyor":"Hizmet bekleniyor");
 const paid=r=>r.asama==="kart-odemesi-tamam"||r.asama==="havale-secildi";
 const EYE="<svg viewBox='0 0 24 24'><path d='M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z'/><circle cx='12' cy='12' r='3'/></svg>";
 const EYE0="<svg viewBox='0 0 24 24'><path d='M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z'/><circle cx='12' cy='12' r='3'/><path d='M3 3l18 18'/></svg>";
@@ -916,6 +917,7 @@ $("#fl").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)re
 $("#aq").addEventListener("input",()=>{shown=20;drawDash()});
 $("#more").onclick=()=>{shown+=20;drawDash()};
 function toggleDur(r){
+ if(r.asama==="ucretsiz-harita")return;
  r.durum=durOf(r)==="Tamamlandı"?(hasV(r)?"Görüşme bekleniyor":"Hizmet bekleniyor"):"Tamamlandı";
  if(demo)localUpdate(r.room,{durum:r.durum});
  if(!demo&&CFG.endpoint)fetch(CFG.endpoint,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain"},body:JSON.stringify({islem:"durum",room:r.room,durum:r.durum,kullanici:AU,anahtar:AK})}).catch(()=>{})}
