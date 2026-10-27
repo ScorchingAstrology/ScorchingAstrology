@@ -284,6 +284,23 @@ a.btn[hidden]{display:none}
 .hcth{all:unset;display:block;width:100%;box-sizing:border-box;border-radius:12px;overflow:hidden;cursor:zoom-in;background:#fff;box-shadow:inset 0 0 0 1.5px var(--line)}
 .hcth img{display:block;width:100%;max-height:340px;object-fit:contain}
 .hcth:focus-visible{outline:2px solid var(--sel);outline-offset:2px}
+.tcr{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 0;border-top:1px solid var(--line)}
+.tcr:first-child{border-top:0}
+.tcn{flex:1 1 180px;min-width:0;font-size:.92rem;overflow-wrap:anywhere}
+.tcn small{display:block;color:var(--muted);font-size:.8rem}
+.tcr .btn{margin-top:0;padding:8px 16px;font-size:.88rem}
+.pv{position:fixed;inset:0;z-index:125;background:#0f0c23;display:flex;flex-direction:column}
+.pv[hidden]{display:none}
+.pvh{display:flex;align-items:center;gap:10px;padding:10px 12px;color:#fff}
+.pvh b{flex:1;min-width:0;font-weight:500;font-size:.95rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pvh button{all:unset;box-sizing:border-box;min-width:44px;height:44px;padding:0 14px;border-radius:22px;background:rgba(255,255,255,.14);color:#fff;font:500 .95rem Lexend,sans-serif;text-align:center;line-height:44px;cursor:pointer}
+.pvh button:focus-visible{outline:2px solid #fff}
+.pvb{flex:1;overflow:auto;padding:4px 12px 24px;-webkit-overflow-scrolling:touch}
+.pvb canvas{display:block;margin:0 auto 12px;background:#fff;border-radius:4px;box-shadow:0 2px 12px rgba(0,0,0,.4)}
+.pvm{color:#fff;text-align:center;margin:30px 12px}
+.pvd{background:#fff;color:#222;border-radius:8px;max-width:820px;margin:0 auto;padding:22px;font:400 15px/1.6 Georgia,serif;overflow-wrap:anywhere}
+.pvd img{max-width:100%;height:auto}.pvd table{border-collapse:collapse;max-width:100%}.pvd td,.pvd th{border:1px solid #ccc;padding:4px 8px}
+.pvd h1,.pvd h2,.pvd h3{line-height:1.25}
 .zm{position:fixed;inset:0;z-index:120;background:rgba(15,12,35,.94);display:flex;flex-direction:column}
 .zm[hidden]{display:none}
 .zt{display:flex;gap:8px;justify-content:flex-end;padding:10px 12px}
@@ -291,6 +308,14 @@ a.btn[hidden]{display:none}
 .zt button:focus-visible{outline:2px solid #fff}
 .zs{flex:1;position:relative;overflow:hidden;touch-action:none;cursor:grab}
 .zs img{position:absolute;left:50%;top:50%;max-width:100%;max-height:100%;transform-origin:center;user-select:none;-webkit-user-drag:none;will-change:transform}
+.c.fr{margin-top:12px}
+.cwd{margin-top:14px}.cwd summary{cursor:pointer;font-weight:500;padding:6px 0}
+.cwp{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;padding:0 12px 28px}
+.cwi{background:var(--bg1);color:var(--ink);border-radius:16px;max-width:760px;margin:0 auto;padding:16px}
+.cwg{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}.cwg .f2{grid-column:1/-1}
+.cwg label.ck{display:flex;gap:8px;align-items:center;font-weight:400;margin:10px 0 0}.cwg label.ck input{width:auto;margin:0}
+.cws{margin-top:14px;cursor:zoom-in}.cws svg{width:100%;height:auto;display:block;border-radius:12px;background:#fff;box-shadow:inset 0 0 0 1.5px var(--line)}
+.cwt{width:100%;border-collapse:collapse;font-size:.92rem}.cwt td,.cwt th{padding:6px 6px;border-bottom:1px solid var(--line);text-align:left}
 .nopay #v5 .cc,.nopay #hv,.nopay #v5 .lock,.nopay #v5 .refund,.nopay #hnote,.nopay #vnote,.nopay #pm{display:none!important}
 </style>
 </head>
@@ -317,6 +342,38 @@ a.btn[hidden]{display:none}
     <div class="row l"><div><h3>Yükselen Burç</h3><ul><li>Doğum tarihi ve saati</li><li>Doğum Yeri (İl yeterlidir.)</li></ul>bilgileriyle tayin edilmekte olup yakınlarımızdan öğrendiğimiz doğum saatlerinin çoğunlukla doğruyu yansıtmadığını söylemek gerekir.</div><span class="sym" style="color:var(--venus)">♀&#xFE0E;</span></div>
     <div class="row r"><p>Kesin yargı soru cevap biçimindeki bilgi alışverişiyle ortaya çıkmaktadır. Astrolojideki tekniklerin yanı sıra Yükselen derecesinin kesinliğini tayin etmenin başka yolları da mevcuttur.</p><span class="sym" style="color:var(--merc)">☿&#xFE0E;</span></div>
     <div class="c"><button class="btn g" data-go="v2">PAKETLERİ GÖR</button></div>
+    <div class="c fr"><button class="btn l" data-go="v15">ÜCRETSİZ DOĞUM HARİTANI OLUŞTUR</button></div>
+  </section>
+
+  <section class="view" id="v15" hidden>
+    <h2>Ücretsiz Doğum Haritası</h2>
+    <p class="nt2">Doğum bilgilerini gir, doğum haritanı hemen oluştur. Bilgilerin, haritanı hesaplamak ve sana ulaşabilmek için kaydedilir.</p>
+    <div>
+      <label for="pbAd">Ad Soyad</label><input id="pbAd" required autocomplete="name">
+      <label for="pbMail">E-posta</label><input id="pbMail" type="email" autocomplete="email" required>
+      <label for="pbT">Doğum tarihi</label><input id="pbT" type="date" required>
+      <div class="two"><div><label for="pbS">Doğum saati</label><input id="pbS" type="time"></div><div><label for="pbY">Doğum yeri (İl)</label><input id="pbY" autocomplete="off" required></div></div>
+      <label class="cb"><input type="checkbox" id="pbB"> Doğum saatimi bilmiyorum</label>
+      <div id="pbAdv" hidden>
+        <div class="two"><div><label for="pbLa">Enlem (kuzey +)</label><input id="pbLa" type="text" inputmode="decimal" placeholder="38.68"></div><div><label for="pbLo">Boylam (doğu +)</label><input id="pbLo" type="text" inputmode="decimal" placeholder="39.22"></div></div>
+      </div>
+      <label for="pbTz">Saat dilimi</label><select id="pbTz"></select>
+      <div id="pbOffW" hidden><label for="pbOff">UTC farkı (saat)</label><input id="pbOff" type="text" inputmode="decimal" placeholder="3 / -5"></div>
+      <div id="pbFq"><label for="pbFan">Hayranı olduğunuz bir ünlü ya da hayatınızdaki biri veya bu kişinin burcu</label><input id="pbFan" required></div>
+      <label class="cb"><input type="checkbox" id="pbKv" required> <span><button class="lnk" type="button" data-kvkk>KVKK Aydınlatma Metni</button>’ni okudum.</span></label>
+      <div class="acts"><button class="btn g" type="button" id="pbGo">Haritamı oluştur</button></div>
+      <p class="msg" id="pbSt" role="status"></p>
+      <div id="pbRes" hidden>
+        <div class="cws" id="pbSvg"></div>
+        <p class="msg">Çarkı büyütüp yakınlaştırmak için üzerine dokun.</p>
+        <div class="acts"><button class="btn l" type="button" id="pbPng">Görseli indir (PNG)</button></div>
+        <div id="pbNote"></div>
+        <h3 class="sh">Konumlar</h3><table class="cwt" id="pbTbl"></table>
+        <h3 class="sh">Majör açılar</h3><table class="cwt" id="pbAc"></table>
+        <div class="c" style="margin-top:22px"><p>Haritanı birlikte yorumlamak ister misin?</p><button class="btn g" type="button" data-go="v2">PAKETLERİ GÖR</button></div>
+      </div>
+    </div>
+    <div class="c"><button class="btn g" type="button" id="pbRst">Yeni harita</button> <button class="btn g" type="button" data-go="v1">Geri dön</button></div>
   </section>
 
   <section class="view" id="v2" hidden>
@@ -459,10 +516,40 @@ a.btn[hidden]{display:none}
     <div class="sm" id="cinfo"></div>
     <div class="card" id="hc">
       <h3>Doğum haritası</h3>
+      <p class="msg" id="cwSt" role="status"></p>
+      <div id="cwRes" hidden>
+        <div class="cws" id="cwSvg"></div>
+        <p class="msg">Çarkı büyütüp yakınlaştırmak için üzerine dokun.</p>
+        <div class="acts"><button class="btn l" type="button" id="cwPng">Görseli indir (PNG)</button><button class="btn g" type="button" id="cwEd">Bilgileri düzenle</button></div>
+        <div id="cwNote"></div>
+        <details class="cwd"><summary>Konumlar ve majör açılar</summary>
+          <table class="cwt" id="cwTbl"></table>
+          <table class="cwt" id="cwAc" style="margin-top:14px"></table>
+        </details>
+      </div>
+      <div id="cwForm" hidden>
+        <label for="cwAd">Başlıkta görünecek ad</label><input id="cwAd" autocomplete="off">
+        <label for="cwT">Doğum tarihi</label><input id="cwT" type="date">
+        <div class="two"><div><label for="cwS">Doğum saati</label><input id="cwS" type="time"></div><div><label for="cwY">Doğum yeri (İl)</label><input id="cwY" autocomplete="off"></div></div>
+        <label class="cb"><input type="checkbox" id="cwB"> Doğum saatini bilmiyor</label>
+        <div class="two"><div><label for="cwLa">Enlem (kuzey +)</label><input id="cwLa" type="text" inputmode="decimal" placeholder="38.68"></div><div><label for="cwLo">Boylam (doğu +)</label><input id="cwLo" type="text" inputmode="decimal" placeholder="39.22"></div></div>
+        <label for="cwTz">Saat dilimi</label><select id="cwTz"></select>
+        <div id="cwOffW" hidden><label for="cwOff">UTC farkı (saat)</label><input id="cwOff" type="text" inputmode="decimal" placeholder="3 / -5"></div>
+        <div class="acts"><button class="btn g" type="button" id="cwGo">Yeniden hesapla</button></div>
+      </div>
+      <p class="msg" style="margin-top:18px"><b>Elle yüklenen görsel (isteğe bağlı)</b></p>
       <div id="hcBox"></div>
       <input type="file" id="hcFile" accept="image/*" hidden>
       <div class="acts"><button class="btn l" type="button" id="hcAdd">Harita görseli ekle</button><button class="btn g" type="button" id="hcDel" hidden>Görseli sil</button></div>
       <p class="msg" id="hcSt" role="status"></p>
+    </div>
+    <div class="card" id="tc" hidden>
+      <h3>Metin dosyası</h3>
+      <p class="msg">PDF veya Word (.doc, .docx) yükleyebilirsin. En fazla 10 MB.</p>
+      <div id="tcList"></div>
+      <input type="file" id="tcFile" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" hidden>
+      <div class="acts"><button class="btn l" type="button" id="tcAdd">Dosya yükle</button></div>
+      <p class="msg" id="tcSt" role="status"></p>
     </div>
     <p class="msg" id="nov" hidden>Bu müşterinin paketinde video görüşme yok. Ses kaydı veya metin dosyası hazırlanacak.</p>
     <div class="card" id="rsc" hidden>
@@ -579,6 +666,7 @@ a.btn[hidden]{display:none}
   <div class="zod" aria-hidden="true"><span>♈&#xFE0E;</span><span>♉&#xFE0E;</span><span>♊&#xFE0E;</span><span>♋&#xFE0E;</span><span>♌&#xFE0E;</span><span>♍&#xFE0E;</span><span>♎&#xFE0E;</span><span>♏&#xFE0E;</span><span>♐&#xFE0E;</span><span>♑&#xFE0E;</span><span>♒&#xFE0E;</span><span>♓&#xFE0E;</span></div>
   <div class="end"></div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="pv" id="pv" hidden role="dialog" aria-modal="true" aria-labelledby="pvt"><div class="pvh"><b id="pvt"></b><button type="button" id="pvx" aria-label="Kapat">✕</button></div><div class="pvb" id="pvb"></div></div>
   <div class="zm" id="zm" hidden role="dialog" aria-modal="true" aria-label="Doğum haritası"><div class="zt"><button type="button" id="zout" aria-label="Uzaklaştır">−</button><button type="button" id="zin" aria-label="Yakınlaştır">+</button><button type="button" id="zrs">Sığdır</button><button type="button" id="zx" aria-label="Kapat">✕</button></div><div class="zs" id="zs"><img id="zi" alt="Doğum haritası" draggable="false"></div></div>
   <div class="mdl" id="mdl" role="dialog" aria-modal="true" aria-labelledby="mdt" aria-describedby="mdp"><div class="mdb"><h3 id="mdt"></h3><p id="mdp"></p><input id="mdk" type="password" autocomplete="current-password" placeholder="Yönetici şifren" aria-label="Yönetici şifresi" hidden><p class="er" id="mde" role="alert"></p><div class="acts"><button class="btn l" type="button" id="mdn">Vazgeç</button><button class="btn dg" type="button" id="mdy">Evet</button></div></div></div>
   <div class="scrim" id="scr"></div>
@@ -611,6 +699,7 @@ const tl=n=>n.toLocaleString("tr-TR")+"₺",$=s=>document.querySelector(s);
 const sel=new Set();
 let LANG="tr";try{LANG=localStorage.getItem("sa_lang")==="en"?"en":"tr"}catch(_){}
 const EN={"Özet":"Summary","Randevumu Tamamla":"Complete my booking","Siparişimi Tamamla":"Complete my order","Randevun başarıyla tamamlandı":"Your appointment is complete","Siparişin başarıyla alındı":"Your order was received successfully","Teşekkürler. Paketin hazırlanmaya başladı.":"Thank you. Preparation of your package has started.","Siparişin alındı":"Your order was received","Kartla ödeme için seninle e-posta veya telefon üzerinden iletişime geçeceğiz. Ödemen alındıktan sonra paketin hazırlanmaya başlayacak.":"We will contact you by email or phone about the card payment. Your package will be prepared once your payment has been received.","Doluluk bilgisi alınamadı. Seçtiğin saat, ödemeye geçerken yeniden kontrol edilecek.":"Availability could not be loaded. Your chosen time will be checked again when you continue to payment.","Randevu kaydediliyor…":"Saving your appointment…","Randevu doğrulanamadı. İnternet bağlantını kontrol edip tekrar dene.":"Your appointment could not be verified. Please check your internet connection and try again.","Ülke kodu":"Country code","Lütfen telefon numaranı başında 0 olmadan, ülke kodunu seçerek yaz.":"Please enter your phone number without a leading 0, after choosing the country code.","Türkiye için telefon numarası 10 haneli olmalı (5XX XXX XX XX).":"For Turkey, the phone number must have 10 digits (5XX XXX XX XX).","İletişime geç":"Contact us","Bana yazmak istediklerini aşağıya yaz, mesajın doğrudan bana ulaşır.":"Write what you would like to tell me below; your message reaches me directly.","E-posta adresin":"Your email address","E-posta adresini doğru yazman önemlidir, yanıtı bu adrese göndereceğim.":"Please type your email address correctly; I will send my reply to it.","Konu":"Subject","Mesajın":"Your message","Mesajı gönder":"Send message","Lütfen e-posta adresini, konuyu ve mesajı doldur.":"Please fill in your email address, subject and message.","Gönderiliyor…":"Sending…","Mesajın gönderildi. En kısa sürede yanıt vereceğim.":"Your message has been sent. I will reply as soon as possible.","Mesaj gönderilemedi, lütfen tekrar dene.":"The message could not be sent. Please try again.","Önizleme sürümünde mesaj gönderilmez.":"Messages are not sent in the preview version.","Doğum Haritası’nın Okunması": "Reading Your Birth Chart", "Bir haritanın doğru ve anlamlı sonuçlar verebilmesinin temeli": "A chart can only give accurate and meaningful results if it is based on the", "“Yükselen Burca”": "“Rising Sign (Ascendant)”", "dayanmaktadır.": ".", "Çünkü": "Because the", "“Yükselen Burç”": "“Rising Sign”", "haritanın nasıl inşa edildiğine dair en önemli bilgidir.": "is the most important piece of information about how a chart is built.", "Yükselen Burç": "Rising Sign", "Doğum tarihi ve saati": "Date and time of birth", "Doğum Yeri (İl yeterlidir.)": "Place of birth (the city is enough)", "bilgileriyle tayin edilmekte olup yakınlarımızdan öğrendiğimiz doğum saatlerinin çoğunlukla doğruyu yansıtmadığını söylemek gerekir.": "The Rising Sign is determined from this information. It should be said that birth times we learn from relatives often do not reflect the truth.", "Kesin yargı soru cevap biçimindeki bilgi alışverişiyle ortaya çıkmaktadır. Astrolojideki tekniklerin yanı sıra Yükselen derecesinin kesinliğini tayin etmenin başka yolları da mevcuttur.": "A firm conclusion emerges through an exchange of questions and answers. Besides the techniques of astrology, there are other ways of pinning down the exact degree of the Rising Sign.", "PAKETLERİ GÖR": "VIEW PACKAGES", "Bir paket seçerek devam edebilirsin.": "You can choose one package to continue.", "Seans sonrasında memnuniyet olmazsa tutarın": "If you are not satisfied after the session,", "%60’ı geri ödenecektir.": "60% of the amount will be refunded.", "BİLGİLENDİRMEYE DÖN": "BACK TO INFO", "Formu Doldur": "Fill in the Form", "Ad Soyad": "Full name", "Telefon": "Phone", "E-posta": "Email", "E-posta adresinin doğru yazılması önemlidir. Randevu onayı, değişiklik ve iptal bilgilendirmeleri bu adrese gönderilir. Yanlış yazılan adrese ulaşamayız.": "Please make sure your email address is correct. Appointment confirmations, changes and cancellations are sent to this address. We cannot reach you if it is mistyped.", "Doğum tarihi": "Date of birth", "Doğum saati": "Time of birth", "Doğum yeri (İl)": "Place of birth (city)", "Doğum saatimi bilmiyorum": "I don’t know my birth time", "Hayranı olduğunuz bir ünlü ya da hayatınızdaki biri veya bu kişinin burcu": "A celebrity you admire, someone in your life, or this person’s zodiac sign", "KVKK Aydınlatma Metni": "Privacy Notice (KVKK)", "’ni okudum.": "— I have read it.", "Mesafeli Satış Sözleşmesi, Ön Bilgilendirme ve İade Koşulları": "Distance Sales Agreement, Pre-Information and Refund Terms", "’nı okudum; hizmetin cayma süresi dolmadan başlamasını onaylıyorum.": "— I have read them, and I consent to the service starting before the withdrawal period ends.", "Gönder": "Submit", "Paketlere dön": "Back to packages", "Ödeme": "Payment", "Ödeme yapılan işlem yüz yüze (video) görüşme ise, görüşme takvim müsaitliğine göre yapılacaktır. Görüşme aynı hafta içinde, en geç ise ertesi hafta gerçekleşir. Randevular doluluğa göre ayarlanır.": "If the service you are paying for is a face-to-face (video) session, it will be held according to calendar availability. The session takes place within the same week, or at the latest the following week. Appointments are arranged according to availability.", "Seçtiğin randevu, ödemen tamamlanınca kesinleşir. Ödeme yapılmazsa bu saat yaklaşık 30 dakika sonra tekrar başkalarına açılır.": "Your appointment is confirmed once your payment is complete. If no payment is made, this time slot is released to others after about 30 minutes.", "Havale / EFT": "Bank transfer", "Hesap sahibi": "Account holder", "IBAN": "IBAN", "Açıklama": "Description", "IBAN’ı kopyala": "Copy IBAN", "Havale ile devam et": "Continue with bank transfer", "Kredi / Banka Kartı ile Öde": "Pay with Credit / Debit Card", "Kart bilgilerini bu sayfada girmezsin. Güvenli ödeme sayfasına yönlendirilirsin.": "You do not enter card details on this page. You will be redirected to a secure payment page.", "Randevuyu değiştir": "Change appointment", "Forma dön": "Back to form", "Görüşme zamanı": "Session time", "Video görüşme paketin için uygun bir gün ve saat aralığı seç. Seçtiğin saat, ödemeni tamamlayınca kesinleşir.": "Choose a day and time slot for your video session. Your slot is confirmed once your payment is complete.", "Müsait": "Available", "Dolu": "Full", "Seçilen gün:": "Selected day:", "Hafta içi 21:00–23:00, hafta sonu 13:00–15:00 ve 21:00–23:00 saatleri arasında görüşme yapılıyor. Bu saatler dışında randevu verilmiyor.": "Sessions are held on weekdays 21:00–23:00 and on weekends 13:00–15:00 and 21:00–23:00 (Turkey time, UTC+3). No appointments are given outside these hours.", "Randevular doluluğa göre ayarlanır. Görüşme, bu hafta içinde ya da en geç ertesi hafta yapıldığı için yalnızca bu hafta ve gelecek hafta gösteriliyor.": "Appointments are arranged according to availability. Because the session takes place this week or at the latest next week, only this week and next week are shown.", "Örnek doluluk gösteriliyor. Gerçek doluluk, kayıt adresi bağlanınca burada görünür.": "Sample availability is shown. Real availability will appear here once the booking address is connected.", "Not (isteğe bağlı)": "Note (optional)", "Takvimden seç": "Choose from calendar", "Ödemeye geç": "Continue to payment", "Randevum": "My Appointment", "Ödeme sonrası aldığın takip kodunu ve telefon numaranın son 4 hanesini gir.": "Enter the tracking code you received after payment and the last 4 digits of your phone number.", "Takip kodu": "Tracking code", "Telefon numaranın son 4 hanesi": "Last 4 digits of your phone number", "Görüntüle": "View", "Görüşmeye katıl": "Join the session", "Geri dön": "Go back", "Sözleşme ve İade Koşulları": "Agreement and Refund Terms", "Paketiniz hazırlanıyor": "Your package is being prepared", "saat": "hours", "dakika": "minutes", "saniye": "seconds", "Takip kodun": "Your tracking code", "Randevunu ve paketini bu kodla (ve telefon numaranın son 4 haneyle) görüntüleyebilirsin. Kodu sakla.": "You can view your appointment and package with this code (and the last 4 digits of your phone number). Keep the code.", "Kodu kopyala": "Copy code", "Randevumu görüntüle": "View my appointment", "Randevu al": "Book an appointment", "Birebir video görüşmen için gün ve saat seç.": "Choose a day and time for your one-to-one video session.", "Görüşmeye git": "Go to the session", "Benimle birebir yazışabileceğin sohbet ekranı.": "A chat screen where you can write to me one-to-one.", "‹ Geri": "‹ Back", "Birebir görüşme": "One-to-one chat", "Teşekkürler": "Thank you", "Formun alındı.": "Your form has been received.", "Ödemen kontrol edilir.": "Your payment will be checked.", "Randevun kesinleşir ve sana iletilir.": "Your appointment will be confirmed and sent to you.", "Özeti kopyala": "Copy summary", "Paket durumuna dön": "Back to package status", "Takip kodun:": "Your tracking code:", "Menü": "Menu", "Randevumu gör": "View my appointment", "Menüyü kapat": "Close menu", "Önceki ay": "Previous month", "Sonraki ay": "Next month", "Randevu günü": "Appointment day", "Mesajını yaz": "Write your message", "Mesaj": "Message", "Doğum Haritası Ile Güncel Transitleri İçeren Temel Harita İnceleme": "Core Chart Reading with Natal Chart and Current Transits", "Mini Doğum Harita Ve Transit İnceleme": "Mini Natal Chart and Transit Reading", "İkincil, Birincil İlerletilmiş Ve Directed Haritalar İle Transit Güncel Analizi": "Secondary and Primary Progressed and Directed Charts with Current Transit Analysis", "İkincil, Birincil İlerletilmiş Ve Directed Haritalar": "Secondary and Primary Progressed and Directed Charts", "Birincil, İkincil İlerletilmiş Ve Directed Haritalar": "Primary and Secondary Progressed and Directed Charts", "Video Meeting (Yaklaşık 2 Saat)": "Video Meeting (about 2 hours)", "Ses Kaydı (Yaklaşık 2 Saat)": "Audio Recording (about 2 hours)", "Ses Kaydı (Yaklaşık 40 Dk)": "Audio Recording (about 40 min)", "Video Meeting (Yaklaşık 1 Saat)": "Video Meeting (about 1 hour)", "Ses Kaydı (Yaklaşık 1 Saat)": "Audio Recording (about 1 hour)", "Metin Dosyası": "Text File", "(Temel Harita İncelemesi Olup Diğer Seçeneklerden Önce Gereklidir.)": "(This is the core chart reading and is required before the other options.)", "1 No’lu Ile 2 No’lu Seçeneklerden Sonra Ya Da Temel Doğum Haritası Analizi Yapılmışsa Alınması Tavsiye Edilir.": "Recommended after options 1 and 2, or if a core natal chart analysis has already been done.", "Form": "Form", "Randevu": "Appointment", "Onay": "Confirmed", "Toplam": "Total", "Tamamlandı": "Completed", "Görüşme bekleniyor": "Awaiting session", "Hizmet bekleniyor": "Awaiting service", "Önce en az bir paket seç.": "Please choose at least one package first.", "Lütfen zorunlu alanları doldur ve KVKK ile sözleşme metinlerini okuduğunu onayla.": "Please fill in the required fields and confirm that you have read the privacy notice and the agreement texts.", "IBAN kopyalandı.": "IBAN copied.", "IBAN’ı seçip kopyalayabilirsin.": "You can select and copy the IBAN.", "henüz seçilmedi": "not selected yet", "Müsait saat yok": "No available times", "Gün ve saat aralığı seç.": "Please choose a day and a time slot.", "Bu saat az önce doldu. Lütfen başka bir saat seç.": "This slot has just been taken. Please choose another time.", "Kartla ödeme henüz aktif değil. Havale/EFT ile ödeyebilir ya da DM’den yazabilirsin.": "Card payment is not active yet. Please write to me by DM.", "Bilgilerin alındı. Harita okuman planlanacak.": "Your information has been received. Your chart reading will be scheduled.", "Bilgilerin aşağıda. Özeti kopyalayıp DM’den iletebilirsin.": "Your information is below. You can copy the summary and send it by DM.", "Ödemen başarıyla tamamlandı": "Your payment was completed successfully", "Havale seçimin alındı": "Your bank transfer choice was received", "Teşekkürler. Randevun kaydedildi, onaylanınca Meet bağlantısı sana iletilecek.": "Thank you. Your appointment is saved, and the Meet link will be sent to you once it is confirmed.", "Teşekkürler.": "Thank you.", "Ödemen kontrol edildikten sonra sana bilgi verilecek.": "You will be informed after your payment has been checked.", "Hazırlık süresi doldu. Paketin sana iletilecek, ulaşmadıysa DM’den yazabilirsin.": "The preparation time is over. Your package will be delivered to you; if it has not reached you, you can write to me by DM.", "Henüz mesaj yok. İlk mesajını yazabilirsin.": "No messages yet. You can write the first one.", "Canlı sohbet henüz bağlı değil. Mesajların bu cihazda saklanır.": "Live chat is not connected yet. Your messages are stored on this device.", "Kayıt henüz görünmüyor. Biraz sonra tekrar dene.": "Your record is not visible yet. Please try again in a moment.", "Takip kodunu ve telefonunun son 4 hanesini gir.": "Enter your tracking code and the last 4 digits of your phone number.", "Aranıyor…": "Searching…", "Kayıt bulunamadı. Kodu ve telefon numaranı kontrol et.": "No record found. Please check your code and phone number.", "Kopyalandı": "Copied", "Özet kopyalandı.": "Summary copied.", "Metni seçip kopyalayabilirsin.": "You can select and copy the text.", "Randevun değişirse bu sayfada güncellenir. Görüşme linki hazır olduğunda burada görünür.": "If your appointment changes, it is updated on this page. The session link will appear here when it is ready.", "Randevu tarihini henüz seçmedin.": "You have not chosen an appointment date yet.", "Henüz seçilmedi": "Not selected yet", "Ad": "Name", "Seçtiğin paket": "Your package", "Durum": "Status", "Video meeting": "Video meeting", "Ses kaydı": "Audio recording", "Metin dosyası": "Text file", "Ödemen kontrol edildikten sonra paketin hazırlanmaya başlayacak.": "Preparation of your package will start after your payment has been checked."};
+Object.assign(EN,{"ÜCRETSİZ DOĞUM HARİTANI OLUŞTUR":"CREATE YOUR FREE BIRTH CHART","Ücretsiz Doğum Haritası":"Free Birth Chart","Doğum bilgilerini gir, doğum haritanı hemen oluştur. Bilgilerin, haritanı hesaplamak ve sana ulaşabilmek için kaydedilir.":"Enter your birth details and create your birth chart right away. Your details are saved so we can calculate your chart and reach you.","Ad (isteğe bağlı)":"Name (optional)","Enlem (kuzey +)":"Latitude (north +)","Boylam (doğu +)":"Longitude (east +)","Saat dilimi":"Time zone","UTC farkı (saat)":"UTC offset (hours)","Haritamı oluştur":"Create my chart","Çarkı büyütüp yakınlaştırmak için üzerine dokun.":"Tap the chart to enlarge and zoom in.","Görseli indir (PNG)":"Download image (PNG)","Konumlar":"Positions","Majör açılar":"Major aspects","Haritanı birlikte yorumlamak ister misin?":"Would you like to interpret your chart together?","Yeni harita":"New chart"});
 const L=(a,b)=>LANG==="en"?b:a;
 const T=s=>LANG==="en"&&Object.prototype.hasOwnProperty.call(EN,s)?EN[s]:s;
 const DNE={Pazar:"Sunday",Pazartesi:"Monday",Salı:"Tuesday",Çarşamba:"Wednesday",Perşembe:"Thursday",Cuma:"Friday",Cumartesi:"Saturday"};
@@ -777,7 +866,7 @@ const fd=s=>{const d=new Date(s);return isNaN(d)?"":d.toLocaleString("tr-TR",{da
 const ea=s=>esc(String(s==null?"":s)).replace(/"/g,"&quot;");
 const pk=r=>String(r.paketler||"").split(",").map(x=>x.trim()).filter(Boolean);
 const hasV=r=>pk(r).some(n=>n==="1.0"||n==="3.0");
-const durOf=r=>r.durum||(hasV(r)?"Görüşme bekleniyor":"Hizmet bekleniyor");
+const durOf=r=>r.durum||(r.asama==="ucretsiz-harita"?"Tamamlandı":hasV(r)?"Görüşme bekleniyor":"Hizmet bekleniyor");
 const paid=r=>r.asama==="kart-odemesi-tamam"||r.asama==="havale-secildi";
 const EYE="<svg viewBox='0 0 24 24'><path d='M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z'/><circle cx='12' cy='12' r='3'/></svg>";
 const EYE0="<svg viewBox='0 0 24 24'><path d='M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z'/><circle cx='12' cy='12' r='3'/><path d='M3 3l18 18'/></svg>";
@@ -861,7 +950,7 @@ function openCust(id){
  const r=AR.find(x=>String(x.room)===String(id));if(!r)return;CU=r;
  $("#cn").textContent=r.ad||"Müşteri";infoRows();
  const v=hasV(r);$("#mt").hidden=!v;$("#nov").hidden=v;
- $("#mlink").value=r.meet||"";$("#mst").textContent="";meetUI();rscUI();hcUI();go("v11")}
+ $("#mlink").value=r.meet||"";$("#mst").textContent="";meetUI();rscUI();hcUI();tcUI();go("v11");cwAuto(r)}
 $("#mlink").addEventListener("input",()=>{if(CU)meetUI()});
 $("#msave").onclick=()=>{
  const u=$("#mlink").value.trim();
@@ -990,10 +1079,12 @@ $("#hcFile").onchange=async e=>{
  if(!/^image\//.test(f.type)){$("#hcSt").textContent="Lütfen bir görsel dosyası seç (JPG veya PNG).";return}
  const r=CU;$("#hcSt").textContent="Hazırlanıyor…";let d;
  try{d=await hcPrep(f)}catch(_){$("#hcSt").textContent="Görsel okunamadı. Başka bir dosya dene.";return}
- if(demo||!CFG.endpoint){const id="demo"+Date.now();r.dosyalar=JSON.stringify([{id,tur:"harita",ad:f.name,mime:"image/jpeg"}]);IMGC[id]=d;if(demo)localUpdate(r.room,{dosyalar:r.dosyalar});hcUI();$("#hcSt").textContent="Görsel eklendi (örnek veri, sayfa yenilenince silinir).";return}
+ await hcSend(r,d,f.name,"image/jpeg",t=>{$("#hcSt").textContent=t})};
+async function hcSend(r,d,adi,mime,say){ // görseli karta kaydeder (Drive); true/false döner
+ if(demo||!CFG.endpoint){const id="demo"+Date.now();r.dosyalar=JSON.stringify([{id,tur:"harita",ad:adi,mime}]);IMGC[id]=d;if(demo)localUpdate(r.room,{dosyalar:r.dosyalar});if(CU===r)hcUI();say("Görsel eklendi (örnek veri, sayfa yenilenince silinir).");return true}
  const old=hMeta(r),oldId=old?old.id:"";
- $("#hcSt").textContent="Yükleniyor…";$("#hcAdd").disabled=true;
- fetch(CFG.endpoint,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain"},body:JSON.stringify({islem:"dosyaYukle",room:r.room,tur:"harita",ad:f.name,mime:"image/jpeg",veri:d.split(",")[1],kullanici:AU,anahtar:AK})}).catch(()=>{});
+ say("Yükleniyor…");$("#hcAdd").disabled=true;
+ fetch(CFG.endpoint,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain"},body:JSON.stringify({islem:"dosyaYukle",room:r.room,tur:"harita",ad:adi,mime,veri:d.split(",")[1],kullanici:AU,anahtar:AK})}).catch(()=>{});
  let done=false;
  for(let i=0;i<15&&!done;i++){
   await new Promise(x=>setTimeout(x,2000));
@@ -1001,9 +1092,97 @@ $("#hcFile").onchange=async e=>{
    const row=j.ok&&j.rows.find(z=>String(z.room)===String(r.room)),m=row&&hMeta(row);
    if(m&&m.id!==oldId){r.dosyalar=row.dosyalar;IMGC[m.id]=d;done=true}}catch(_){}}
  $("#hcAdd").disabled=false;
- if(CU===r){if(done){hcUI();$("#hcSt").textContent="Görsel kaydedildi.";toast("Harita görseli kaydedildi")}else $("#hcSt").textContent="Yükleme doğrulanamadı. Biraz bekleyip kartı yeniden aç, görsel yoksa tekrar dene."}};
+ if(done){if(CU===r)hcUI();say("Görsel kaydedildi.");toast("Harita görseli kaydedildi")}else say("Yükleme doğrulanamadı. Biraz bekleyip kartı yeniden aç, görsel yoksa tekrar dene.");
+ return done}
 $("#hcDel").onclick=()=>ask("Görsel silinsin mi?","Doğum haritası görseli Google Drive’dan da kalıcı olarak silinecek.","Evet, sil",()=>{
  const m=hMeta(CU);if(!m)return;adm({islem:"dosyaSil",id:m.id});CU.dosyalar="[]";if(demo)localUpdate(CU.room,{dosyalar:"[]"});hcUI();toast("Görsel silindi")});
+/* ---------- Doğum haritası çarkı (Placidus) ---------- */
+const IL_TXT="Adana,37.00,35.32;Adıyaman,37.76,38.28;Afyonkarahisar,38.76,30.54;Ağrı,39.72,43.05;Aksaray,38.37,34.03;Amasya,40.65,35.83;Ankara,39.93,32.86;Antalya,36.90,30.70;Ardahan,41.11,42.70;Artvin,41.18,41.82;Aydın,37.85,27.84;Balıkesir,39.65,27.89;Bartın,41.64,32.34;Batman,37.88,41.13;Bayburt,40.26,40.23;Bilecik,40.14,29.98;Bingöl,38.88,40.50;Bitlis,38.40,42.11;Bolu,40.74,31.61;Burdur,37.72,30.29;Bursa,40.18,29.07;Çanakkale,40.15,26.41;Çankırı,40.60,33.62;Çorum,40.55,34.95;Denizli,37.78,29.09;Diyarbakır,37.91,40.24;Düzce,40.84,31.16;Edirne,41.68,26.56;Elazığ,38.68,39.22;Erzincan,39.75,39.49;Erzurum,39.90,41.27;Eskişehir,39.78,30.52;Gaziantep,37.07,37.38;Giresun,40.91,38.39;Gümüşhane,40.46,39.48;Hakkari,37.58,43.74;Hatay,36.20,36.16;Iğdır,39.92,44.05;Isparta,37.76,30.55;İstanbul,41.01,28.98;İzmir,38.42,27.14;Kahramanmaraş,37.58,36.94;Karabük,41.20,32.63;Karaman,37.18,33.22;Kars,40.60,43.10;Kastamonu,41.38,33.78;Kayseri,38.73,35.49;Kırıkkale,39.85,33.52;Kırklareli,41.74,27.22;Kırşehir,39.15,34.17;Kilis,36.72,37.12;Kocaeli,40.77,29.94;Konya,37.87,32.48;Kütahya,39.42,29.98;Malatya,38.35,38.31;Manisa,38.61,27.43;Mardin,37.31,40.74;Mersin,36.80,34.64;Muğla,37.22,28.36;Muş,38.74,41.51;Nevşehir,38.62,34.71;Niğde,37.97,34.68;Ordu,40.98,37.88;Osmaniye,37.07,36.25;Rize,41.02,40.52;Sakarya,40.78,30.40;Samsun,41.29,36.33;Şanlıurfa,37.16,38.79;Siirt,37.93,41.94;Sinop,42.03,35.15;Sivas,39.75,37.02;Şırnak,37.52,42.46;Tekirdağ,40.98,27.51;Tokat,40.31,36.55;Trabzon,41.00,39.72;Tunceli,39.11,39.55;Uşak,38.68,29.41;Van,38.49,43.38;Yalova,40.65,29.27;Yozgat,39.82,34.81;Zonguldak,41.46,31.80";
+const IL_ALT={antakya:"Hatay",izmit:"Kocaeli",adapazari:"Sakarya",maras:"Kahramanmaraş",urfa:"Şanlıurfa",antep:"Gaziantep",icel:"Mersin",afyon:"Afyonkarahisar"};
+const trn=s=>String(s||"").toLocaleLowerCase("tr").replace(/ı/g,"i").normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z ]/g," ").replace(/\s+/g," ").trim();
+const IL=IL_TXT.split(";").map(x=>{const a=x.split(",");return{ad:a[0],k:trn(a[0]),la:+a[1],lo:+a[2]}});
+function ilBul(y){const t=" "+trn(y)+" ";let b=null;
+ IL.forEach(i=>{if(t.includes(" "+i.k+" ")||t.includes(" "+i.k)){if(!b||i.k.length>b.k.length)b=i}});
+ if(!b)for(const k in IL_ALT)if(t.includes(" "+k)){b=IL.find(i=>i.ad===IL_ALT[k]);break}
+ return b}
+const TZL=[["Europe/Istanbul","Türkiye (İstanbul)"],["Europe/Berlin","Almanya, Orta Avrupa (Berlin)"],["Europe/London","Birleşik Krallık (Londra)"],["Europe/Paris","Fransa (Paris)"],["Europe/Amsterdam","Hollanda (Amsterdam)"],["Europe/Brussels","Belçika (Brüksel)"],["Europe/Vienna","Avusturya (Viyana)"],["Europe/Zurich","İsviçre (Zürih)"],["Europe/Stockholm","İsveç (Stockholm)"],["Europe/Athens","Yunanistan (Atina)"],["Europe/Moscow","Rusya (Moskova)"],["Asia/Nicosia","Kıbrıs (Lefkoşa)"],["Asia/Baku","Azerbaycan (Bakü)"],["Asia/Dubai","BAE (Dubai)"],["America/New_York","ABD Doğu (New York)"],["America/Chicago","ABD Merkez (Chicago)"],["America/Denver","ABD Dağ (Denver)"],["America/Los_Angeles","ABD Batı (Los Angeles)"],["America/Toronto","Kanada (Toronto)"],["Australia/Sydney","Avustralya (Sidney)"],["UTC","UTC (Greenwich)"],["manuel","Elle UTC farkı gir…"]];
+function tzOff(tz,t){const f=new Intl.DateTimeFormat("en-US",{timeZone:tz,hourCycle:"h23",year:"numeric",month:"numeric",day:"numeric",hour:"numeric",minute:"numeric",second:"numeric"}),p={};
+ f.formatToParts(new Date(t)).forEach(x=>p[x.type]=+x.value);return Date.UTC(p.year,p.month-1,p.day,p.hour,p.minute,p.second)-Math.floor(t/1000)*1000}
+function yerelUtc(y,m,d,h,mi,tz){const g=Date.UTC(y,m-1,d,h,mi);let u=g-tzOff(tz,g);u=g-tzOff(tz,u);return new Date(u)}
+const AYK=()=>LANG==="en"?["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]:["Oca","Şub","Mar","Nis","May","Haz","Tem","Ağu","Eyl","Eki","Kas","Ara"];
+const dm=(v,p,n)=>{const a=Math.abs(v),d=Math.floor(a),m=Math.round((a-d)*60);return (m===60?d+1:d)+"°"+String(m===60?0:m).padStart(2,"0")+"'"+(v<0?n:p)};
+const BURC_TR=["Koç","Boğa","İkizler","Yengeç","Aslan","Başak","Terazi","Akrep","Yay","Oğlak","Kova","Balık"],BURC_EN=["Aries","Taurus","Gemini","Cancer","Leo","Virgo","Libra","Scorpio","Sagittarius","Capricorn","Aquarius","Pisces"],BA=()=>LANG==="en"?BURC_EN:BURC_TR;
+const pad2=n=>String(n).padStart(2,"0");
+const blob2url=b=>new Promise(ok=>{const f=new FileReader();f.onload=()=>ok(f.result);f.readAsDataURL(b)});
+async function cwLibs(){await loadJs("astronomy.min.js?v=1");await loadJs("efemeris.js?v=1");await loadJs("harita.js?v=1")}
+function cwKur(P,vis){
+ const q=x=>$("#"+P+x);let S=null;
+ q("Tz").innerHTML=TZL.map(([v,t])=>`<option value="${v}">${t}</option>`).join("");
+ const tzUI=()=>{q("OffW").hidden=q("Tz").value!=="manuel"},tmUI=()=>{q("S").disabled=q("B").checked};
+ q("Tz").onchange=tzUI;q("B").onchange=tmUI;
+ const sonuc=il=>{q("Y").dataset.il=il?il.ad:"";if(il){q("La").value=il.la;q("Lo").value=il.lo}else if(vis){q("La").value="";q("Lo").value=""}};
+ q("Y").addEventListener("change",()=>{const il=ilBul(q("Y").value);sonuc(il);if(!vis)q("St").textContent=il?"Doğum yeri "+il.ad+" olarak bulundu.":""});
+ const blobP=()=>Harita.png(S.svg,2000);
+ let room="h"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+ const kaydet=()=>{const pl={room,zaman:new Date().toISOString(),ad:q("Ad").value.trim(),eposta:q("Mail").value.trim(),tarih:q("T").value,saat:q("B").checked?"bilmiyor":q("S").value,yer:q("Y").value.trim(),fan:q("Fan").value.trim(),paketler:"Ücretsiz doğum haritası",asama:"ucretsiz-harita",dil:LANG,not:"Saat dilimi: "+q("Tz").value+(q("Tz").value==="manuel"?" "+q("Off").value:"")};
+  if(!CFG.endpoint){localUpsert(pl);return}
+  try{fetch(CFG.endpoint,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain"},body:JSON.stringify(pl)}).catch(()=>{})}catch(_){}};
+ const run=async()=>{
+  const st=q("St"),bil=q("B").checked,td=q("T").value,ts=q("S").value;
+  if(vis){const em=q("Mail").value.trim();
+   if(!q("Ad").value.trim()||!em||!q("Y").value.trim()||!q("Fan").value.trim()||!q("Kv").checked){st.textContent=L("Lütfen zorunlu alanları doldur ve KVKK metnini okuduğunu onayla.","Please fill in the required fields and confirm that you have read the privacy notice.");return false}
+   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){st.textContent=L("E-posta adresi geçerli değil.","The email address is not valid.");return false}}let la=parseFloat(q("La").value.replace(",",".")),lo=parseFloat(q("Lo").value.replace(",","."));
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(td)){st.textContent=L("Doğum tarihi geçerli değil.","Please enter a valid date of birth.");return false}
+  if(!bil&&!/^\d{2}:\d{2}/.test(ts)){st.textContent=L("Doğum saatini yaz ya da “saatimi bilmiyorum” kutusunu işaretle.","Enter your birth time or tick “I don’t know my birth time”.");return false}
+  if(vis&&q("Adv").hidden){const il=ilBul(q("Y").value);
+   if(il){sonuc(il);la=il.la;lo=il.lo}
+   else{q("Adv").hidden=false;st.textContent=L("Doğum yerini tanıyamadım. Türkiye’de doğduysan il adını yaz; Türkiye dışında doğduysan aşağıya enlem ve boylamı, saat dilimini de listeden seç.","I couldn’t recognise the birth place. If you were born in Turkey, type the province name; if outside Turkey, enter latitude and longitude below and choose the time zone from the list.");return false}}
+  if(!(la>=-90&&la<=90)||!(lo>=-180&&lo<=180)){st.textContent=L("Enlem (−90..90) ve boylam (−180..180) sayı olmalı. Doğu ve kuzey artı değerdir.","Latitude (−90..90) and longitude (−180..180) must be numbers. East and north are positive.");return false}
+  const [Y,M,D]=td.split("-").map(Number),[H,Mi]=bil?[12,0]:ts.split(":").map(Number),tz=q("Tz").value;let utc,offMin;
+  try{
+   if(tz==="manuel"){const o=parseFloat(q("Off").value.replace(",","."));if(!(o>=-12&&o<=14)){st.textContent=L("UTC farkını saat olarak yaz (örn. 3 veya -5).","Enter the UTC offset in hours (e.g. 3 or -5).");return false}offMin=Math.round(o*60);utc=new Date(Date.UTC(Y,M-1,D,H,Mi)-offMin*60000)}
+   else{utc=yerelUtc(Y,M,D,H,Mi,tz);offMin=Math.round((Date.UTC(Y,M-1,D,H,Mi)-utc.getTime())/60000)}}
+  catch(_){st.textContent=L("Saat dilimi hesaplanamadı.","The time zone could not be calculated.");return false}
+  st.textContent=L("Hesaplanıyor…","Calculating…");q("Go").disabled=true;
+  try{await cwLibs()}catch(_){st.textContent=L("Hesap dosyaları yüklenemedi. İnternet bağlantını kontrol edip tekrar dene.","The calculation files could not be loaded. Check your connection and try again.");q("Go").disabled=false;return false}
+  q("Go").disabled=false;
+  let h;try{h=Harita.hesapla({utc,lat:la,lon:lo,saatBilinmiyor:bil})}catch(e){st.textContent=L("Hesaplama hatası: ","Calculation error: ")+e.message;return false}
+  const BA_=BA(),ad=q("Ad").value.trim()||L("Doğum haritası","Birth chart"),sg=offMin<0?"−":"+",am=Math.abs(offMin),ofs="UTC"+sg+pad2(Math.floor(am/60))+":"+pad2(am%60);
+  const yer=q("Y").value.trim()||"—";
+  const satir=[ad,D+" "+AYK()[M-1]+" "+Y+(bil?L(", saat bilinmiyor (12:00)",", time unknown (12:00)"):", "+pad2(H)+":"+pad2(Mi)+" ("+ofs+")"),yer+" "+dm(la,"N","S")+" "+dm(lo,"E","W"),L("Tropikal · ","Tropical · ")+(h.ev&&h.ev.placidus?"Placidus":h.ev?L("Porphyry (kutup enlemi)","Porphyry (polar latitude)"):L("Evsiz","No houses"))+" · True Node"];
+  const svg=Harita.ciz(h,{satirlar:satir});S={svg,h,ad};if(vis)kaydet();
+  q("Svg").innerHTML=svg;
+  const rows=h.govdeler.map(g=>`<tr><td>${LANG==="en"?({Sun:"Sun",Moon:"Moon",Mercury:"Mercury",Venus:"Venus",Mars:"Mars",Jupiter:"Jupiter",Saturn:"Saturn",Uranus:"Uranus",Neptune:"Neptune",Pluto:"Pluto",Vertex:"Vertex",NNode:"North Node",SNode:"South Node",Chiron:"Chiron"})[g.id]:g.ad}</td><td>${g.der}°${pad2(g.dk)}'${pad2(g.sn)}"</td><td>${BA_[g.burc]}</td><td>${g.ev||"—"}</td><td>${g.retro&&g.id!=="Vertex"?"Rx":""}</td></tr>`);
+  if(h.ev){const f=(n,l)=>`<tr><td>${n}</td><td>${Math.floor(l%30)}°${pad2(Math.floor((l%1)*60))}'</td><td>${BA_[Math.floor(l/30)]}</td><td></td><td></td></tr>`;rows.unshift(f(L("Yükselen (ASC)","Ascendant (ASC)"),h.ev.asc),f(L("Orta Gök (MC)","Midheaven (MC)"),h.ev.mc))}
+  q("Tbl").innerHTML="<tr><th>"+L("Nokta","Point")+"</th><th>"+L("Derece","Degree")+"</th><th>"+L("Burç","Sign")+"</th><th>"+L("Ev","House")+"</th><th></th></tr>"+rows.join("");
+  const hc=h.ev?`<p class="msg">`+L("Ev başlangıçları: ","House cusps: ")+h.ev.cusp.slice(1).map((l,i)=>(i+1)+": "+Math.floor(l%30)+"° "+BA_[Math.floor(l/30)]+" "+pad2(Math.floor((l%1)*60))+"'").join(" · ")+"</p>":"";
+  const nt=[];if(bil)nt.push(L("Doğum saati bilinmediği için ev ve Yükselen hesaplanmadı; harita öğle 12:00 için çizildi (Ay yaklaşık ±6° oynayabilir).","Because the birth time is unknown, houses and the Ascendant are not calculated; the chart is drawn for 12:00 noon (the Moon may shift by about ±6°)."));
+  if(!h.chiron)nt.push(L("Chiron bu tarih için hesaplanamadı (tablo 1897–2100 arasını kapsar).","Chiron could not be calculated for this date (the table covers 1897–2100)."));
+  if(h.ev&&!h.ev.placidus)nt.push(L("Enlem 66° üstünde olduğu için Placidus tanımsız; evler Porphyry ile çizildi.","Placidus is undefined above 66° latitude; houses are drawn with Porphyry."));
+  q("Note").innerHTML=hc+(nt.length?`<p class="msg">${nt.join(" ")}</p>`:"");
+  const nm=x=>x==="ASC"?"ASC":x==="MC"?"MC":(LANG==="en"?({Sun:"Sun",Moon:"Moon",Mercury:"Mercury",Venus:"Venus",Mars:"Mars",Jupiter:"Jupiter",Saturn:"Saturn",Uranus:"Uranus",Neptune:"Neptune",Pluto:"Pluto",Vertex:"Vertex",NNode:"North Node",SNode:"South Node",Chiron:"Chiron"})[x]:h.govdeler.find(g=>g.id===x).ad);
+  const AEN={Sekstil:"Sextile",Kare:"Square","Üçgen":"Trine","Karşıt":"Opposition"};
+  q("Ac").innerHTML=Harita.acilar(h,3).map(a=>`<tr><td>${nm(a.a)}</td><td style="color:${a.renk}">${LANG==="en"?AEN[a.ad]:a.ad}</td><td>${nm(a.b)}</td><td>${Math.floor(a.orb)}°${pad2(Math.round((a.orb%1)*60))}'</td></tr>`).join("");
+  q("Res").hidden=false;st.textContent=L("Çark hazır.","Your chart is ready.");q("Svg").scrollIntoView({block:"nearest"});return true};
+ q("Go").onclick=run;
+ q("Svg").onclick=async()=>{if(!S)return;try{zmOpen(await blob2url(await blobP()))}catch(_){}};
+ q("Png").onclick=async()=>{if(!S)return;try{const b=await blobP(),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=(S.ad.replace(/[^\w\-çğıöşüÇĞİÖŞÜ ]+/g,"").trim().replace(/\s+/g,"-")||"harita")+"-dogum-haritasi.png";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000)}catch(_){q("St").textContent=L("Görsel oluşturulamadı.","The image could not be created.")}};
+ return {q,run,get S(){return S},reset(){S=null;q("Res").hidden=true;room="h"+Date.now().toString(36)+Math.random().toString(36).slice(2,6)},tzUI,tmUI,blobP}}
+/* yönetici kartı: müşterinin çarkı otomatik */
+const CWA=cwKur("cw",false);
+async function cwAuto(r){
+ const q=CWA.q;CWA.reset();$("#cwForm").hidden=true;
+ q("Ad").value=r.ad||"";q("T").value=r.tarih||"";const bil=r.saat==="bilmiyor";q("B").checked=bil;q("S").value=bil?"":(r.saat||"");
+ q("Y").value=r.yer||"";const il=ilBul(r.yer);q("La").value=il?il.la:"";q("Lo").value=il?il.lo:"";
+ q("Tz").value="Europe/Istanbul";q("Off").value="";CWA.tzUI();CWA.tmUI();
+ if(!il){$("#cwForm").hidden=false;q("St").textContent="Doğum yeri 81 il listesinde bulunamadı. Enlem, boylam ve saat dilimini elle yaz, sonra “Yeniden hesapla”ya bas.";return}
+ q("St").textContent="Çark hazırlanıyor…";
+ const ok=await CWA.run();if(CU!==r)return;
+ if(ok)q("St").textContent="";else $("#cwForm").hidden=false}
+$("#cwEd").onclick=()=>{$("#cwForm").hidden=!$("#cwForm").hidden};
+/* ziyaretçi sayfası (ücretsiz harita) */
+const CWV=cwKur("pb",true);
+$("#pbRst").onclick=()=>{CWV.reset();["Ad","Mail","T","S","Y","La","Lo","Fan"].forEach(x=>CWV.q(x).value="");CWV.q("B").checked=false;CWV.q("Kv").checked=false;CWV.q("Adv").hidden=true;CWV.tmUI();CWV.q("St").textContent="";window.scrollTo({top:0})};
 const Z={s:1,x:0,y:0,p:new Map(),d0:0,s0:1};
 function zT(){$("#zi").style.transform="translate(-50%,-50%) translate("+Z.x+"px,"+Z.y+"px) scale("+Z.s+")"}
 function zAt(cx,cy,f){const s=Math.min(8,Math.max(1,Z.s*f)),k=s/Z.s;Z.x=cx-(cx-Z.x)*k;Z.y=cy-(cy-Z.y)*k;Z.s=s;if(s===1){Z.x=0;Z.y=0}zT()}
@@ -1020,6 +1199,90 @@ $("#zs").addEventListener("pointermove",e=>{const o=Z.p.get(e.pointerId);if(!o)r
  else if(Z.s>1){Z.x+=e.clientX-o.x;Z.y+=e.clientY-o.y;Z.p.set(e.pointerId,{x:e.clientX,y:e.clientY});zT()}
  else Z.p.set(e.pointerId,{x:e.clientX,y:e.clientY})});
 ["pointerup","pointercancel"].forEach(t=>$("#zs").addEventListener(t,e=>{Z.p.delete(e.pointerId)}));
+/* ---------- Metin dosyası (PDF / Word) yükleme ---------- */
+const TCF={};
+const hasMetin=r=>pk(r).some(n=>{const p=P.find(x=>x.n===n);return p&&p.k==="metin"});
+const tMetas=r=>{try{return JSON.parse(r.dosyalar||"[]").filter(x=>x.tur==="metin")}catch(_){return[]}};
+const fmtSize=b=>!b?"":b<1048576?Math.max(1,Math.round(b/1024))+" KB":(b/1048576).toFixed(1)+" MB";
+function tcUI(){
+ const r=CU;if(!r)return;$("#tc").hidden=!hasMetin(r);if(!hasMetin(r))return;
+ $("#tcSt").textContent="";const a=tMetas(r);
+ $("#tcAdd").textContent=a.length?"Başka dosya yükle":"Dosya yükle";
+ $("#tcList").innerHTML=a.length?a.map(m=>'<div class="tcr"><span class="tcn">'+esc(m.ad||"Dosya")+'<small>'+esc([fmtSize(m.boyut),m.t?fd(m.t):""].filter(Boolean).join(" · "))+'</small></span>'+(/\.(pdf|docx)$/i.test(m.ad||"")||/pdf|wordprocessingml/.test(m.mime||"")?'<button type="button" class="btn l" data-tpv="'+ea(m.id)+'">Önizle</button>':'')+'<button type="button" class="btn l" data-tdl="'+ea(m.id)+'">İndir</button><button type="button" class="btn g" data-tdx="'+ea(m.id)+'">Sil</button></div>').join(""):'<p class="msg">Henüz dosya yüklenmedi.</p>'}
+function tcSave(blob,name){const u=URL.createObjectURL(blob),a=document.createElement("a");a.href=u;a.download=name||"dosya";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000)}
+async function tcBlob(id){
+ if(TCF[id])return TCF[id];
+ if(demo||!CFG.endpoint)throw new Error("demo");
+ const x=await fetch(CFG.endpoint+"?islem=dosya&room="+encodeURIComponent(CU.room)+"&id="+encodeURIComponent(id)+"&user="+encodeURIComponent(AU)+"&key="+encodeURIComponent(AK)),j=await x.json();
+ if(!j.ok)throw new Error("yok");
+ const bin=atob(j.veri),u8=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u8[i]=bin.charCodeAt(i);
+ return TCF[id]=new Blob([u8],{type:j.mime})}
+async function tcDownload(id){
+ const m=tMetas(CU).find(x=>x.id===id);if(!m)return;
+ $("#tcSt").textContent="Dosya hazırlanıyor…";
+ try{tcSave(await tcBlob(id),m.ad);$("#tcSt").textContent=""}
+ catch(e){$("#tcSt").textContent=e.message==="demo"?"Örnek veride dosya yalnızca yüklendiği oturumda saklanır.":"Dosya indirilemedi. İnternetini kontrol edip tekrar dene."}}
+/* Önizleme: PDF için pdf.js, Word (.docx) için mammoth.js, yalnızca açılınca internetten yüklenir */
+const CDN="https://cdnjs.cloudflare.com/ajax/libs/",LIBP={};let pvTok=0,pvPrev=null,pdfWorkerOk=false;
+function loadJs(u){return LIBP[u]||(LIBP[u]=new Promise((ok,no)=>{const s=document.createElement("script");s.src=u;s.onload=ok;s.onerror=()=>{delete LIBP[u];no(new Error("lib"))};document.head.appendChild(s)}))}
+async function pdfLib(){
+ await loadJs(CDN+"pdf.js/3.11.174/pdf.min.js");
+ if(!pdfWorkerOk){const w=await (await fetch(CDN+"pdf.js/3.11.174/pdf.worker.min.js")).blob();pdfjsLib.GlobalWorkerOptions.workerSrc=URL.createObjectURL(w);pdfWorkerOk=true}
+ return pdfjsLib}
+function cleanHtml(h){
+ const d=new DOMParser().parseFromString(h,"text/html");
+ d.querySelectorAll("script,iframe,object,embed,style,link,form,meta,base").forEach(x=>x.remove());
+ d.querySelectorAll("*").forEach(x=>{[...x.attributes].forEach(a=>{if(/^on/i.test(a.name)||(/^(href|src|xlink:href)$/i.test(a.name)&&/^\s*(javascript|vbscript):/i.test(a.value)))x.removeAttribute(a.name)});if(x.tagName==="A"){x.target="_blank";x.rel="noopener noreferrer"}});
+ return d.body.innerHTML}
+async function tcPreview(id){
+ const m=tMetas(CU).find(x=>x.id===id);if(!m)return;
+ const isPdf=/\.pdf$/i.test(m.ad||"")||m.mime==="application/pdf",tok=++pvTok,body=$("#pvb");
+ pvPrev=document.activeElement;$("#pvt").textContent=m.ad||"Dosya";body.innerHTML='<p class="pvm">Önizleme hazırlanıyor…</p>';$("#pv").hidden=false;document.body.style.overflow="hidden";$("#pvx").focus();
+ try{
+  const blob=await tcBlob(id);if(tok!==pvTok)return;
+  if(isPdf){
+   const lib=await pdfLib(),doc=await lib.getDocument({data:await blob.arrayBuffer()}).promise;if(tok!==pvTok)return;
+   body.innerHTML="";const W=Math.max(200,Math.min(body.clientWidth-24,900)),n=Math.min(doc.numPages,40),dpr=Math.min(2,window.devicePixelRatio||1);
+   for(let i=1;i<=n;i++){
+    const pg=await doc.getPage(i);if(tok!==pvTok)return;
+    const sc=W/pg.getViewport({scale:1}).width,v=pg.getViewport({scale:sc*dpr}),c=document.createElement("canvas"),ctx=c.getContext("2d");
+    c.width=Math.floor(v.width);c.height=Math.floor(v.height);c.style.width=W+"px";c.style.height=Math.floor(v.height/dpr)+"px";body.appendChild(c);
+    await pg.render({canvasContext:ctx,canvas:c,viewport:v}).promise}
+   if(doc.numPages>n){const p=document.createElement("p");p.className="pvm";p.textContent="İlk "+n+" sayfa gösteriliyor. Tamamı için dosyayı indir.";body.appendChild(p)}
+  }else{
+   await loadJs(CDN+"mammoth/1.6.0/mammoth.browser.min.js");
+   const r=await mammoth.convertToHtml({arrayBuffer:await blob.arrayBuffer()});if(tok!==pvTok)return;
+   body.innerHTML='<div class="pvd"></div>';body.firstChild.innerHTML=cleanHtml(r.value)||"<p>Bu dosyada gösterilecek metin bulunamadı.</p>"}
+ }catch(e){if(tok!==pvTok)return;
+  body.innerHTML='<p class="pvm">'+(e.message==="demo"?"Örnek veride dosya yalnızca yüklendiği oturumda saklanır.":"Önizleme açılamadı. İnternetini kontrol et ya da dosyayı indirip aç.")+'</p>'}}
+function pvClose(){pvTok++;$("#pv").hidden=true;$("#pvb").innerHTML="";document.body.style.overflow="";if(pvPrev&&pvPrev.focus)pvPrev.focus()}
+$("#pvx").onclick=pvClose;
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#pv").hidden)pvClose()});
+$("#tcAdd").onclick=()=>$("#tcFile").click();
+$("#tcList").addEventListener("click",e=>{
+ const d=e.target.closest("[data-tdl]"),x=e.target.closest("[data-tdx]"),v=e.target.closest("[data-tpv]");
+ if(d)tcDownload(d.dataset.tdl);
+ if(v)tcPreview(v.dataset.tpv);
+ if(x){const id=x.dataset.tdx,m=tMetas(CU).find(z=>z.id===id);if(!m)return;
+  ask("Dosya silinsin mi?",(m.ad||"Dosya")+" Google Drive’dan da kalıcı olarak silinecek.","Evet, sil",()=>{
+   adm({islem:"dosyaSil",id});const rest=JSON.parse(CU.dosyalar||"[]").filter(z=>z.id!==id);CU.dosyalar=JSON.stringify(rest);delete TCF[id];if(demo)localUpdate(CU.room,{dosyalar:CU.dosyalar});tcUI();toast("Dosya silindi")})}});
+$("#tcFile").onchange=async e=>{
+ const f=e.target.files[0];e.target.value="";if(!f)return;const r=CU;
+ if(!/\.(pdf|docx?)$/i.test(f.name)){$("#tcSt").textContent="Yalnızca PDF veya Word (.doc, .docx) dosyası yükleyebilirsin.";return}
+ if(f.size>10*1048576){$("#tcSt").textContent="Dosya 10 MB’tan büyük. Daha küçük bir dosya seç.";return}
+ const oldIds=new Set(tMetas(r).map(m=>m.id));
+ if(demo||!CFG.endpoint){const id="demo"+Date.now(),a=JSON.parse(r.dosyalar||"[]");a.push({id,tur:"metin",ad:f.name,mime:f.type,boyut:f.size,t:new Date().toISOString()});r.dosyalar=JSON.stringify(a);TCF[id]=f;if(demo)localUpdate(r.room,{dosyalar:r.dosyalar});tcUI();$("#tcSt").textContent="Dosya eklendi (örnek veri, sayfa yenilenince silinir).";return}
+ $("#tcSt").textContent="Yükleniyor…";$("#tcAdd").disabled=true;
+ let b64;try{b64=await new Promise((ok,no)=>{const fr=new FileReader();fr.onload=()=>ok(String(fr.result).split(",")[1]);fr.onerror=no;fr.readAsDataURL(f)})}catch(_){$("#tcSt").textContent="Dosya okunamadı.";$("#tcAdd").disabled=false;return}
+ fetch(CFG.endpoint,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain"},body:JSON.stringify({islem:"dosyaYukle",room:r.room,tur:"metin",ad:f.name,mime:f.type,veri:b64,kullanici:AU,anahtar:AK})}).catch(()=>{});
+ let done=false;
+ for(let i=0;i<30&&!done;i++){
+  await new Promise(x=>setTimeout(x,2000));
+  try{const x=await fetch(CFG.endpoint+"?user="+encodeURIComponent(AU)+"&key="+encodeURIComponent(AK)),j=await x.json();
+   const row=j.ok&&j.rows.find(z=>String(z.room)===String(r.room));
+   if(row){const nw=tMetas(row).find(m=>!oldIds.has(m.id));if(nw){r.dosyalar=row.dosyalar;TCF[nw.id]=f;done=true}}}catch(_){}}
+ $("#tcAdd").disabled=false;
+ if(CU===r){if(done){tcUI();$("#tcSt").textContent="Dosya kaydedildi.";toast("Metin dosyası kaydedildi")}else $("#tcSt").textContent="Yükleme doğrulanamadı. Dosya türü PDF veya Word değilse kabul edilmez. Biraz bekleyip kartı yeniden aç, dosya yoksa tekrar dene."}};
 function menu(o){
  $("#drw").classList.toggle("open",o);$("#scr").classList.toggle("open",o);$("#hmb").setAttribute("aria-expanded",o);
  if(o)setTimeout(()=>$("#mclose").focus(),0);else $("#hmb").focus()}
