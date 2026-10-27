@@ -317,6 +317,28 @@ a.btn[hidden]{display:none}
 .cwg label.ck{display:flex;gap:8px;align-items:center;font-weight:400;margin:10px 0 0}.cwg label.ck input{width:auto;margin:0}
 .cws{margin-top:14px;cursor:zoom-in}.cws svg{width:100%;height:auto;display:block;border-radius:12px;background:#fff;box-shadow:inset 0 0 0 1.5px var(--line)}
 .cwt{width:100%;border-collapse:collapse;font-size:.92rem}.cwt td,.cwt th{padding:6px 6px;border-bottom:1px solid var(--line);text-align:left}
+/* Bilgisayar ekranı (geniş) düzeni */
+@media (min-width:900px){
+ .app{max-width:1120px;box-shadow:0 0 0 1px rgba(120,110,170,.12),0 24px 60px rgba(60,50,120,.10);background:rgba(255,255,255,.28)}
+ .top{padding:30px 96px 30px 76px;font-size:1.15rem}
+ .planets{max-width:520px;margin:34px auto 10px}
+ .view{padding:10px 48px 44px}
+ .view:not(#v2):not(#v9):not(#v11){max-width:780px;width:100%;margin-left:auto;margin-right:auto}
+ #v1 h1{font-size:2.4rem;margin-bottom:30px}
+ #v1 .row p,#v1 .row div{font-size:1.15rem}
+ #v2 #list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 36px;margin-top:10px}
+ #v2 .pk{margin-bottom:0;padding:20px 14px}
+ #v2 .warn,#v2 .msg.c,#v2 .refund,#v2 .kvm,#v2 .dcm,#v2 .c{max-width:780px;margin-left:auto;margin-right:auto}
+ #v11{max-width:900px;margin-left:auto;margin-right:auto;width:100%}
+ #v9 .stats{grid-template-columns:repeat(4,1fr);gap:14px}
+ #at{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+ #at .uc{margin:0}
+ #v3 .two,#v15 .two{gap:16px}
+ .toast{font-size:1rem}
+}
+@media (min-width:1300px){
+ #v2 #list{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 56px}
+}
 .nopay #v5 .cc,.nopay #hv,.nopay #v5 .lock,.nopay #v5 .refund,.nopay #hnote,.nopay #vnote,.nopay #pm{display:none!important}
 </style>
 </head>
@@ -712,7 +734,7 @@ const amt=rows=>LANG==="en"?"$"+sumU(rows):tl(sumP(rows));
 function drawList(){$("#list").innerHTML=P.map(p=>`<button class="pk" data-n="${p.n}" aria-pressed="${sel.has(p.n)}"><span class="bd g${p.g}"><svg viewBox="0 0 60 44" aria-hidden="true"><g transform="rotate(-18 30 22)"><ellipse class="rg" cx="30" cy="22" rx="28" ry="8"/></g><circle class="pl" cx="30" cy="22" r="14"/><g transform="rotate(-18 30 22)"><path class="rg" d="M2 22A28 8 0 0 0 58 22"/></g></svg><b>${p.n}</b></span><span class="tx"><h3>${T(p.t)}</h3><div class="fmt">${IC[p.k]}<span>${T(p.d)}</span></div><p class="nt">${T(p.nt)}</p><span class="pr">${pr(p)}</span></span><span class="chk" aria-hidden="true">✓</span></button>`).join("");}
 drawList();
 
-function go(id){document.querySelectorAll(".view").forEach(v=>v.hidden=v.id!==id);drawStp();$(".app").style.maxWidth=id==="v9"?"720px":"";$("#bar").hidden=!(id==="v2"&&sel.size);window.scrollTo({top:0,behavior:"auto"})}
+function go(id){document.querySelectorAll(".view").forEach(v=>v.hidden=v.id!==id);drawStp();$(".app").style.maxWidth=(id==="v9"||id==="v11")&&innerWidth<900?"720px":"";$("#bar").hidden=!(id==="v2"&&sel.size);window.scrollTo({top:0,behavior:"auto"})}
 function upd(){const c=[...sel],tr_=P.filter(p=>sel.has(p.n));$("#bt").textContent=c.length?`${c.join(" + ")} · ${amt(tr_)}`:"";$("#bar").hidden=!(c.length&&!$("#v2").hidden);$("#warn").textContent=""}
 document.addEventListener("click",e=>{
  const g=e.target.closest("[data-go]");if(g){go(g.dataset.go);upd();return}
