@@ -163,7 +163,7 @@ body{transition:--ink 1.3s ease,--muted 1.3s ease,--card 1.3s ease,--line 1.3s e
 @media(hover:hover){.anBand .cws svg .glow:hover{opacity:1;transform:scale(1.55)}.anBand .cws svg .glow.moon:hover{opacity:.8;transform:scale(1.45)}}
 @keyframes gl16{50%{scale:1.08}}
 @media(prefers-reduced-motion:reduce){.anBand .cws svg .glow{animation:none}}
-#anSec .anBand .anTb{position:relative;z-index:1;width:calc(100% - 48px);margin:10px auto 0}.anTb .tbN{display:none}.anTb .tbF{justify-content:center}.anTb{max-width:480px;margin:14px auto 0;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.35);text-align:left}
+#anSec .anBand .anTb{position:relative;z-index:1;width:100%;max-width:none;margin:10px 0 0;border-radius:0;box-shadow:none;border-top:1.5px solid rgba(255,255,255,.35);border-bottom:1.5px solid rgba(255,255,255,.35)}.anTb .tbN{display:none}.anTb .tbF{justify-content:center}.anTb{max-width:480px;margin:14px auto 0;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.35);text-align:left}
 .anTb .tbT i{color:rgba(255,255,255,.75)}.anTb .tbHi{background:rgba(255,255,255,.24);box-shadow:0 2px 12px rgba(0,0,0,.25),inset 0 0 0 1px rgba(255,255,255,.4)}.anTb .tbHi b,.anTb .tbHi small,.anTb .tbN,.anTb .tbSeg{color:#fff}.anTb .tbN span{color:rgba(255,255,255,.7)}.anTb .tbF{border-top-color:rgba(255,255,255,.3)}
 .anTb .lv{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 11px;border-radius:999px;border:1.5px solid rgba(255,255,255,.6);font:500 .78rem Lexend,sans-serif;color:#fff;cursor:pointer}.anTb .lv:focus-visible{outline:2px solid #fff;outline-offset:2px}.anTb .lv[aria-pressed="true"]{background:rgba(255,255,255,.3);border-color:#fff}.anTb .lv i{width:8px;height:8px;border-radius:50%;background:#7EF58A;box-shadow:0 0 8px #7EF58A;opacity:.45}.anTb .lv[aria-pressed="true"] i{opacity:1}
 @media (hover:hover){.anTb .tbSeg:hover{background:rgba(255,255,255,.25);color:#fff}}.anTb .tbSeg.on{background:rgba(255,255,255,.25);color:#fff}
@@ -171,7 +171,7 @@ body{transition:--ink 1.3s ease,--muted 1.3s ease,--card 1.3s ease,--line 1.3s e
 #cwBiCtl,#cwBiUn{display:none}
 .tbR .lv{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 11px;border-radius:999px;border:1.5px solid var(--line);font:500 .78rem Lexend,sans-serif;color:var(--ink);cursor:pointer}.tbR .lv:focus-visible{outline:2px solid var(--sel);outline-offset:2px}.tbR .lv[aria-pressed="true"]{background:var(--lav);border-color:var(--sel);color:var(--btnt)}.tbR .lv i{width:8px;height:8px;border-radius:50%;background:#35C24B;opacity:.45}.tbR .lv[aria-pressed="true"] i{opacity:1}
 .tbar{margin:12px 0 4px;border-radius:22px;background:var(--card);box-shadow:inset 0 0 0 1.5px var(--line);overflow:hidden;user-select:none;-webkit-user-select:none}
-.tbS{position:relative;height:78px;overflow:hidden;cursor:ew-resize;touch-action:pan-y;-webkit-mask-image:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent);mask-image:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent)}
+.tbS{position:relative;height:78px;overflow:hidden;cursor:ew-resize;touch-action:pan-y;-webkit-mask-image:linear-gradient(90deg,transparent,#000 30%,#000 70%,transparent);mask-image:linear-gradient(90deg,transparent,#000 30%,#000 70%,transparent)}
 .tbT{position:absolute;top:0;bottom:0;left:50%;width:0;will-change:transform}
 .tbT i{position:absolute;top:0;height:100%;width:46px;margin-left:-23px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-style:normal;font:500 1.55rem Lexend,sans-serif;color:var(--muted)}
 .tbT i em{font-style:normal;font-size:.6rem;letter-spacing:.05em;margin-top:-2px}
@@ -427,6 +427,19 @@ a.btn[hidden]{display:none}
 #v1>h1{text-align:center}
 .tbS.arm,.tbSeg.arm{touch-action:none}.tbS.arm{box-shadow:inset 0 0 0 2px var(--lav)}.tbSeg.arm{background:var(--lav);color:var(--btnt)}.anTb .tbS.arm{box-shadow:inset 0 0 0 2px rgba(255,255,255,.85)}.anTb .tbSeg.arm{background:rgba(255,255,255,.3);color:#fff}
 .tbSeg.flow{animation:tbfl 1.1s ease-in-out infinite}.tbS.flow{animation:tbfs 1.4s ease-in-out infinite}@keyframes tbfl{50%{box-shadow:inset 0 -2.5px 0 currentColor}}@keyframes tbfs{50%{box-shadow:inset 0 0 0 2px var(--lav)}}.anTb .tbS.flow{animation-name:tbfs2}@keyframes tbfs2{50%{box-shadow:inset 0 0 0 2px rgba(255,255,255,.7)}}@media(prefers-reduced-motion:reduce){.tbSeg.flow,.tbS.flow{animation:none;box-shadow:inset 0 -2.5px 0 currentColor}}
+.tbS.sm{height:32px;cursor:ew-resize}.tbS.sm+.tbS.sm,.tbS:not(.sm)+.tbS.sm{border-top:1px solid var(--line)}
+.tbS.sm .tbT i{font:500 .88rem Lexend,sans-serif;width:46px}
+.tbHi.sm{top:3px;bottom:3px;width:42px;margin-left:-21px;border-radius:9px}.tbHi.sm b{font:500 .95rem Lexend,sans-serif;color:var(--ink)}
+.anTb .tbHi.sm b{color:#fff}.anTb .tbS.sm+.tbS.sm,.anTb .tbS:not(.sm)+.tbS.sm{border-top-color:rgba(255,255,255,.2)}
+.cwWrap.bi{display:flex;flex-direction:column}.cwWrap #cwTb{display:none}.cwWrap.bi #cwTb{display:block;order:-1}
+.cwWrap.bi.v{flex-direction:row;align-items:flex-start;gap:14px}.cwWrap.bi.v #cwSvg{flex:1;min-width:0}.cwWrap.bi.v #cwTb{order:0;margin:14px 0 0;width:max-content;flex:none;display:grid;grid-template-columns:repeat(4,46px)}
+.tbar.v .tbS{height:450px;width:auto;touch-action:pan-x;cursor:ns-resize;-webkit-mask-image:linear-gradient(180deg,transparent,#000 30%,#000 70%,transparent);mask-image:linear-gradient(180deg,transparent,#000 30%,#000 70%,transparent)}
+.tbar.v .tbS.sm{height:450px;border-top:0}.tbar.v .tbS+.tbS{border-left:1px solid var(--line)}.tbar.v .tbS.arm,.tbar.v .tbS.on{touch-action:none}
+.tbar.v .tbT{left:0;right:0;top:50%;bottom:auto;width:auto;height:0}
+.tbar.v .tbT i{left:0;right:0;width:auto;margin:-23px 0 0;height:46px}
+.tbar.v .tbHi{left:3px;right:3px;width:auto;margin:-33px 0 0;top:50%;bottom:auto;height:66px}.tbar.v .tbHi.sm{height:34px;margin-top:-17px;border-radius:9px}
+.tbar.v .tbF{grid-column:1/-1;flex-wrap:wrap;justify-content:center;padding:10px 8px;gap:8px}.tbar.v .tbN span{display:none}
+.tbar.v .tbS:not(.sm) .tbT i{font-size:1.1rem}.tbar.v .tbS.sm .tbT i{font-size:.74rem}.tbar.v .tbHi{left:2px;right:2px;margin-top:-27px;height:54px}.tbar.v .tbHi:not(.sm) b{font-size:1.05rem}.tbar.v .tbHi small{font-size:.55rem}.tbar.v .tbHi.sm{height:28px;margin-top:-14px}.tbar.v .tbHi.sm b{font-size:.8rem}.tbar.v .tbF{padding:8px 4px;gap:6px;font-size:.8rem}.tbar.v .lv{font-size:.7rem;padding:0 8px;height:24px}.tbar.v .tbCal svg{width:20px;height:20px}
 </style>
 </head>
 <body>
@@ -460,7 +473,7 @@ a.btn[hidden]{display:none}
     <p class="msg c" id="anSt" role="status"></p>
     <div class="anBand" id="anBand">
       <div class="anHead" id="anHead"><div class="anD" id="anD"></div><div class="anT" id="anT"></div><div class="anPw"><button type="button" id="anGeo" class="anGeo" aria-label="Konumumu kullan" title="Konumumu kullan"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.800 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></button><div class="anP" id="anP"></div></div></div>
-      <div class="cws" id="anSvg"></div><div class="tbar anTb" id="anTb"><div class="tbS" id="anTbS"><div class="tbT" id="anTbT"></div><div class="tbHi" aria-hidden="true"><small id="anTbW"></small><b id="anTbD"></b><small id="anTbL"></small></div></div><div class="tbF"><span class="tbN" id="anTbN"></span><span class="tbR"><button type="button" id="anNowBtn" class="lv" aria-pressed="true"><i></i><span>Canlı</span></button><button type="button" class="tbCal" id="anTbC" aria-label="Tarih seç"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M8 14h.01M12 14h.01M16 14h.01M8 17.5h.01M12 17.5h.01"/></svg></button><input id="anTbI" type="datetime-local" tabindex="-1" aria-hidden="true" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none"><span class="tbSeg" id="anTbY"></span><span class="tbTm"><span class="tbSeg" id="anTbH"></span>:<span class="tbSeg" id="anTbM"></span></span></span></div></div>
+      <div class="cws" id="anSvg"></div><div class="tbar anTb" id="anTb"><div class="tbS sm" id="anTbYS"><div class="tbT" id="anTbYT"></div><div class="tbHi sm" aria-hidden="true"><b id="anTbYV"></b></div></div><div class="tbS" id="anTbS"><div class="tbT" id="anTbT"></div><div class="tbHi" aria-hidden="true"><small id="anTbW"></small><b id="anTbD"></b><small id="anTbL"></small></div></div><div class="tbS sm" id="anTbHS"><div class="tbT" id="anTbHT"></div><div class="tbHi sm" aria-hidden="true"><b id="anTbHV"></b></div></div><div class="tbS sm" id="anTbMS"><div class="tbT" id="anTbMT"></div><div class="tbHi sm" aria-hidden="true"><b id="anTbMV"></b></div></div><div class="tbF"><span class="tbN" id="anTbN"></span><span class="tbR"><button type="button" id="anNowBtn" class="lv" aria-pressed="true"><i></i><span>Canlı</span></button><input id="anTbI" type="datetime-local" tabindex="-1" aria-hidden="true" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none"></span></div></div>
     </div>
     
     <p class="msg c" id="anZm" hidden>Çarkı büyütmek için çift dokun. Güneş ve Ay’a dokunursan parlarlar.</p>
@@ -674,10 +687,10 @@ a.btn[hidden]{display:none}
     <div class="sm" id="cinfo"></div>
     <div class="card" id="hc">
       <div class="dh"><h3>Doğum haritası</h3><button class="btn l" type="button" id="cwBi" hidden>Transit Biwheel</button></div>
-      <div id="cwBiBox" hidden><label for="cwBiY">Transit yeri</label><input id="cwBiY" placeholder="Şehir (boş bırakılırsa bu cihazın saati)" autocomplete="off"><div class="tbar" id="cwTb"><div class="tbS" id="cwTbS"><div class="tbT" id="cwTbT"></div><div class="tbHi" aria-hidden="true"><small id="cwTbW"></small><b id="cwTbD"></b><small id="cwTbL"></small></div></div><div class="tbF"><span class="tbN" id="cwTbN"></span><span class="tbR"><button type="button" id="cwBiNow" class="lv" aria-pressed="true"><i></i><span>Canlı</span></button><button type="button" class="tbCal" id="cwTbC" aria-label="Tarih seç"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#2F7DF6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M8 14h.01M12 14h.01M16 14h.01M8 17.5h.01M12 17.5h.01"/></svg></button><input id="cwBiD" type="datetime-local" tabindex="-1" aria-hidden="true" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none"><span class="tbSeg" id="cwTbY" title="Yıl"></span><span class="tbTm"><span class="tbSeg" id="cwTbH" title="Saat"></span>:<span class="tbSeg" id="cwTbM" title="Dakika"></span></span></span></div></div><div class="anCtl" id="cwBiCtl" role="group" aria-label="Zaman kontrolü"><button type="button" id="cwB2" aria-label="Durdurana kadar geri akıt"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 6l-6 6 6 6"/><path d="M19 6l-6 6 6 6"/></svg></button><button type="button" id="cwB1" aria-label="1 adım geri"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button><button type="button" id="cwPz" aria-label="Durdur" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg></button><button type="button" id="cwF1" aria-label="1 adım ileri"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button><button type="button" id="cwF2" aria-label="Durdurana kadar ileri akıt"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 6l6 6-6 6"/><path d="M13 6l6 6-6 6"/></svg></button></div><div class="anCtl un" id="cwBiUn" role="group" aria-label="Adım birimi"><button type="button" data-sp="60" aria-pressed="true">Dakika</button><button type="button" data-sp="3600" aria-pressed="false">Saat</button><button type="button" data-sp="86400" aria-pressed="false">Gün</button></div></div>
+      <div id="cwBiBox" hidden><label for="cwBiY">Transit yeri</label><input id="cwBiY" placeholder="Şehir (boş bırakılırsa bu cihazın saati)" autocomplete="off"><div class="anCtl" id="cwBiCtl" role="group" aria-label="Zaman kontrolü"><button type="button" id="cwB2" aria-label="Durdurana kadar geri akıt"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 6l-6 6 6 6"/><path d="M19 6l-6 6 6 6"/></svg></button><button type="button" id="cwB1" aria-label="1 adım geri"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button><button type="button" id="cwPz" aria-label="Durdur" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg></button><button type="button" id="cwF1" aria-label="1 adım ileri"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button><button type="button" id="cwF2" aria-label="Durdurana kadar ileri akıt"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 6l6 6-6 6"/><path d="M13 6l6 6-6 6"/></svg></button></div><div class="anCtl un" id="cwBiUn" role="group" aria-label="Adım birimi"><button type="button" data-sp="60" aria-pressed="true">Dakika</button><button type="button" data-sp="3600" aria-pressed="false">Saat</button><button type="button" data-sp="86400" aria-pressed="false">Gün</button></div></div>
       <p class="msg" id="cwSt" role="status"></p>
       <div id="cwRes" hidden>
-        <div class="cws" id="cwSvg"></div>
+        <div class="cwWrap" id="cwWrap"><div class="cws" id="cwSvg"></div><div class="tbar" id="cwTb"><div class="tbS sm" id="cwTbYS"><div class="tbT" id="cwTbYT"></div><div class="tbHi sm" aria-hidden="true"><b id="cwTbYV"></b></div></div><div class="tbS" id="cwTbS"><div class="tbT" id="cwTbT"></div><div class="tbHi" aria-hidden="true"><small id="cwTbW"></small><b id="cwTbD"></b><small id="cwTbL"></small></div></div><div class="tbS sm" id="cwTbHS"><div class="tbT" id="cwTbHT"></div><div class="tbHi sm" aria-hidden="true"><b id="cwTbHV"></b></div></div><div class="tbS sm" id="cwTbMS"><div class="tbT" id="cwTbMT"></div><div class="tbHi sm" aria-hidden="true"><b id="cwTbMV"></b></div></div><div class="tbF"><span class="tbN" id="cwTbN"></span><span class="tbR"><button type="button" id="cwBiNow" class="lv" aria-pressed="true"><i></i><span>Canlı</span></button><input id="cwBiD" type="datetime-local" tabindex="-1" aria-hidden="true" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none"></span></div></div></div>
         <p class="msg">Çarkı büyütüp yakınlaştırmak için üzerine dokun.</p>
         <div class="acts"><button class="btn l" type="button" id="cwPng">Görseli indir (PNG)</button><button class="btn g" type="button" id="cwEd">Bilgileri düzenle</button></div>
         <div id="cwNote"></div>
@@ -866,6 +879,27 @@ function tbGate(e,el){if(e.pointerType!=="touch")return true;if(el.classList.con
  const x=e.clientX,y=e.clientY,t=Date.now(),up=u=>{el.removeEventListener("pointerup",up);if(Math.abs(u.clientX-x)<10&&Math.abs(u.clientY-y)<10&&Date.now()-t<500)tbArm(el)};
  el.addEventListener("pointerup",up);el.addEventListener("pointercancel",()=>el.removeEventListener("pointerup",up),{once:true});return false}
 document.addEventListener("pointerdown",e=>{if(!e.target.closest||!e.target.closest(".tbS.arm,.tbSeg.arm"))tbDis()},true);
+const TBN=v=>v?6:Math.max(7,Math.min(30,Math.ceil(innerWidth/92)+2)),TBO=(d,n)=>Math.max(.12,1-Math.abs(d)/n*.88).toFixed(2);
+function cwBiShow(P,on){const b=document.getElementById(P+"BiBox"),w=document.getElementById(P+"Wrap");if(b)b.hidden=!on;if(w)w.classList.toggle("bi",on);tbLay()}
+function tbLay(){const w=document.getElementById("cwWrap"),t=document.getElementById("cwTb");if(!w||!t)return;const v=innerWidth>=720&&w.classList.contains("bi");if(t.classList.contains("v")===v)return;t.classList.toggle("v",v);w.classList.toggle("v",v);t.querySelectorAll(".tbT").forEach(x=>{x.style.transform=""});
+ if(window.cwBiRedraw)window.cwBiRedraw()}
+addEventListener("resize",tbLay);
+function tbSub(P,api){const C=46,$$=i=>document.getElementById(P+i);
+ const W=ms=>{const w=new Date(ms+api.off(ms)*60000);return{ms,wm:w.getTime(),Y:w.getUTCFullYear(),M:w.getUTCMonth()+1,D:w.getUTCDate(),h:w.getUTCHours(),mi:w.getUTCMinutes()}};
+ const defs={Y:{sp:31557600,key:w=>w.Y,lab:(w,d)=>String(w.Y+d),to:(w,d)=>api.from(w.Y+d,w.M,w.D,w.h,w.mi)},
+  H:{sp:3600,key:w=>Math.floor(w.wm/36e5),lab:(w,d)=>String(((w.h+d)%24+24)%24),to:(w,d)=>w.ms+d*36e5},
+  M:{sp:60,key:w=>Math.floor(w.wm/6e4),lab:(w,d)=>String(((w.mi+d)%60+60)%60),to:(w,d)=>w.ms+d*6e4}};
+ let drag=null;const st={};
+ for(const k in defs){const df=defs[k],el=$$(k+"S"),trk=$$(k+"T"),val=$$(k+"V");st[k]={key:null,trk,val,el};
+  el.addEventListener("pointerdown",e=>{if(e.button>0)return;if(!tbGate(e,el))return;e.preventDefault();el.setPointerCapture(e.pointerId);const V=!!(api.vert&&api.vert());drag={k,V,x:V?e.clientY:e.clientX,w:W(api.ms())};el.classList.add("on")});
+  el.addEventListener("pointermove",e=>{if(!drag||drag.k!==k)return;const v=-((drag.V?e.clientY:e.clientX)-drag.x)/C,r=Math.round(v);api.set(df.to(drag.w,r));render();trk.style.transform=`translate${drag.V?"Y":"X"}(${-(v-r)*C}px)`});
+  const end=()=>{if(!drag||drag.k!==k)return;drag=null;el.classList.remove("on");trk.style.transition="transform .2s ease-out";trk.style.transform="translate(0,0)";setTimeout(()=>{trk.style.transition=""},220)};
+  el.addEventListener("pointerup",end);el.addEventListener("pointercancel",end);
+  tbDbl(el,()=>api.flow(el,df.sp))}
+ function render(){const w=W(api.ms());for(const k in defs){const V=!!(api.vert&&api.vert()),n=TBN(V),df=defs[k],o=st[k],key=df.key(w)+":"+n+V;if(key===o.key)continue;o.key=key;let h="";
+   for(let d=-n;d<=n;d++)h+=`<i style="${V?"top":"left"}:${d*C}px;${d===0?"visibility:hidden;":""}opacity:${TBO(d,n)}">${df.lab(w,d)}</i>`;
+   o.trk.innerHTML=h;o.val.textContent=df.lab(w,0)}}
+ return{render,redraw(){for(const k in st)st[k].key=null;render()}}}
 function tbFlowMark(sel,o){document.querySelectorAll(sel+" .flow").forEach(x=>x.classList.remove("flow"));if(o.run&&o.sp>1&&o.fe)o.fe.classList.add("flow")}
 function tbDbl(el,fn){let lt=0,sx=0,sy=0,st=0;el.addEventListener("pointerdown",e=>{sx=e.clientX;sy=e.clientY;st=Date.now()});el.addEventListener("pointerup",e=>{if(Math.abs(e.clientX-sx)>10||Math.abs(e.clientY-sy)>10||Date.now()-st>400){lt=0;return}const n=Date.now();if(n-lt<450){lt=0;fn()}else lt=n})}
 const sel=new Set();
@@ -1349,30 +1383,28 @@ function cwKur(P,vis){
   const [y,mo,d,h,mi]=m.slice(1).map(Number),tz=BI.yr&&BI.yr.tz,to=(tz?yerelUtc(y,mo,d,h,mi,tz):new Date(y,mo-1,d,h,mi)).getTime(),cur=biSim().getTime();
   BI.t0=cur;BI.run=false;BI.sp=1;BI.dir=1;BI.tw={a:cur,b:to,s:performance.now(),d:Math.min(900,420+Math.abs(to-cur)/(86400000*365)*60)};biUI();biGo()};
  /* tarih çubuğu: sürükleyerek ileri geri */
- const CELL=46,trk=$("#cwTbT"),tbS=$("#cwTbS");let tbKey="",tbDrag=null;
+ const CELL=46,trk=$("#cwTbT"),tbS=$("#cwTbS"),trkV=$("#cwTb");let tbKey="",tbDrag=null;
  const biOff=ms=>{const tz=BI.yr&&BI.yr.tz;return tz?tzOff(tz,ms)/60000:-new Date(ms).getTimezoneOffset()};
  const biSet=ms=>{BI.tw=null;BI.t0=ms;BI.w0=performance.now();BI.run=false;BI.sp=1;BI.dir=1;biUI();biGo()};
  const biFrom=(Y,M,D,h,mi)=>{const tz=BI.yr&&BI.yr.tz;return tz?yerelUtc(Y,M,D,h,mi,tz).getTime():new Date(Y,M-1,D,h,mi).getTime()};
  const biBar=()=>{if(!S)return;const ms=biSim().getTime(),off=biOff(ms),w=new Date(ms+off*60000),n=new Date(Date.now()+biOff(Date.now())*60000),
    dk=Math.floor(w.getTime()/864e5),nk=Math.floor(n.getTime()/864e5),loc=LANG==="en"?"en-GB":"tr-TR";
-  if(String(dk)+LANG!==tbKey){tbKey=String(dk)+LANG;let h="";
-   for(let d=-7;d<=7;d++){const x=new Date((dk+d)*864e5),dd=x.getUTCDate();h+=`<i style="left:${d*CELL}px;${d===0?"visibility:hidden;":""}opacity:${Math.max(.15,1-Math.abs(d)*.13).toFixed(2)}">${dd}${dd===1?`<em>${x.toLocaleDateString(loc,{month:"short",timeZone:"UTC"})}</em>`:""}</i>`}
+  if(String(dk)+LANG+TBN(biV())+biV()!==tbKey){tbKey=String(dk)+LANG+TBN(biV())+biV();let h="";
+   const n=TBN(biV());for(let d=-n;d<=n;d++){const x=new Date((dk+d)*864e5),dd=x.getUTCDate();h+=`<i style="${biV()?"top":"left"}:${d*CELL}px;${d===0?"visibility:hidden;":""}opacity:${TBO(d,n)}">${dd}${dd===1?`<em>${x.toLocaleDateString(loc,{month:"short",timeZone:"UTC"})}</em>`:""}</i>`}
    trk.innerHTML=h;$("#cwTbW").textContent=w.toLocaleDateString(loc,{weekday:"short",timeZone:"UTC"});$("#cwTbD").textContent=w.getUTCDate();
    $("#cwTbL").textContent=dk===nk?L("Bugün","Today"):w.toLocaleDateString(loc,{month:"short",timeZone:"UTC"})}
-  $("#cwTbY").textContent=w.getUTCFullYear();$("#cwTbH").textContent=pad2(w.getUTCHours());$("#cwTbM").textContent=pad2(w.getUTCMinutes());
+  sub.render();
   $("#cwTbN").innerHTML=esc((S.ad||"").split(" ")[0])+`<span>, ${esc(S.nat||"")}</span>`};
  const dragger=(el,scale,fn,onmove)=>{el.addEventListener("pointerdown",e=>{if(e.button>0)return;if(!tbGate(e,el))return;e.preventDefault();el.setPointerCapture(e.pointerId);
-   const c0=biSim().getTime(),w0=new Date(c0+biOff(c0)*60000);tbDrag={el,x:e.clientX,base:c0,Y:w0.getUTCFullYear(),M:w0.getUTCMonth()+1,D:w0.getUTCDate(),h:w0.getUTCHours(),mi:w0.getUTCMinutes()};el.classList&&el.classList.add("on")});
-  el.addEventListener("pointermove",e=>{if(!tbDrag||tbDrag.el!==el)return;const dx=e.clientX-tbDrag.x,v=-dx/scale;onmove(fn(tbDrag,v),v)});
-  const end=e=>{if(!tbDrag||tbDrag.el!==el)return;tbDrag=null;el.classList&&el.classList.remove("on");trk.style.transition="transform .2s ease-out";trk.style.transform="translateX(0)";setTimeout(()=>{trk.style.transition=""},220)};
+   const c0=biSim().getTime(),w0=new Date(c0+biOff(c0)*60000);const V=biV();tbDrag={el,V,x:V?e.clientY:e.clientX,base:c0,Y:w0.getUTCFullYear(),M:w0.getUTCMonth()+1,D:w0.getUTCDate(),h:w0.getUTCHours(),mi:w0.getUTCMinutes()};el.classList&&el.classList.add("on")});
+  el.addEventListener("pointermove",e=>{if(!tbDrag||tbDrag.el!==el)return;const dx=(tbDrag.V?e.clientY:e.clientX)-tbDrag.x,v=-dx/scale;onmove(fn(tbDrag,v),v)});
+  const end=e=>{if(!tbDrag||tbDrag.el!==el)return;tbDrag=null;el.classList&&el.classList.remove("on");trk.style.transition="transform .2s ease-out";trk.style.transform="translate(0,0)";setTimeout(()=>{trk.style.transition=""},220)};
   el.addEventListener("pointerup",end);el.addEventListener("pointercancel",end)};
- dragger(tbS,CELL,(d,v)=>d.base+Math.round(v)*864e5,(ms,v)=>{biSet(ms);biBar();trk.style.transform=`translateX(${-(v-Math.round(v))*CELL}px)`});
- dragger($("#cwTbY"),-28,(d,v)=>biFrom(d.Y+Math.round(v),d.M,d.D,d.h,d.mi),ms=>{biSet(ms);biBar()});
- dragger($("#cwTbH"),-18,(d,v)=>d.base+Math.round(v)*36e5,ms=>{biSet(ms);biBar()});
- dragger($("#cwTbM"),-4,(d,v)=>d.base+Math.round(v)*6e4,ms=>{biSet(ms);biBar()});
+ dragger(tbS,CELL,(d,v)=>d.base+Math.round(v)*864e5,(ms,v)=>{biSet(ms);biBar();trk.style.transform=`translate${biV()?"Y":"X"}(${-(v-Math.round(v))*CELL}px)`});
+ const biV=()=>trkV.classList.contains("v");
+ const sub=tbSub("cwTb",{ms:()=>biSim().getTime(),off:biOff,set:biSet,from:biFrom,flow:(el,sp)=>biFlow2(el,sp),vert:biV});window.cwBiRedraw=()=>{tbKey="";sub.redraw();biBar()};
  const biFlow2=(el,sp)=>{if(BI.run&&BI.sp===sp&&BI.dir>0&&BI.fe===el){biRebase();BI.run=false;BI.sp=1;BI.fe=null}else{biRebase();BI.sp=sp;BI.dir=1;BI.run=true;BI.fe=el}biUI();biGo()};
- [[tbS,864e2],[$("#cwTbY"),31557600],[$("#cwTbH"),3600],[$("#cwTbM"),60]].forEach(([el,sp])=>tbDbl(el,()=>biFlow2(el,sp)));
- $("#cwTbC").onclick=()=>{try{biD.showPicker()}catch(_){biD.focus();biD.click()}};
+ [[tbS,864e2]].forEach(([el,sp])=>tbDbl(el,()=>biFlow2(el,sp)));
  const biLoop=()=>{BI.raf=0;if(!biBtn||!biBtn.dataset.on)return;BI.raf=requestAnimationFrame(biLoop);if($("#v11").hidden)return;
   const tw0=!!BI.tw;biSim();const t=performance.now();if(tw0&&!BI.tw)BI.force=true;
   const need=BI.force?0:BI.tw?40:(BI.run&&BI.sp===1)?1000:BI.run?(BI.sp<=60?250:BI.sp<=3600?120:80):1e9;if(t-BI.last<need)return;BI.last=t;BI.force=false;biFrame()};
@@ -1387,8 +1419,8 @@ function cwKur(P,vis){
   $("#cwBiNow").onclick=biLive;if(biD)biD.addEventListener("change",biGit);
   document.querySelectorAll("#cwBiUn button").forEach(x=>x.onclick=()=>{BI.unit=+x.dataset.sp;if(BI.run&&BI.sp>1){biRebase();BI.sp=BI.unit}biUI();biGo()});
   biBtn.onclick=async()=>{if(!S)return;
-   if(biBtn.dataset.on){biBtn.dataset.on="";S.show=null;q("Svg").innerHTML=S.svg;biBtn.textContent=T("Transit Biwheel");$("#"+P+"BiBox").hidden=true;q("St").textContent="";return}
-   if(!await biPrep())return;biBtn.dataset.on="1";biBtn.textContent=T("Doğum Haritası");$("#"+P+"BiBox").hidden=false;biLive()}}
+   if(biBtn.dataset.on){biBtn.dataset.on="";S.show=null;q("Svg").innerHTML=S.svg;biBtn.textContent=T("Transit Biwheel");cwBiShow(P,false);q("St").textContent="";return}
+   if(!await biPrep())return;biBtn.dataset.on="1";biBtn.textContent=T("Doğum Haritası");cwBiShow(P,true);biLive()}}
  const kaydet=()=>{const pl={room,zaman:new Date().toISOString(),ad:q("Ad").value.trim(),eposta:q("Mail").value.trim(),tarih:q("T").value,saat:q("B").checked?"bilmiyor":q("S").value,yer:q("Y").value.trim(),fan:q("Fan").value.trim(),paketler:"Ücretsiz doğum haritası",asama:"ucretsiz-harita",dil:LANG,not:"Saat dilimi: "+q("Tz").value+(q("Tz").value==="manuel"?" "+q("Off").value:"")+"; Enlem: "+q("La").value+"; Boylam: "+q("Lo").value};
   window.PBK=pl;try{localStorage.setItem("sa_hk",JSON.stringify({ad:pl.ad,eposta:pl.eposta}))}catch(_){}
   if(!CFG.endpoint){localUpsert(pl);return}
@@ -1417,7 +1449,7 @@ function cwKur(P,vis){
   const yer=q("Y").value.trim()||"—";
   const satir=[ad,D+" "+AYK()[M-1]+" "+Y+(bil?L(", saat bilinmiyor (12:00)",", time unknown (12:00)"):", "+pad2(H)+":"+pad2(Mi)+" ("+ofs+")"),yer+" "+dm(la,"N","S")+" "+dm(lo,"E","W"),L("Tropikal · ","Tropical · ")+(h.ev&&h.ev.placidus?"Placidus":h.ev?L("Porphyry (kutup enlemi)","Porphyry (polar latitude)"):L("Evsiz","No houses"))+" · True Node"];
   const svg=Harita.ciz(h,{satirlar:satir});S={svg,h,ad,satir,show:null,nat:D+" "+AYK()[M-1]+" "+Y};if(vis)kaydet();
-  q("Svg").innerHTML=svg;if($("#"+P+"Bi")){$("#"+P+"Bi").hidden=false;$("#"+P+"Bi").textContent=T("Transit Biwheel");$("#"+P+"Bi").dataset.on="";$("#"+P+"BiBox").hidden=true}
+  q("Svg").innerHTML=svg;if($("#"+P+"Bi")){$("#"+P+"Bi").hidden=false;$("#"+P+"Bi").textContent=T("Transit Biwheel");$("#"+P+"Bi").dataset.on="";cwBiShow(P,false)}
   const rows=h.govdeler.map(g=>`<tr><td>${LANG==="en"?({Sun:"Sun",Moon:"Moon",Mercury:"Mercury",Venus:"Venus",Mars:"Mars",Jupiter:"Jupiter",Saturn:"Saturn",Uranus:"Uranus",Neptune:"Neptune",Pluto:"Pluto",Vertex:"Vertex",NNode:"North Node",SNode:"South Node",Chiron:"Chiron",Fortune:"Part of Fortune"})[g.id]:g.ad}</td><td>${g.der}°${pad2(g.dk)}'${pad2(g.sn)}"</td><td>${BA_[g.burc]}</td><td>${g.ev||"—"}</td><td>${g.retro&&g.id!=="Vertex"?"Rx":""}</td></tr>`);
   if(h.ev){const f=(n,l)=>`<tr><td>${n}</td><td>${Math.floor(l%30)}°${pad2(Math.floor((l%1)*60))}'</td><td>${BA_[Math.floor(l/30)]}</td><td></td><td></td></tr>`;rows.unshift(f(L("Yükselen (ASC)","Ascendant (ASC)"),h.ev.asc),f(L("Orta Gök (MC)","Midheaven (MC)"),h.ev.mc))}
   q("Tbl").innerHTML="<tr><th>"+L("Nokta","Point")+"</th><th>"+L("Derece","Degree")+"</th><th>"+L("Burç","Sign")+"</th><th>"+L("Ev","House")+"</th><th></th></tr>"+rows.join("");
@@ -1589,10 +1621,10 @@ function anStart(){AN.tw=null;AN.sp=1;AN.dir=1;AN.run=true;AN.t0=Date.now();AN.w
  const setT=ms=>{AN.tw=null;AN.t0=ms;AN.w0=performance.now();AN.run=false;AN.sp=1;AN.dir=1;anCtlUI();anTick(true)};
  const txt=(id,v)=>{if(last[id]!==v){last[id]=v;$(id).textContent=v}};
  window.anBar=()=>{const ms=anSim().getTime(),w=new Date(ms+off(ms)*60000),n=new Date(Date.now()+off(Date.now())*60000),dk=Math.floor(w.getTime()/864e5),nk=Math.floor(n.getTime()/864e5),loc=LANG==="en"?"en-GB":"tr-TR";
-  if(String(dk)+LANG!==key){key=String(dk)+LANG;let h="";
-   for(let d=-7;d<=7;d++){const x=new Date((dk+d)*864e5),dd=x.getUTCDate();h+=`<i style="left:${d*CELL}px;${d===0?"visibility:hidden;":""}opacity:${Math.max(.15,1-Math.abs(d)*.13).toFixed(2)}">${dd}${dd===1?`<em>${x.toLocaleDateString(loc,{month:"short",timeZone:"UTC"})}</em>`:""}</i>`}
+  if(String(dk)+LANG+TBN()!==key){key=String(dk)+LANG+TBN();let h="";
+   const n=TBN();for(let d=-n;d<=n;d++){const x=new Date((dk+d)*864e5),dd=x.getUTCDate();h+=`<i style="left:${d*CELL}px;${d===0?"visibility:hidden;":""}opacity:${TBO(d,n)}">${dd}${dd===1?`<em>${x.toLocaleDateString(loc,{month:"short",timeZone:"UTC"})}</em>`:""}</i>`}
    trk.innerHTML=h;txt("#anTbW",w.toLocaleDateString(loc,{weekday:"short",timeZone:"UTC"}));txt("#anTbD",String(w.getUTCDate()));txt("#anTbL",dk===nk?L("Bugün","Today"):w.toLocaleDateString(loc,{month:"short",timeZone:"UTC"}))}
-  txt("#anTbY",String(w.getUTCFullYear()));txt("#anTbH",pad2(w.getUTCHours()));txt("#anTbM",pad2(w.getUTCMinutes()));txt("#anTbN",AN.ad||"");
+  sub.render();txt("#anTbN",AN.ad||"");
   if(document.activeElement!==inp)inp.value=w.toISOString().slice(0,16)};
  const dragger=(el,scale,fn,onmove)=>{el.addEventListener("pointerdown",e=>{if(e.button>0)return;if(!tbGate(e,el))return;e.preventDefault();el.setPointerCapture(e.pointerId);
    const c0=anSim().getTime(),w0=new Date(c0+off(c0)*60000);drag={el,x:e.clientX,base:c0,Y:w0.getUTCFullYear(),M:w0.getUTCMonth()+1,D:w0.getUTCDate(),h:w0.getUTCHours(),mi:w0.getUTCMinutes()};el.classList.add("on")});
@@ -1600,12 +1632,9 @@ function anStart(){AN.tw=null;AN.sp=1;AN.dir=1;AN.run=true;AN.t0=Date.now();AN.w
   const end=()=>{if(!drag||drag.el!==el)return;drag=null;el.classList.remove("on");trk.style.transition="transform .2s ease-out";trk.style.transform="translateX(0)";setTimeout(()=>{trk.style.transition=""},220)};
   el.addEventListener("pointerup",end);el.addEventListener("pointercancel",end)};
  dragger(tbS,CELL,(d,v)=>d.base+Math.round(v)*864e5,(ms,v)=>{setT(ms);anBar();trk.style.transform=`translateX(${-(v-Math.round(v))*CELL}px)`});
- dragger($("#anTbY"),-28,(d,v)=>from(d.Y+Math.round(v),d.M,d.D,d.h,d.mi),ms=>{setT(ms);anBar()});
- dragger($("#anTbH"),-18,(d,v)=>d.base+Math.round(v)*36e5,ms=>{setT(ms);anBar()});
- dragger($("#anTbM"),-4,(d,v)=>d.base+Math.round(v)*6e4,ms=>{setT(ms);anBar()});
+ const sub=tbSub("anTb",{ms:()=>anSim().getTime(),off,set:setT,from,flow:(el,sp)=>flow(el,sp)});
  const flow=(el,sp)=>{if(AN.run&&AN.sp===sp&&AN.dir>0&&AN.fe===el){anRebase();AN.run=false;AN.sp=1;AN.fe=null}else{anRebase();AN.sp=sp;AN.dir=1;AN.run=true;AN.fe=el}anCtlUI();anTick(true)};
- [[tbS,864e2],[$("#anTbY"),31557600e0*1e3/1e3],[$("#anTbH"),3600],[$("#anTbM"),60]].forEach(([el,sp])=>tbDbl(el,()=>flow(el,sp)));
- $("#anTbC").onclick=()=>{try{inp.showPicker()}catch(_){inp.focus();inp.click()}};
+ [[tbS,864e2]].forEach(([el,sp])=>tbDbl(el,()=>flow(el,sp)));
  inp.addEventListener("change",()=>{const m=inp.value.match(/^(\d{4})-(\d\d)-(\d\d)T(\d\d):(\d\d)/);if(!m)return;const[y,mo,d,h,mi]=m.slice(1).map(Number),to=from(y,mo,d,h,mi),cur=anSim().getTime();
   AN.t0=cur;AN.run=false;AN.sp=1;AN.dir=1;AN.tw={a:cur,b:to,s:performance.now(),d:Math.min(900,420+Math.abs(to-cur)/(86400000*365)*60)};anCtlUI();anTick(true)})}
 if("IntersectionObserver" in window)new IntersectionObserver(e=>{AN.vis=e.some(x=>x.isIntersecting)},{rootMargin:"150px"}).observe($("#anBand"));
