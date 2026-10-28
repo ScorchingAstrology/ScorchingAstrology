@@ -24,7 +24,7 @@ html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;min-height:100vh;color:var(--ink);font:400 1rem/1.55 Lexend,system-ui,sans-serif;background:linear-gradient(180deg,var(--bg1),var(--bg2)) fixed}
 .app{max-width:none;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
 .top{background:linear-gradient(100deg,var(--h1),var(--h2));padding:26px max(76px,calc((100% - 1120px)/2 + 76px)) 26px max(56px,calc((100% - 1120px)/2 + 56px));text-align:left;color:#fff;font-weight:500;letter-spacing:.3em;font-size:1.05rem;white-space:nowrap}
-.planets{display:block;width:100%;max-width:690px;height:auto;margin:26px auto 6px}
+.planets{display:block;width:100%;max-width:640px;height:auto;margin:26px auto 6px}
 .view{padding:6px 24px 28px;flex:1;animation:in .35s ease both;width:100%;max-width:460px;margin-left:auto;margin-right:auto}
 #v9{max-width:720px}#v11{max-width:720px}
 .view[hidden]{display:none}
@@ -148,10 +148,12 @@ body.nite{--ink:#ECE9FA;--muted:#A9A4C8;--card:rgba(255,255,255,.08);--line:#3A3
 @property --sel{syntax:"<color>";inherits:true;initial-value:#9B7AE0}
 @property --gold{syntax:"<color>";inherits:true;initial-value:#C9B63A}
 body{transition:--ink 1.3s ease,--muted 1.3s ease,--card 1.3s ease,--line 1.3s ease,--note 1.3s ease,--sel 1.3s ease,--gold 1.3s ease}
-.anBand{position:relative;width:100vw;margin:18px 0 0 calc(50% - 50vw);padding:22px 0;background:rgba(255,255,255,.2);overflow:hidden}
+#anSt{min-height:0;margin:12px 0 0}
+.anBand{position:relative;width:100vw;margin:8px 0 0 calc(50% - 50vw);padding:16px 0 16px}.anBand::before{content:"";position:absolute;left:0;right:0;top:-170px;bottom:-170px;background:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,.2) 210px,rgba(255,255,255,.2) calc(100% - 210px),rgba(255,255,255,0));z-index:0;pointer-events:none}
 .anBand .cws{position:relative;z-index:1;margin:0 auto;max-width:520px;padding:0 24px}
 .anBand .cws svg{background:none;box-shadow:none;border-radius:0}
-.anStars{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+#anSec{position:relative;z-index:0}#anSec>:not(.anStars):not(.anBand){position:relative;z-index:1}
+.anStars{position:absolute;top:0;bottom:0;left:50%;width:100vw;margin-left:-50vw;height:100%;z-index:1;pointer-events:none}
 .anStars .tw{animation:tw16 4s ease-in-out infinite}
 .app{overflow-x:clip}
 .anBand .cws svg .glow{pointer-events:all;opacity:.7;transform-box:fill-box;transform-origin:center;transition:opacity 3.2s ease-in-out,transform 3.2s ease-in-out;animation:gl16 20s ease-in-out infinite}
@@ -161,8 +163,14 @@ body{transition:--ink 1.3s ease,--muted 1.3s ease,--card 1.3s ease,--line 1.3s e
 @media(hover:hover){.anBand .cws svg .glow:hover{opacity:1;transform:scale(1.55)}.anBand .cws svg .glow.moon:hover{opacity:.8;transform:scale(1.45)}}
 @keyframes gl16{50%{scale:1.08}}
 @media(prefers-reduced-motion:reduce){.anBand .cws svg .glow{animation:none}}
-.anCtl{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0 4px}.anT{font-variant-numeric:tabular-nums}
-.anHead{position:relative;z-index:1;text-align:center;color:#fff;padding:0 24px 4px}
+.anCtl{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0 0}.anCtl.un{margin-top:8px}.anT{font-variant-numeric:tabular-nums}
+.anCtl button{appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:7px;min-width:42px;height:38px;padding:0 14px;border-radius:999px;border:1.5px solid rgba(255,255,255,.7);background:rgba(255,255,255,.08);color:#fff;font:500 .85rem Lexend,sans-serif;cursor:pointer;transition:background .25s,transform .15s}
+.anCtl.un button{height:32px;font-size:.78rem;padding:0 12px;opacity:.85}
+.anCtl button[aria-pressed="true"]{background:rgba(255,255,255,.34);border-color:#fff;opacity:1}
+.anCtl button:active{transform:scale(.95)}.anCtl button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.anCtl .lv i{width:8px;height:8px;border-radius:50%;background:#7EF58A;box-shadow:0 0 8px #7EF58A;opacity:.5}.anCtl .lv[aria-pressed="true"] i{opacity:1;animation:tw16 2s ease-in-out infinite}
+@media (hover:hover){.anCtl button:hover{background:rgba(255,255,255,.22)}}
+.anHead{position:relative;z-index:1;text-align:center;color:#fff;padding:0 24px 0}
 .anD{font-size:1.1rem;font-weight:400;letter-spacing:.1em;opacity:.92}
 .anT{font-size:3rem;line-height:1.1;font-weight:600;letter-spacing:.08em;margin:2px 0;text-shadow:0 0 18px rgba(255,255,255,.55)}
 .anP{font-size:.88rem;letter-spacing:.12em;opacity:.75}
@@ -375,7 +383,7 @@ a.btn[hidden]{display:none}
  #v2,#v9{max-width:1120px}
  #v11{max-width:900px}
  .zod{max-width:1120px}
- .planets{max-width:780px;margin:34px auto 10px}
+ .planets{max-width:720px;margin:34px auto 10px}
  .view{padding:10px 48px 44px}
  .view:not(#v2):not(#v9):not(#v11){max-width:780px;width:100%;margin-left:auto;margin-right:auto}
  #v1 h1{font-size:2.4rem;margin-bottom:30px}
@@ -399,17 +407,17 @@ a.btn[hidden]{display:none}
 <div id="nite" aria-hidden="true"></div>
 <div class="app">
   <div class="top"><div class="lng" role="group" aria-label="Language"><button type="button" data-l="tr" aria-pressed="true">TR</button><button type="button" data-l="en" aria-pressed="false">EN</button></div><span class="brand" id="brand" aria-label="Scorching Astrology">Scorching Astrology</span><button class="hmb" id="hmb" type="button" aria-label="Menü" aria-expanded="false" aria-controls="drw"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 7q2.4 -3.2 4.8 0t4.8 0t4.8 0t4.8 0M2.5 12.5q2.4 -3.2 4.8 0t4.8 0t4.8 0t4.8 0M2.5 18q2.4 -3.2 4.8 0t4.8 0t4.8 0t4.8 0"/></svg></button></div>
-  <svg class="planets" viewBox="0 0 540 70">
-    <g class="pl"><circle cx="58.8" cy="34" r="7" fill="#A855F7"/></g>
-    <g class="pl"><circle cx="113.2" cy="34" r="9" fill="#9FE7EE"/></g>
-    <g class="pl"><circle cx="164.4" cy="36" r="3.5" fill="#7C8BEA"/></g>
-    <g class="pl"><circle cx="202.8" cy="38" r="3" fill="#F3D98B"/></g>
-    <g class="pl sun" id="sunb" role="button" tabindex="0" aria-label="Yönetici girişi"><circle cx="270" cy="34" r="30" fill="#FCE7A0"/></g>
-    <g class="pl"><circle cx="340.4" cy="38" r="2" fill="#F59FA8"/></g>
-    <g class="pl"><circle cx="375.6" cy="36" r="2.6" fill="#F26D6D"/></g>
-    <g class="pl"><circle cx="423.6" cy="34" r="13" fill="#FBBE5E"/></g>
-    <g class="pl"><ellipse cx="487.6" cy="38" rx="11" ry="4.2" fill="#CFC9C0"/><circle cx="487.6" cy="37" r="5" fill="#D9D3CA"/></g>
-    <g class="pl"><circle cx="535.6" cy="38" r="1.6" fill="#B9B3C4"/></g>
+  <svg class="planets" viewBox="0 0 500 70">
+    <g class="pl"><circle cx="65.2" cy="34" r="7" fill="#A855F7"/></g>
+    <g class="pl"><circle cx="112.8" cy="34" r="9" fill="#9FE7EE"/></g>
+    <g class="pl"><circle cx="157.6" cy="36" r="3.5" fill="#7C8BEA"/></g>
+    <g class="pl"><circle cx="191.2" cy="38" r="3" fill="#F3D98B"/></g>
+    <g class="pl sun" id="sunb" role="button" tabindex="0" aria-label="Yönetici girişi"><circle cx="250" cy="34" r="30" fill="#FCE7A0"/></g>
+    <g class="pl"><circle cx="311.6" cy="38" r="2" fill="#F59FA8"/></g>
+    <g class="pl"><circle cx="342.4" cy="36" r="2.6" fill="#F26D6D"/></g>
+    <g class="pl"><circle cx="384.4" cy="34" r="13" fill="#FBBE5E"/></g>
+    <g class="pl"><ellipse cx="440.4" cy="38" rx="11" ry="4.2" fill="#CFC9C0"/><circle cx="440.4" cy="37" r="5" fill="#D9D3CA"/></g>
+    <g class="pl"><circle cx="482.4" cy="38" r="1.6" fill="#B9B3C4"/></g>
   </svg>
 
   <section class="view" id="v1">
@@ -419,18 +427,16 @@ a.btn[hidden]{display:none}
     <div class="row l"><div><h3>Yükselen Burç</h3><ul><li>Doğum tarihi ve saati</li><li>Doğum Yeri (İl yeterlidir.)</li></ul>bilgileriyle tayin edilmekte olup yakınlarımızdan öğrendiğimiz doğum saatlerinin çoğunlukla doğruyu yansıtmadığını söylemek gerekir.</div><span class="sym" style="color:var(--venus)">♀&#xFE0E;</span></div>
     <div class="row r"><p>Kesin yargı soru cevap biçimindeki bilgi alışverişiyle ortaya çıkmaktadır. Astrolojideki tekniklerin yanı sıra Yükselen derecesinin kesinliğini tayin etmenin başka yolları da mevcuttur.</p><span class="sym" style="color:var(--merc)">☿&#xFE0E;</span></div>
     <div class="c fr"><button class="btn l" data-go="v15"><span>Ücretsiz Doğum Haritanı Oluştur</span></button></div>
-    <div id="anSec" style="margin-top:110px;padding-top:60px">
-    <h2 class="c" style="text-align:center;margin-top:38px;margin-bottom:12px">Anın Haritası</h2>
-    <p class="msg c" id="anSub"></p>
+    <div id="anSec" style="margin-top:110px;padding-top:60px"><svg class="anStars" id="anStars" aria-hidden="true" preserveAspectRatio="none"></svg>
+    <h2 class="c" style="text-align:center;margin-top:58px;margin-bottom:-4px">Anın Haritası</h2>
+    <p class="msg c" id="anSub" hidden></p>
     <div class="two"><div><label for="anYer">Yer (Şehir)</label><input id="anYer" placeholder="İstanbul" autocomplete="off"></div><div style="display:flex;align-items:flex-end"><button class="btn g" type="button" id="anGeo" style="width:100%">Konumumu Kullan</button></div></div>
     <p class="msg c" id="anSt" role="status"></p>
     <div class="anBand" id="anBand">
-      <svg class="anStars" id="anStars" aria-hidden="true" preserveAspectRatio="none"></svg>
-      <div class="anHead" id="anHead"><div class="anD" id="anD"></div><div class="anT" id="anT"></div><div class="anP" id="anP"></div></div>
+      <div class="anHead" id="anHead"><div class="anD" id="anD"></div><div class="anT" id="anT"></div><div class="anP" id="anP"></div><div class="anCtl" id="anCtl" role="group" aria-label="Zaman kontrolü"><button type="button" id="anB2" aria-label="10 adım geri"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 6l-6 6 6 6"/><path d="M19 6l-6 6 6 6"/></svg></button><button type="button" id="anB1" aria-label="1 adım geri"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button><button type="button" id="anPz" aria-label="Durdur" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg></button><button type="button" id="anF1" aria-label="1 adım ileri"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button><button type="button" id="anF2" aria-label="10 adım ileri"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 6l6 6-6 6"/><path d="M13 6l6 6-6 6"/></svg></button><button type="button" id="anNowBtn" class="lv" aria-pressed="true"><i></i><span>Canlı</span></button></div><div class="anCtl un" id="anUn" role="group" aria-label="Adım birimi"><button type="button" data-sp="60" aria-pressed="true">Dakika</button><button type="button" data-sp="3600" aria-pressed="false">Saat</button><button type="button" data-sp="86400" aria-pressed="false">Gün</button></div></div>
       <div class="cws" id="anSvg"></div>
     </div>
-    <div class="anCtl" id="anCtl" role="group" aria-label="Zaman hızı"><button class="chip" type="button" data-sp="1" aria-pressed="true">Canlı</button><button class="chip" type="button" data-sp="60" aria-pressed="false">1 dk/sn</button><button class="chip" type="button" data-sp="600" aria-pressed="false">10 dk/sn</button><button class="chip" type="button" data-sp="3600" aria-pressed="false">1 sa/sn</button><button class="chip" type="button" data-sp="86400" aria-pressed="false">1 gün/sn</button></div>
-    <div class="acts" style="justify-content:center"><button class="btn g" type="button" id="anPlay">Durdur</button><button class="btn g" type="button" id="anRev" aria-pressed="false">Geriye</button><button class="btn g" type="button" id="anNowBtn">Şimdiye dön</button></div>
+    
     <p class="msg c" id="anZm" hidden>Çarkı büyütmek için çift dokun. Güneş ve Ay’a dokunursan parlarlar.</p>
     <div class="card" id="anHr" hidden>
       <h3>Gezegen Saatleri</h3>
@@ -641,7 +647,8 @@ a.btn[hidden]{display:none}
     <div class="dh"><h2 id="cn"></h2><button class="btn l" type="button" id="cb">‹ Panele dön</button></div>
     <div class="sm" id="cinfo"></div>
     <div class="card" id="hc">
-      <h3>Doğum haritası</h3>
+      <div class="dh"><h3>Doğum haritası</h3><button class="btn l" type="button" id="cwBi" hidden>Transit Biwheel</button></div>
+      <div id="cwBiBox" hidden><label for="cwBiY">Transit yeri</label><input id="cwBiY" placeholder="Şehir (boş bırakılırsa bu cihazın saati)" autocomplete="off"></div>
       <p class="msg" id="cwSt" role="status"></p>
       <div id="cwRes" hidden>
         <div class="cws" id="cwSvg"></div>
@@ -828,7 +835,7 @@ const tl=n=>n.toLocaleString("tr-TR")+"₺",$=s=>document.querySelector(s);
 const sel=new Set();
 let LANG="tr";try{LANG=localStorage.getItem("sa_lang")==="en"?"en":"tr"}catch(_){}
 const EN={"Özet":"Summary","Randevumu Tamamla":"Complete my booking","Siparişimi Tamamla":"Complete my order","Randevun başarıyla tamamlandı":"Your appointment is complete","Siparişin başarıyla alındı":"Your order was received successfully","Teşekkürler. Paketin hazırlanmaya başladı.":"Thank you. Preparation of your package has started.","Siparişin alındı":"Your order was received","Kartla ödeme için seninle e-posta veya telefon üzerinden iletişime geçeceğiz. Ödemen alındıktan sonra paketin hazırlanmaya başlayacak.":"We will contact you by email or phone about the card payment. Your package will be prepared once your payment has been received.","Doluluk bilgisi alınamadı. Seçtiğin saat, ödemeye geçerken yeniden kontrol edilecek.":"Availability could not be loaded. Your chosen time will be checked again when you continue to payment.","Randevu kaydediliyor…":"Saving your appointment…","Randevu doğrulanamadı. İnternet bağlantını kontrol edip tekrar dene.":"Your appointment could not be verified. Please check your internet connection and try again.","Ülke kodu":"Country code","Lütfen telefon numaranı başında 0 olmadan, ülke kodunu seçerek yaz.":"Please enter your phone number without a leading 0, after choosing the country code.","Türkiye için telefon numarası 10 haneli olmalı (5XX XXX XX XX).":"For Turkey, the phone number must have 10 digits (5XX XXX XX XX).","İletişime geç":"Contact us","Bana yazmak istediklerini aşağıya yaz, mesajın doğrudan bana ulaşır.":"Write what you would like to tell me below; your message reaches me directly.","E-posta adresin":"Your email address","E-posta adresini doğru yazman önemlidir, yanıtı bu adrese göndereceğim.":"Please type your email address correctly; I will send my reply to it.","Konu":"Subject","Mesajın":"Your message","Mesajı gönder":"Send message","Lütfen e-posta adresini, konuyu ve mesajı doldur.":"Please fill in your email address, subject and message.","Gönderiliyor…":"Sending…","Mesajın gönderildi. En kısa sürede yanıt vereceğim.":"Your message has been sent. I will reply as soon as possible.","Mesaj gönderilemedi, lütfen tekrar dene.":"The message could not be sent. Please try again.","Önizleme sürümünde mesaj gönderilmez.":"Messages are not sent in the preview version.","Doğum Haritası’nın Okunması": "Reading Your Birth Chart", "Bir haritanın doğru ve anlamlı sonuçlar verebilmesinin temeli": "A chart can only give accurate and meaningful results if it is based on the", "“Yükselen Burca”": "“Rising Sign (Ascendant)”", "dayanmaktadır.": ".", "Çünkü": "Because the", "“Yükselen Burç”": "“Rising Sign”", "haritanın nasıl inşa edildiğine dair en önemli bilgidir.": "is the most important piece of information about how a chart is built.", "Yükselen Burç": "Rising Sign", "Doğum tarihi ve saati": "Date and time of birth", "Doğum Yeri (İl yeterlidir.)": "Place of birth (the city is enough)", "bilgileriyle tayin edilmekte olup yakınlarımızdan öğrendiğimiz doğum saatlerinin çoğunlukla doğruyu yansıtmadığını söylemek gerekir.": "The Rising Sign is determined from this information. It should be said that birth times we learn from relatives often do not reflect the truth.", "Kesin yargı soru cevap biçimindeki bilgi alışverişiyle ortaya çıkmaktadır. Astrolojideki tekniklerin yanı sıra Yükselen derecesinin kesinliğini tayin etmenin başka yolları da mevcuttur.": "A firm conclusion emerges through an exchange of questions and answers. Besides the techniques of astrology, there are other ways of pinning down the exact degree of the Rising Sign.", "Paketleri Gör": "View Packages", "Bir paket seçerek devam edebilirsin.": "You can choose one package to continue.", "Seans sonrasında memnuniyet olmazsa tutarın": "If you are not satisfied after the session,", "%60’ı geri ödenecektir.": "60% of the amount will be refunded.", "Bilgilendirmeye Dön": "BACK TO INFO", "Formu Doldur": "Fill in the Form", "Ad Soyad": "Full name", "Telefon": "Phone", "E-posta": "Email", "E-posta adresinin doğru yazılması önemlidir. Randevu onayı, değişiklik ve iptal bilgilendirmeleri bu adrese gönderilir. Yanlış yazılan adrese ulaşamayız.": "Please make sure your email address is correct. Appointment confirmations, changes and cancellations are sent to this address. We cannot reach you if it is mistyped.", "Doğum tarihi": "Date of birth", "Doğum saati": "Time of birth", "Doğum yeri (Şehir)": "Place of birth (city)", "Doğum saatimi bilmiyorum": "I don’t know my birth time", "Hayranı olduğunuz bir ünlü ya da hayatınızdaki biri veya bu kişinin burcu": "A celebrity you admire, someone in your life, or this person’s zodiac sign", "KVKK Aydınlatma Metni": "Privacy Notice (KVKK)", "’ni okudum.": "— I have read it.", "Mesafeli Satış Sözleşmesi, Ön Bilgilendirme ve İade Koşulları": "Distance Sales Agreement, Pre-Information and Refund Terms", "’nı okudum; hizmetin cayma süresi dolmadan başlamasını onaylıyorum.": "— I have read them, and I consent to the service starting before the withdrawal period ends.", "Gönder": "Submit", "Paketlere dön": "Back to packages", "Ödeme": "Payment", "Ödeme yapılan işlem yüz yüze (video) görüşme ise, görüşme takvim müsaitliğine göre yapılacaktır. Görüşme aynı hafta içinde, en geç ise ertesi hafta gerçekleşir. Randevular doluluğa göre ayarlanır.": "If the service you are paying for is a face-to-face (video) session, it will be held according to calendar availability. The session takes place within the same week, or at the latest the following week. Appointments are arranged according to availability.", "Seçtiğin randevu, ödemen tamamlanınca kesinleşir. Ödeme yapılmazsa bu saat yaklaşık 30 dakika sonra tekrar başkalarına açılır.": "Your appointment is confirmed once your payment is complete. If no payment is made, this time slot is released to others after about 30 minutes.", "Havale / EFT": "Bank transfer", "Hesap sahibi": "Account holder", "IBAN": "IBAN", "Açıklama": "Description", "IBAN’ı kopyala": "Copy IBAN", "Havale ile devam et": "Continue with bank transfer", "Kredi / Banka Kartı ile Öde": "Pay with Credit / Debit Card", "Kart bilgilerini bu sayfada girmezsin. Güvenli ödeme sayfasına yönlendirilirsin.": "You do not enter card details on this page. You will be redirected to a secure payment page.", "Randevuyu değiştir": "Change appointment", "Forma dön": "Back to form", "Görüşme zamanı": "Session time", "Video görüşme paketin için uygun bir gün ve saat aralığı seç. Seçtiğin saat, ödemeni tamamlayınca kesinleşir.": "Choose a day and time slot for your video session. Your slot is confirmed once your payment is complete.", "Müsait": "Available", "Dolu": "Full", "Seçilen gün:": "Selected day:", "Hafta içi 21:00–23:00, hafta sonu 13:00–15:00 ve 21:00–23:00 saatleri arasında görüşme yapılıyor. Bu saatler dışında randevu verilmiyor.": "Sessions are held on weekdays 21:00–23:00 and on weekends 13:00–15:00 and 21:00–23:00 (Turkey time, UTC+3). No appointments are given outside these hours.", "Randevular doluluğa göre ayarlanır. Görüşme, bu hafta içinde ya da en geç ertesi hafta yapıldığı için yalnızca bu hafta ve gelecek hafta gösteriliyor.": "Appointments are arranged according to availability. Because the session takes place this week or at the latest next week, only this week and next week are shown.", "Örnek doluluk gösteriliyor. Gerçek doluluk, kayıt adresi bağlanınca burada görünür.": "Sample availability is shown. Real availability will appear here once the booking address is connected.", "Not (isteğe bağlı)": "Note (optional)", "Takvimden seç": "Choose from calendar", "Ödemeye geç": "Continue to payment", "Randevum": "My Appointment", "Ödeme sonrası aldığın takip kodunu ve telefon numaranın son 4 hanesini gir.": "Enter the tracking code you received after payment and the last 4 digits of your phone number.", "Takip kodu": "Tracking code", "Telefon numaranın son 4 hanesi": "Last 4 digits of your phone number", "Görüntüle": "View", "Görüşmeye katıl": "Join the session", "Geri dön": "Go back", "Sözleşme ve İade Koşulları": "Agreement and Refund Terms", "Paketiniz hazırlanıyor": "Your package is being prepared", "saat": "hours", "dakika": "minutes", "saniye": "seconds", "Takip kodun": "Your tracking code", "Randevunu ve paketini bu kodla (ve telefon numaranın son 4 haneyle) görüntüleyebilirsin. Kodu sakla.": "You can view your appointment and package with this code (and the last 4 digits of your phone number). Keep the code.", "Kodu kopyala": "Copy code", "Randevumu görüntüle": "View my appointment", "Randevu al": "Book an appointment", "Birebir video görüşmen için gün ve saat seç.": "Choose a day and time for your one-to-one video session.", "Görüşmeye git": "Go to the session", "Benimle birebir yazışabileceğin sohbet ekranı.": "A chat screen where you can write to me one-to-one.", "‹ Geri": "‹ Back", "Birebir görüşme": "One-to-one chat", "Teşekkürler": "Thank you", "Formun alındı.": "Your form has been received.", "Ödemen kontrol edilir.": "Your payment will be checked.", "Randevun kesinleşir ve sana iletilir.": "Your appointment will be confirmed and sent to you.", "Özeti kopyala": "Copy summary", "Paket durumuna dön": "Back to package status", "Takip kodun:": "Your tracking code:", "Menü": "Menu", "Randevumu gör": "View my appointment", "Menüyü kapat": "Close menu", "Önceki ay": "Previous month", "Sonraki ay": "Next month", "Randevu günü": "Appointment day", "Mesajını yaz": "Write your message", "Mesaj": "Message", "Doğum Haritası Ile Güncel Transitleri İçeren Temel Harita İnceleme": "Core Chart Reading with Natal Chart and Current Transits", "Mini Doğum Harita Ve Transit İnceleme": "Mini Natal Chart and Transit Reading", "İkincil, Birincil İlerletilmiş Ve Directed Haritalar İle Transit Güncel Analizi": "Secondary and Primary Progressed and Directed Charts with Current Transit Analysis", "İkincil, Birincil İlerletilmiş Ve Directed Haritalar": "Secondary and Primary Progressed and Directed Charts", "Birincil, İkincil İlerletilmiş Ve Directed Haritalar": "Primary and Secondary Progressed and Directed Charts", "Video Meeting (Yaklaşık 2 Saat)": "Video Meeting (about 2 hours)", "Ses Kaydı (Yaklaşık 2 Saat)": "Audio Recording (about 2 hours)", "Ses Kaydı (Yaklaşık 40 Dk)": "Audio Recording (about 40 min)", "Video Meeting (Yaklaşık 1 Saat)": "Video Meeting (about 1 hour)", "Ses Kaydı (Yaklaşık 1 Saat)": "Audio Recording (about 1 hour)", "Metin Dosyası": "Text File", "(Temel Harita İncelemesi Olup Diğer Seçeneklerden Önce Gereklidir.)": "(This is the core chart reading and is required before the other options.)", "1 No’lu Ile 2 No’lu Seçeneklerden Sonra Ya Da Temel Doğum Haritası Analizi Yapılmışsa Alınması Tavsiye Edilir.": "Recommended after options 1 and 2, or if a core natal chart analysis has already been done.", "Form": "Form", "Randevu": "Appointment", "Onay": "Confirmed", "Toplam": "Total", "Tamamlandı": "Completed", "Görüşme bekleniyor": "Awaiting session", "Hizmet bekleniyor": "Awaiting service", "Önce en az bir paket seç.": "Please choose at least one package first.", "Lütfen zorunlu alanları doldur ve KVKK ile sözleşme metinlerini okuduğunu onayla.": "Please fill in the required fields and confirm that you have read the privacy notice and the agreement texts.", "IBAN kopyalandı.": "IBAN copied.", "IBAN’ı seçip kopyalayabilirsin.": "You can select and copy the IBAN.", "henüz seçilmedi": "not selected yet", "Müsait saat yok": "No available times", "Gün ve saat aralığı seç.": "Please choose a day and a time slot.", "Bu saat az önce doldu. Lütfen başka bir saat seç.": "This slot has just been taken. Please choose another time.", "Kartla ödeme henüz aktif değil. Havale/EFT ile ödeyebilir ya da DM’den yazabilirsin.": "Card payment is not active yet. Please write to me by DM.", "Bilgilerin alındı. Harita okuman planlanacak.": "Your information has been received. Your chart reading will be scheduled.", "Bilgilerin aşağıda. Özeti kopyalayıp DM’den iletebilirsin.": "Your information is below. You can copy the summary and send it by DM.", "Ödemen başarıyla tamamlandı": "Your payment was completed successfully", "Havale seçimin alındı": "Your bank transfer choice was received", "Teşekkürler. Randevun kaydedildi, onaylanınca Meet bağlantısı sana iletilecek.": "Thank you. Your appointment is saved, and the Meet link will be sent to you once it is confirmed.", "Teşekkürler.": "Thank you.", "Ödemen kontrol edildikten sonra sana bilgi verilecek.": "You will be informed after your payment has been checked.", "Hazırlık süresi doldu. Paketin sana iletilecek, ulaşmadıysa DM’den yazabilirsin.": "The preparation time is over. Your package will be delivered to you; if it has not reached you, you can write to me by DM.", "Henüz mesaj yok. İlk mesajını yazabilirsin.": "No messages yet. You can write the first one.", "Canlı sohbet henüz bağlı değil. Mesajların bu cihazda saklanır.": "Live chat is not connected yet. Your messages are stored on this device.", "Kayıt henüz görünmüyor. Biraz sonra tekrar dene.": "Your record is not visible yet. Please try again in a moment.", "Takip kodunu ve telefonunun son 4 hanesini gir.": "Enter your tracking code and the last 4 digits of your phone number.", "Aranıyor…": "Searching…", "Kayıt bulunamadı. Kodu ve telefon numaranı kontrol et.": "No record found. Please check your code and phone number.", "Kopyalandı": "Copied", "Özet kopyalandı.": "Summary copied.", "Metni seçip kopyalayabilirsin.": "You can select and copy the text.", "Randevun değişirse bu sayfada güncellenir. Görüşme linki hazır olduğunda burada görünür.": "If your appointment changes, it is updated on this page. The session link will appear here when it is ready.", "Randevu tarihini henüz seçmedin.": "You have not chosen an appointment date yet.", "Henüz seçilmedi": "Not selected yet", "Ad": "Name", "Seçtiğin paket": "Your package", "Durum": "Status", "Video meeting": "Video meeting", "Ses kaydı": "Audio recording", "Metin dosyası": "Text file", "Ödemen kontrol edildikten sonra paketin hazırlanmaya başlayacak.": "Preparation of your package will start after your payment has been checked."};
-Object.assign(EN,{"Doğum yeri (Şehir)":"Birth place (City)","Canlı":"Live","1 dk/sn":"1 min/s","10 dk/sn":"10 min/s","1 sa/sn":"1 h/s","1 gün/sn":"1 day/s","Durdur":"Pause","Başlat":"Play","Geriye":"Reverse","Şimdiye dön":"Back to now"});
+Object.assign(EN,{"Transit Biwheel":"Transit Biwheel","Transit yeri":"Transit location","Şehir (boş bırakılırsa bu cihazın saati)":"City (leave empty to use this device’s time)","Doğum Haritası":"Natal Chart","Doğum yeri (Şehir)":"Birth place (City)","Canlı":"Live","1 dk/sn":"1 min/s","10 dk/sn":"10 min/s","1 sa/sn":"1 h/s","1 gün/sn":"1 day/s","Dakika":"Minute","Saat":"Hour","Gün":"Day"});
 Object.assign(EN,{"Çarkı büyütmek için çift dokun. Güneş ve Ay’a dokunursan parlarlar.":"Double-tap the chart to enlarge it. Tap the Sun and Moon to make them glow.","Anın Haritası":"Chart of the Moment","Gezegen Saatleri":"Planetary Hours","Bugünün gezegen saatleri":"Today’s planetary hours","Konumumu Kullan":"Use My Location","Şimdi Güncelle":"Update Now","Yer (Şehir)":"Place (City)","Doğum Haritam":"My Birth Chart","Haritanı oluştururken yazdığın ad soyad ve e-posta adresini gir, haritanı yeniden göster.":"Enter the full name and email address you used when creating your chart to view it again.","Haritamı Göster":"Show My Chart","Ad soyad ve geçerli bir e-posta adresi yaz.":"Enter your full name and a valid email address.","Bu bilgilerle oluşturulmuş bir harita bulamadım. Ad soyad ve e-postayı haritayı oluştururken yazdığın gibi gir.":"I could not find a chart with these details. Enter your name and email exactly as you did when you created the chart.","Ana Sayfa":"Home","Geri dön":"Go Back","İlerle":"Go Forward","Tamamla":"Complete","Bu bölüm sizler için hazırlanıyor":"This section is being prepared for you","Haritanız alındı. Bizimle iletişime geçin.":"Your chart has been received. Please get in touch with us.","Devam Et":"Continue","Paketi Satın Al":"Buy the Package","Bu Paketi Satın Al":"Buy This Package","Paket Onayı":"Package Confirmation","Bu bölüm sizler için hazırlanıyor. Haritanız alındı. Bizimle iletişime geçin.":"This section is being prepared for you. Your chart has been received. Please get in touch with us.","Şimdi danışmanlık türlerine göz atmak ister misin?":"Would you like to take a look at the consultation types now?","Ücretsiz Doğum Haritanı Oluştur":"Create Your Free Birth Chart","Ücretsiz Doğum Haritası":"Free Birth Chart","Doğum bilgilerini gir, doğum haritanı hemen oluştur. Bilgilerin, haritanı hesaplamak ve sana ulaşabilmek için kaydedilir.":"Enter your birth details and create your birth chart right away. Your details are saved so we can calculate your chart and reach you.","Ad (isteğe bağlı)":"Name (optional)","Enlem (kuzey +)":"Latitude (north +)","Boylam (doğu +)":"Longitude (east +)","Saat dilimi":"Time zone","UTC farkı (saat)":"UTC offset (hours)","Haritamı oluştur":"Create my chart","Çarkı büyütüp yakınlaştırmak için üzerine dokun.":"Tap the chart to enlarge and zoom in.","Görseli indir (PNG)":"Download image (PNG)","Konumlar":"Positions","Majör açılar":"Major aspects","Haritanı birlikte yorumlamak ister misin?":"Would you like to interpret your chart together?","Yeni harita":"New chart"});
 const L=(a,b)=>LANG==="en"?b:a;
 const T=s=>LANG==="en"&&Object.prototype.hasOwnProperty.call(EN,s)?EN[s]:s;
@@ -1273,7 +1280,7 @@ const dm=(v,p,n)=>{const a=Math.abs(v),d=Math.floor(a),m=Math.round((a-d)*60);re
 const BURC_TR=["Koç","Boğa","İkizler","Yengeç","Aslan","Başak","Terazi","Akrep","Yay","Oğlak","Kova","Balık"],BURC_EN=["Aries","Taurus","Gemini","Cancer","Leo","Virgo","Libra","Scorpio","Sagittarius","Capricorn","Aquarius","Pisces"],BA=()=>LANG==="en"?BURC_EN:BURC_TR;
 const pad2=n=>String(n).padStart(2,"0");
 const blob2url=b=>new Promise(ok=>{const f=new FileReader();f.onload=()=>ok(f.result);f.readAsDataURL(b)});
-async function cwLibs(){await loadJs("astronomy.min.js?v=1");await loadJs("efemeris.js?v=1");await loadJs("harita.js?v=2")}
+async function cwLibs(){await loadJs("astronomy.min.js?v=1");await loadJs("efemeris.js?v=1");await loadJs("harita.js?v=5")}
 function cwKur(P,vis){
  const q=x=>$("#"+P+x);let S=null;
  q("Tz").innerHTML=TZL.map(([v,t])=>`<option value="${v}">${t}</option>`).join("");
@@ -1282,8 +1289,21 @@ function cwKur(P,vis){
  const sonuc=il=>{q("Y").dataset.il=il?il.ad:"";if(il){q("La").value=il.la;q("Lo").value=il.lo;tzSet(q("Tz"),il.tz||"Europe/Istanbul")}else if(vis){q("La").value="";q("Lo").value=""}};
  yerOto(q("Y"),x=>{sonuc(x);if(!vis)q("St").textContent="Doğum yeri "+x.ad+" olarak bulundu."});
  q("Y").addEventListener("change",async()=>{const il=await yerCoz(q("Y"));sonuc(il);if(!vis)q("St").textContent=il?"Doğum yeri "+il.ad+" olarak bulundu.":""});
- const blobP=()=>Harita.png(S.svg,2000);
- let room="h"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+ const blobP=()=>Harita.png(S.show||S.svg,2000);
+ const biBtn=$("#"+P+"Bi");
+ const biDraw=async()=>{if(!S)return;
+  try{await cwLibs()}catch(_){q("St").textContent=L("Hesap dosyaları yüklenemedi.","The calculation files could not be loaded.");return}
+  const h=S.h,yin=$("#"+P+"BiY");let yr=null;if(yin&&yin.value.trim())yr=await yerCoz(yin);
+  const now=new Date();let ht;try{ht=Harita.hesapla({utc:now,lat:h.lat,lon:h.lon,saatBilinmiyor:false})}catch(e){q("St").textContent=L("Transit hesaplanamadı: ","Transit could not be calculated: ")+e.message;return}
+  const tz=yr&&yr.tz?yr.tz:null,off=tz?tzOff(tz,now.getTime())/60000:-now.getTimezoneOffset();
+  const w=new Date(now.getTime()+off*60000),ofs="UTC"+(off<0?"−":"+")+pad2(Math.floor(Math.abs(off)/60))+":"+pad2(Math.abs(off)%60);
+  const sol=[L("İç Çark · Doğum","Inner Wheel · Natal")].concat(S.satir),
+   sag=[L("Dış Çark · Transit","Outer Wheel · Transit"),L("Transit","Transits")+" "+w.getUTCDate()+" "+AYK()[w.getUTCMonth()]+" "+w.getUTCFullYear(),pad2(w.getUTCHours())+":"+pad2(w.getUTCMinutes())+" ("+ofs+")"];
+  if(yr)sag.push(yr.ad.split(",")[0]+" "+dm(yr.la,"N","S")+" "+dm(yr.lo,"E","W"));
+  sag.push(L("Tropikal · ","Tropical · ")+(h.ev&&h.ev.placidus?"Placidus":"Porphyry")+" · True Node");
+  const bi=Harita.cizBi(h,ht,{sol,sag});S.show=bi;q("Svg").innerHTML=bi;biBtn.dataset.on="1";biBtn.textContent=T("Doğum Haritası");$("#"+P+"BiBox").hidden=false;q("St").textContent=""};
+ if(biBtn){const yin=$("#"+P+"BiY");if(yin){yerOto(yin,()=>biDraw());yin.addEventListener("change",()=>{if(biBtn.dataset.on)biDraw()})}
+  biBtn.onclick=()=>{if(!S)return;if(biBtn.dataset.on){S.show=null;q("Svg").innerHTML=S.svg;biBtn.dataset.on="";biBtn.textContent=T("Transit Biwheel");$("#"+P+"BiBox").hidden=true;q("St").textContent="";return}biDraw()}}
  const kaydet=()=>{const pl={room,zaman:new Date().toISOString(),ad:q("Ad").value.trim(),eposta:q("Mail").value.trim(),tarih:q("T").value,saat:q("B").checked?"bilmiyor":q("S").value,yer:q("Y").value.trim(),fan:q("Fan").value.trim(),paketler:"Ücretsiz doğum haritası",asama:"ucretsiz-harita",dil:LANG,not:"Saat dilimi: "+q("Tz").value+(q("Tz").value==="manuel"?" "+q("Off").value:"")+"; Enlem: "+q("La").value+"; Boylam: "+q("Lo").value};
   window.PBK=pl;try{localStorage.setItem("sa_hk",JSON.stringify({ad:pl.ad,eposta:pl.eposta}))}catch(_){}
   if(!CFG.endpoint){localUpsert(pl);return}
@@ -1311,9 +1331,9 @@ function cwKur(P,vis){
   const BA_=BA(),ad=q("Ad").value.trim()||L("Doğum haritası","Birth chart"),sg=offMin<0?"−":"+",am=Math.abs(offMin),ofs="UTC"+sg+pad2(Math.floor(am/60))+":"+pad2(am%60);
   const yer=q("Y").value.trim()||"—";
   const satir=[ad,D+" "+AYK()[M-1]+" "+Y+(bil?L(", saat bilinmiyor (12:00)",", time unknown (12:00)"):", "+pad2(H)+":"+pad2(Mi)+" ("+ofs+")"),yer+" "+dm(la,"N","S")+" "+dm(lo,"E","W"),L("Tropikal · ","Tropical · ")+(h.ev&&h.ev.placidus?"Placidus":h.ev?L("Porphyry (kutup enlemi)","Porphyry (polar latitude)"):L("Evsiz","No houses"))+" · True Node"];
-  const svg=Harita.ciz(h,{satirlar:satir});S={svg,h,ad};if(vis)kaydet();
-  q("Svg").innerHTML=svg;
-  const rows=h.govdeler.map(g=>`<tr><td>${LANG==="en"?({Sun:"Sun",Moon:"Moon",Mercury:"Mercury",Venus:"Venus",Mars:"Mars",Jupiter:"Jupiter",Saturn:"Saturn",Uranus:"Uranus",Neptune:"Neptune",Pluto:"Pluto",Vertex:"Vertex",NNode:"North Node",SNode:"South Node",Chiron:"Chiron"})[g.id]:g.ad}</td><td>${g.der}°${pad2(g.dk)}'${pad2(g.sn)}"</td><td>${BA_[g.burc]}</td><td>${g.ev||"—"}</td><td>${g.retro&&g.id!=="Vertex"?"Rx":""}</td></tr>`);
+  const svg=Harita.ciz(h,{satirlar:satir});S={svg,h,ad,satir,show:null};if(vis)kaydet();
+  q("Svg").innerHTML=svg;if($("#"+P+"Bi")){$("#"+P+"Bi").hidden=false;$("#"+P+"Bi").textContent=T("Transit Biwheel");$("#"+P+"Bi").dataset.on="";$("#"+P+"BiBox").hidden=true}
+  const rows=h.govdeler.map(g=>`<tr><td>${LANG==="en"?({Sun:"Sun",Moon:"Moon",Mercury:"Mercury",Venus:"Venus",Mars:"Mars",Jupiter:"Jupiter",Saturn:"Saturn",Uranus:"Uranus",Neptune:"Neptune",Pluto:"Pluto",Vertex:"Vertex",NNode:"North Node",SNode:"South Node",Chiron:"Chiron",Fortune:"Part of Fortune"})[g.id]:g.ad}</td><td>${g.der}°${pad2(g.dk)}'${pad2(g.sn)}"</td><td>${BA_[g.burc]}</td><td>${g.ev||"—"}</td><td>${g.retro&&g.id!=="Vertex"?"Rx":""}</td></tr>`);
   if(h.ev){const f=(n,l)=>`<tr><td>${n}</td><td>${Math.floor(l%30)}°${pad2(Math.floor((l%1)*60))}'</td><td>${BA_[Math.floor(l/30)]}</td><td></td><td></td></tr>`;rows.unshift(f(L("Yükselen (ASC)","Ascendant (ASC)"),h.ev.asc),f(L("Orta Gök (MC)","Midheaven (MC)"),h.ev.mc))}
   q("Tbl").innerHTML="<tr><th>"+L("Nokta","Point")+"</th><th>"+L("Derece","Degree")+"</th><th>"+L("Burç","Sign")+"</th><th>"+L("Ev","House")+"</th><th></th></tr>"+rows.join("");
   const hc=h.ev?`<p class="msg">`+L("Ev başlangıçları: ","House cusps: ")+h.ev.cusp.slice(1).map((l,i)=>(i+1)+": "+Math.floor(l%30)+"° "+BA_[Math.floor(l/30)]+" "+pad2(Math.floor((l%1)*60))+"'").join(" · ")+"</p>":"";
@@ -1321,13 +1341,13 @@ function cwKur(P,vis){
   if(!h.chiron)nt.push(L("Chiron bu tarih için hesaplanamadı (tablo 1897–2100 arasını kapsar).","Chiron could not be calculated for this date (the table covers 1897–2100)."));
   if(h.ev&&!h.ev.placidus)nt.push(L("Enlem 66° üstünde olduğu için Placidus tanımsız; evler Porphyry ile çizildi.","Placidus is undefined above 66° latitude; houses are drawn with Porphyry."));
   q("Note").innerHTML=hc+(nt.length?`<p class="msg">${nt.join(" ")}</p>`:"");
-  const nm=x=>x==="ASC"?"ASC":x==="MC"?"MC":(LANG==="en"?({Sun:"Sun",Moon:"Moon",Mercury:"Mercury",Venus:"Venus",Mars:"Mars",Jupiter:"Jupiter",Saturn:"Saturn",Uranus:"Uranus",Neptune:"Neptune",Pluto:"Pluto",Vertex:"Vertex",NNode:"North Node",SNode:"South Node",Chiron:"Chiron"})[x]:h.govdeler.find(g=>g.id===x).ad);
+  const nm=x=>x==="ASC"?"ASC":x==="MC"?"MC":(LANG==="en"?({Sun:"Sun",Moon:"Moon",Mercury:"Mercury",Venus:"Venus",Mars:"Mars",Jupiter:"Jupiter",Saturn:"Saturn",Uranus:"Uranus",Neptune:"Neptune",Pluto:"Pluto",Vertex:"Vertex",NNode:"North Node",SNode:"South Node",Chiron:"Chiron",Fortune:"Part of Fortune"})[x]:h.govdeler.find(g=>g.id===x).ad);
   const AEN={Sekstil:"Sextile",Kare:"Square","Üçgen":"Trine","Karşıt":"Opposition"};
   q("Ac").innerHTML=Harita.acilar(h,3).map(a=>`<tr><td>${nm(a.a)}</td><td style="color:${a.renk}">${LANG==="en"?AEN[a.ad]:a.ad}</td><td>${nm(a.b)}</td><td>${Math.floor(a.orb)}°${pad2(Math.round((a.orb%1)*60))}'</td></tr>`).join("");
   q("Res").hidden=false;st.textContent=L("Çark hazır.","Your chart is ready.");q("Svg").scrollIntoView({block:"nearest"});return true};
  q("Go").onclick=run;
  q("Svg").onclick=async()=>{if(!S)return;try{zmOpen(await blob2url(await blobP()))}catch(_){}};
- q("Png").onclick=async()=>{if(!S)return;try{const b=await blobP(),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=(S.ad.replace(/[^\w\-çğıöşüÇĞİÖŞÜ ]+/g,"").trim().replace(/\s+/g,"-")||"harita")+"-dogum-haritasi.png";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000)}catch(_){q("St").textContent=L("Görsel oluşturulamadı.","The image could not be created.")}};
+ q("Png").onclick=async()=>{if(!S)return;try{const b=await blobP(),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=(S.ad.replace(/[^\w\-çğıöşüÇĞİÖŞÜ ]+/g,"").trim().replace(/\s+/g,"-")||"harita")+(S.show?"-transit-biwheel.png":"-dogum-haritasi.png");document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000)}catch(_){q("St").textContent=L("Görsel oluşturulamadı.","The image could not be created.")}};
  return {q,run,setRoom(x){room=x},get S(){return S},reset(){S=null;q("Res").hidden=true;room="h"+Date.now().toString(36)+Math.random().toString(36).slice(2,6)},tzUI,tmUI,blobP}}
 /* yönetici kartı: müşterinin çarkı otomatik */
 const CWA=cwKur("cw",false);
@@ -1376,6 +1396,7 @@ const ANP={Sun:["Güneş","Sun"],Moon:["Ay","Moon"],Mercury:["Merkür","Mercury"
 const ANCH=["Saturn","Jupiter","Mars","Sun","Venus","Mercury","Moon"],ANDAY=["Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn"];
 const AN={la:41.01,lo:28.98,ad:"İstanbul",tm:null,tk:null,ev:null};
 const anN=k=>ANP[k][LANG==="en"?1:0];
+const anDay=k=>LANG==="en"?"Day of "+anN(k):anN(k)+" günü",anHour=k=>LANG==="en"?"Hour of "+anN(k):anN(k)+" saati";
 const anHM=d=>p2s(d.getHours())+":"+p2s(d.getMinutes());
 function anHours(now,la,lo){
  const A=window.Astronomy,ob=new A.Observer(la,lo,0),ev=[];
@@ -1400,11 +1421,11 @@ function anHrUI(now){
  const box=$("#anHr");
  if(!r||!r.cur){box.hidden=false;$("#anNow").textContent="";$("#anHs").textContent=L("Bu konum için gezegen saatleri hesaplanamadı (Güneş doğmuyor ya da batmıyor olabilir).","Planetary hours could not be calculated for this location (the Sun may not rise or set).");$("#anTbl").innerHTML="";return}
  box.hidden=false;const c=r.cur;AN.cd={d:r.dayR,p:c.p};const left=Math.max(0,Math.round((c.b-now)/60000));
- $("#anNow").innerHTML=ANG[r.dayR]+" "+anN(r.dayR)+L(" günü"," day")+" <i>·</i> "+ANG[c.p]+" "+anN(c.p)+L(" saati"," hour");
- $("#anHs").textContent=anN(c.p)+L(" saati "," hour ")+anHM(c.a)+" – "+anHM(c.b)+L(" arası, kalan "," · ")+left+L(" dk."," min left");
+ $("#anNow").innerHTML=ANG[r.dayR]+" "+anDay(r.dayR)+" <i>·</i> "+ANG[c.p]+" "+anHour(c.p);
+ $("#anHs").textContent=anHour(c.p)+" "+anHM(c.a)+" – "+anHM(c.b)+L(" arası, kalan "," · ")+left+L(" dk."," min left");
  $("#anTbl").innerHTML="<tr><th>"+L("Saat","Hour")+"</th><th>"+L("Gezegen","Planet")+"</th></tr>"+r.hrs.map(h=>`<tr${h===c?' class="on"':""}><td>${anHM(h.a)} – ${anHM(h.b)}</td><td>${ANG[h.p]} ${anN(h.p)}</td></tr>`).join("")}
 function anGlow(root){
- const sv=root.querySelector("svg");if(!sv||sv.querySelector("#glS"))return;
+ const sv=root.querySelector("svg");if(!sv||sv.querySelector("#glS"))return;AN.gl={};
  const NS="http://www.w3.org/2000/svg";
  const df=document.createElementNS(NS,"defs");
  df.id="glDefs";df.innerHTML='<radialGradient id="glS"><stop offset="0" stop-color="#FFFBE6" stop-opacity=".95"/><stop offset=".38" stop-color="#FFF4B8" stop-opacity=".5"/><stop offset="1" stop-color="#FFEE99" stop-opacity="0"/></radialGradient><radialGradient id="glM"><stop offset="0" stop-color="#fff" stop-opacity=".85"/><stop offset=".4" stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>';
@@ -1414,12 +1435,13 @@ function anGlow(root){
   g.querySelectorAll("[stroke]").forEach(e=>e.setAttribute("stroke",col));
   const b=g.getBBox(),c=document.createElementNS(NS,"circle");
   c.setAttribute("cx",b.x+b.width/2);c.setAttribute("cy",b.y+b.height/2);c.setAttribute("r",r);c.setAttribute("fill","url(#"+gr+")");c.setAttribute("class","glow "+cl);
-  g.parentNode.insertBefore(c,g);
-  const hv=()=>matchMedia("(hover:hover)").matches;g.addEventListener("mouseenter",()=>{if(hv())c.classList.add("hot")});g.addEventListener("mouseleave",()=>{if(hv())c.classList.remove("hot")})})}
+  g.parentNode.insertBefore(c,g);AN.gl[id]=c});
+ if(!root._gh){root._gh=1;const hv=()=>matchMedia("(hover:hover)").matches,id=e=>{const g=e.target.closest&&e.target.closest("[data-p]");return g&&g.getAttribute("data-p")};
+  root.addEventListener("mouseover",e=>{const k=id(e);if(hv()&&AN.gl[k])AN.gl[k].classList.add("hot")});root.addEventListener("mouseout",e=>{const k=id(e);if(hv()&&AN.gl[k]&&!(e.relatedTarget&&e.relatedTarget.closest&&e.relatedTarget.closest("[data-p]")===e.target.closest("[data-p]")))AN.gl[k].classList.remove("hot")})}}
 function anGlowFix(sv){[["Sun","#FFE23A"],["Moon","#FFFFFF"]].forEach(([id,col])=>{
-  const g=sv.querySelector('[data-p="'+id+'"]');if(!g)return;const c=g.previousElementSibling;
+  const g=sv.querySelector('[data-p="'+id+'"]'),c=AN.gl&&AN.gl[id];if(!g)return;
   g.querySelectorAll("[stroke]").forEach(e=>e.setAttribute("stroke",col));
-  if(c&&c.classList.contains("glow")){const b=g.getBBox();c.setAttribute("cx",b.x+b.width/2);c.setAttribute("cy",b.y+b.height/2)}})}
+  if(c){if(c.nextElementSibling!==g)g.parentNode.insertBefore(c,g);const b=g.getBBox();c.setAttribute("cx",b.x+b.width/2);c.setAttribute("cy",b.y+b.height/2)}})}
 const anKids=el=>[...el.children].filter(c=>!c.classList.contains("glow")&&c.id!=="glDefs");
 function anMorph(a,b){
  if(a.tagName!==b.tagName)return false;
@@ -1440,25 +1462,27 @@ function anRecolor(svg){
  const col=c=>{const[r,g,b]=hex(c),[h,s,l]=hsl(r,g,b);if(l>.93)return"none";let o;if(s<.1)o=rgb(0,0,Math.min(.95,1-l));else o=rgb(h,Math.min(1,s*1.05),Math.max(l,.64));return"#"+o.map(v=>v.toString(16).padStart(2,"0")).join("")};
  svg=svg.replace(/<svg /,'<svg fill="#f1efff" ');
  return svg.split(/(<mask[\s\S]*?<\/mask>)/).map(seg=>seg.startsWith("<mask")?seg:seg.replace(/(fill|stroke)="(#[0-9a-fA-F]{3,6}|black|white)"/g,(m,a,c)=>{if(c==="black")return a+'="#f1efff"';if(c==="white")return a+'="none"';const v=col(c);return v==="none"&&a==="stroke"?'stroke="#f1efff"':a+'="'+v+'"'})).join("")}
-Object.assign(AN,{sp:1,dir:1,run:true,t0:Date.now(),w0:performance.now(),last:0,cost:0,hrT:0,vis:true,ready:false,looping:false,h:null,sat:[]});
+Object.assign(AN,{unit:60,sp:1,dir:1,run:true,t0:Date.now(),w0:performance.now(),last:0,cost:0,hrT:0,vis:true,ready:false,looping:false,h:null,sat:[]});
 Object.defineProperty(AN,"svg",{get(){return AN.h?Harita.ciz(AN.h,{satirlar:AN.sat}):null},configurable:true});
-const anSim=()=>new Date(AN.t0+(performance.now()-AN.w0)*(AN.run?AN.sp*AN.dir:0));
-const anRebase=()=>{AN.t0=anSim().getTime();AN.w0=performance.now()};
+const anSim=()=>{if(AN.tw){const k=Math.min(1,(performance.now()-AN.tw.s)/AN.tw.d),e=1-Math.pow(1-k,3);if(k>=1){AN.t0=AN.tw.b;AN.tw=null;return new Date(AN.t0)}return new Date(AN.tw.a+(AN.tw.b-AN.tw.a)*e)}return new Date(AN.t0+(performance.now()-AN.w0)*(AN.run?AN.sp*AN.dir:0))};
+const anRebase=()=>{const n=anSim().getTime();AN.tw=null;AN.t0=n;AN.w0=performance.now()};
 function anCtlUI(){
- document.querySelectorAll("#anCtl .chip").forEach(b=>b.setAttribute("aria-pressed",String(+b.dataset.sp===AN.sp)));
- $("#anPlay").textContent=T(AN.run?"Durdur":"Başlat");$("#anRev").setAttribute("aria-pressed",String(AN.dir<0));$("#anRev").style.outline=AN.dir<0?"3px solid var(--sel)":"";
  const live=AN.sp===1&&AN.dir>0&&AN.run;
- $("#anUp").textContent=live?L("Canlı · harita anlık olarak akıyor.","Live · the chart updates in real time."):L("Zaman hızlandırılmış. Gerçek saate dönmek için “Şimdiye dön”e bas.","Time is accelerated. Press “Back to now” to return to real time.")}
+ $("#anNowBtn").setAttribute("aria-pressed",String(live));
+ $("#anPz").setAttribute("aria-pressed",String(!AN.run));
+ document.querySelectorAll("#anUn button").forEach(b=>b.setAttribute("aria-pressed",String(+b.dataset.sp===AN.unit)));
+ $("#anUp").textContent=live?L("Canlı · harita anlık olarak akıyor.","Live · the chart updates in real time."):L("Zaman elle ayarlandı. Gerçek saate dönmek için “Canlı”ya bas.","Time is set manually. Press “Live” to return to real time.")}
 async function anRun(){
  const st=$("#anSt");
  try{await cwLibs()}catch(_){st.textContent=L("Hesap dosyaları yüklenemedi. İnternet bağlantını kontrol et.","The calculation files could not be loaded. Check your connection.");return}
  AN.ready=true;anTick(true)}
 function anTick(force){
  if(!AN.ready||!window.Harita)return;
- const now=anSim(),t=performance.now(),sp=AN.run?AN.sp:0,loc=LANG==="en"?"en-GB":"tr-TR";
+ const tw0=!!AN.tw,now=anSim(),t=performance.now(),sp=AN.run?AN.sp:0,loc=LANG==="en"?"en-GB":"tr-TR";
  const tx=pad2(now.getHours())+":"+pad2(now.getMinutes())+(sp<=60?":"+pad2(now.getSeconds()):"");
  if($("#anT").textContent!==tx)$("#anT").textContent=tx;
- const need=force?0:sp===0?1e9:sp<=1?15000:sp<=60?250:sp<=600?120:66;
+ if(tw0&&!AN.tw)force=true;
+ const need=force?0:AN.tw?40:sp===0?1e9:sp<=1?15000:sp<=60?250:sp<=600?120:66;
  if(t-AN.last<Math.max(need,AN.cost*2))return;
  const t1=performance.now();
  let h;try{h=Harita.hesapla({utc:now,lat:AN.la,lon:AN.lo,saatBilinmiyor:false})}catch(e){$("#anSt").textContent=L("Hesaplama hatası: ","Calculation error: ")+e.message;return}
@@ -1470,13 +1494,14 @@ function anTick(force){
  const dt=now.toLocaleDateString(loc,{weekday:"long",day:"numeric",month:"long",year:"numeric"});
  if($("#anD").textContent!==dt)$("#anD").textContent=dt;
  const pt=AN.ad+" · "+dm_(AN.la,"N","S")+" "+dm_(AN.lo,"E","W");if($("#anP").textContent!==pt)$("#anP").textContent=pt;
- if(force||t-AN.hrT>(sp>60?400:5000)){anHrUI(now);AN.hrT=t}
+ if(force||t-AN.hrT>(sp>60||AN.tw?400:5000)){anHrUI(now);AN.hrT=t}
  AN.last=t;AN.cost=performance.now()-t1}
 function anLoop(){requestAnimationFrame(anLoop);if(document.hidden||$("#v1").hidden||!AN.vis)return;anTick(false)}
-function anStart(){AN.sp=1;AN.dir=1;AN.run=true;AN.t0=Date.now();AN.w0=performance.now();anCtlUI();anRun();if(!AN.looping){AN.looping=true;anLoop()}}
-document.querySelectorAll("#anCtl .chip").forEach(b=>b.onclick=()=>{const v=+b.dataset.sp;if(v===1){anStart();return}anRebase();AN.sp=v;AN.run=true;anCtlUI();anTick(true)});
-$("#anPlay").onclick=()=>{anRebase();AN.run=!AN.run;anCtlUI()};
-$("#anRev").onclick=()=>{anRebase();AN.dir=-AN.dir;if(!AN.run)AN.run=true;anCtlUI()};
+function anStart(){AN.tw=null;AN.sp=1;AN.dir=1;AN.run=true;AN.t0=Date.now();AN.w0=performance.now();anCtlUI();anRun();if(!AN.looping){AN.looping=true;anLoop()}}
+const anStep=n=>{const cur=anSim().getTime(),to=(AN.tw?AN.tw.b:cur)+n*AN.unit*1000;AN.t0=cur;AN.run=false;AN.sp=1;AN.dir=1;AN.tw={a:cur,b:to,s:performance.now(),d:420};anCtlUI();anTick(true)};
+$("#anB2").onclick=()=>anStep(-10);$("#anB1").onclick=()=>anStep(-1);$("#anF1").onclick=()=>anStep(1);$("#anF2").onclick=()=>anStep(10);
+$("#anPz").onclick=()=>{anRebase();AN.run=!AN.run;if(AN.run){AN.sp=1;AN.dir=1}anCtlUI()};
+document.querySelectorAll("#anUn button").forEach(b=>b.onclick=()=>{AN.unit=+b.dataset.sp;anCtlUI()});
 if("IntersectionObserver" in window)new IntersectionObserver(e=>{AN.vis=e.some(x=>x.isIntersecting)},{rootMargin:"150px"}).observe($("#anBand"));
 function anPlace(il){AN.la=il.la;AN.lo=il.lo;AN.ad=il.ad;try{localStorage.setItem("sa_an",JSON.stringify({la:il.la,lo:il.lo,ad:il.ad}))}catch(_){}$("#anSub").textContent=AN.ad}
 
@@ -1505,13 +1530,13 @@ function anConst(id,pts,lines,cx,cy,k,name,big){
 function anOrion(){
  const sv=$("#anStars"),W=sv.clientWidth,Hh=sv.clientHeight;if(!W||!Hh)return;
  const k=Math.min(Hh*.82,W*.9)/86;
- anConst("anOri",[[50,6],[66,22],[36,26],[57,58],[50,55],[43,52],[63,92],[33,88]],[[0,1],[0,2],[1,3],[2,5],[5,4],[4,3],[3,6],[5,7]],W>700?W*.78:W*.8,Hh*.5,k,"ORION",[1,7]);
+ anConst("anOri",[[50,6],[66,22],[36,26],[57,58],[50,55],[43,52],[63,92],[33,88]],[[0,1],[0,2],[1,3],[2,5],[5,4],[4,3],[3,6],[5,7]],W>700?W*.8:W*.82,Hh*.3,k,"ORION",[1,7]);
  /* Büyük Ayı (Ursa Major) */
- anConst("anUMa",[[80,10],[76,34],[52,38],[50,18],[32,12],[18,22],[4,40]],[[0,1],[1,2],[2,3],[3,0],[3,4],[4,5],[5,6]],W>700?W*.2:W*.27,Hh*(W>700?.34:.14),k*.55,"URSA MAJOR",[0,6])}
+ anConst("anUMa",[[80,10],[76,34],[52,38],[50,18],[32,12],[18,22],[4,40]],[[0,1],[1,2],[2,3],[3,0],[3,4],[4,5],[5,6]],W>700?W*.2:W*.27,Hh*(W>700?.12:.08),k*.55,"URSA MAJOR",[0,6])}
 function anStarsInit(){
  const sv=$("#anStars");if(!sv)return;
  if(!sv.dataset.on){sv.dataset.on=1;let r=7;const rnd=()=>(r=(r*16807)%2147483647)/2147483647;
-  let h="";for(let i=0;i<90;i++){const x=(rnd()*100).toFixed(2),y=(rnd()*100).toFixed(2),b=rnd(),rad=(.7+b*1.6).toFixed(2);
+  let h="";for(let i=0;i<170;i++){const x=(rnd()*100).toFixed(2),y=(rnd()*100).toFixed(2),b=rnd(),rad=(.7+b*1.6).toFixed(2);
    h+=`<circle class="${b>.7?"tw":""}" style="animation-delay:${(rnd()*4).toFixed(1)}s" cx="${x}%" cy="${y}%" r="${rad}" fill="#fff" opacity="${(.2+b*.6).toFixed(2)}"/>`}
   sv.innerHTML=h;addEventListener("resize",anOrion)}
  anOrion()}
@@ -1524,7 +1549,7 @@ function anFootSvg(cx,y,fs){
  const gh=fs*1.45,gap=fs*.3,seg=[];
  const gl=k=>{const v=(ANG[k].match(/viewBox="([^"]+)"/)||[])[1].split(/\s+/).map(Number),w=gh*v[2]/v[3];return{t:"g",k,w,v}};
  const tx=t=>({t:"t",s:t,w:m.measureText(t).width});
- seg.push(gl(cd.d),tx(anN(cd.d)+L(" günü"," day")),tx("·"),gl(cd.p),tx(anN(cd.p)+L(" saati"," hour")));
+ seg.push(gl(cd.d),tx(anDay(cd.d)),tx("·"),gl(cd.p),tx(anHour(cd.p)));
  const tot=seg.reduce((a,x)=>a+x.w,0)+gap*(seg.length-1);let x=cx-tot/2,o="";
  seg.forEach(g=>{
   if(g.t==="g"){const inner=ANG[g.k].replace(/^<svg[^>]*>/,"").replace(/<\/svg>$/,"");o+=`<svg x="${x.toFixed(1)}" y="${(y-gh*.72).toFixed(1)}" width="${g.w.toFixed(1)}" height="${gh.toFixed(1)}" viewBox="${g.v.join(" ")}" fill="none" style="color:#fff">${inner}</svg>`}
@@ -1581,7 +1606,7 @@ $("#anNowBtn").onclick=()=>anStart();
   if(now-last<350&&near){last=0;zoom();return}
   last=now;lx=e.clientX;ly=e.clientY;
   if(e.pointerType==="mouse")return;
-  const g=e.target.closest&&e.target.closest("[data-p]"),c=g?g.previousElementSibling:(e.target.closest&&e.target.closest(".glow"));
+  const g=e.target.closest&&e.target.closest("[data-p]"),c=g?AN.gl[g.getAttribute("data-p")]:(e.target.closest&&e.target.closest(".glow"));
   if(c&&c.classList&&c.classList.contains("glow")){c.classList.add("hot");clearTimeout(ht);ht=setTimeout(()=>c.classList.remove("hot"),6000)}});
  box.style.touchAction="manipulation"}
 const Z={s:1,x:0,y:0,p:new Map(),d0:0,s0:1};
@@ -1780,6 +1805,7 @@ async function setLang(l,anim){
  if(v==="v7"&&cur)buildSuccess();
  if(v==="v4"&&cur)finText();
  if(v==="v13"&&lastProf&&!$("#pfV").hidden)renderProf(lastProf);
+ try{if(AN.ready){anCtlUI();anTick(true)}}catch(_){}
  fillCc();if($("#pm"))$("#pm").textContent="";if($("#ctSt"))$("#ctSt").textContent="";
  const vw2=[...document.querySelectorAll(".view,#bar")].filter(x=>!x.hidden);
  vw.forEach(x=>x.getAnimations().forEach(a=>a.cancel()));
