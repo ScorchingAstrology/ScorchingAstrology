@@ -1357,7 +1357,7 @@ const dm=(v,p,n)=>{const a=Math.abs(v),d=Math.floor(a),m=Math.round((a-d)*60);re
 const BURC_TR=["Koç","Boğa","İkizler","Yengeç","Aslan","Başak","Terazi","Akrep","Yay","Oğlak","Kova","Balık"],BURC_EN=["Aries","Taurus","Gemini","Cancer","Leo","Virgo","Libra","Scorpio","Sagittarius","Capricorn","Aquarius","Pisces"],BA=()=>LANG==="en"?BURC_EN:BURC_TR;
 const pad2=n=>String(n).padStart(2,"0");
 const blob2url=b=>new Promise(ok=>{const f=new FileReader();f.onload=()=>ok(f.result);f.readAsDataURL(b)});
-async function cwLibs(){await loadJs("astronomy.min.js?v=1");await loadJs("efemeris.js?v=1");await loadJs("harita.js?v=6")}
+async function cwLibs(){await loadJs("astronomy.min.js?v=1");await loadJs("efemeris.js?v=1");await loadJs("harita.js?v=7")}
 function cwKur(P,vis){
  const q=x=>$("#"+P+x);let S=null;
  q("Tz").innerHTML=TZL.map(([v,t])=>`<option value="${v}">${t}</option>`).join("");

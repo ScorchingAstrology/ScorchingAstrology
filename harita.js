@@ -123,7 +123,7 @@ const KUCUK=new Set(["Chiron","Vertex","NNode","SNode"]); // bu noktalar için d
 const ACI_NOKTA=new Set(["ASC","MC","Vertex","NNode","SNode"]);
 function acilar_(h,orbKucuk){
  const P=h.govdeler.filter(g=>g.id!=="Fortune").map(g=>({id:g.id,lon:g.lon}));
- if(h.ev){P.push({id:"ASC",lon:h.ev.asc});P.push({id:"MC",lon:h.ev.mc})}
+ // ASC/DSC/MC/IC eksenlerine yapılan açılar gösterilmez (Chiron/düğüm/Vertex gibi noktalar dahil gezegenler arası açılar kalır)
  const out=[];
  for(let i=0;i<P.length;i++)for(let j=i+1;j<P.length;j++){
   const a=P[i],b=P[j];
@@ -263,7 +263,7 @@ function cizBi(h,t,o){
    else s+=`<text x="${f2(x)}" y="${f2(y+5)}" font-size="14" font-weight="700" text-anchor="middle" fill="#555">${tx}</text>`})}
  // transit → natal açılar
  const OR=Object.assign({sek:3,kare:4,ucgen:4,karsit:4},o.orb||{}),KU=2,AN_=["Sun","Moon","Mercury","Venus","Mars","Jupiter","Saturn","Uranus","Neptune","Pluto","Chiron","NNode"];
- const nat=h.govdeler.filter(g=>AN_.includes(g.id)).map(g=>({id:g.id,lon:g.lon}));if(h.ev){nat.push({id:"ASC",lon:h.ev.asc});nat.push({id:"MC",lon:h.ev.mc})}
+ const nat=h.govdeler.filter(g=>AN_.includes(g.id)).map(g=>({id:g.id,lon:g.lon}));
  const trn=t.govdeler.filter(g=>AN_.includes(g.id)).map(g=>({id:g.id,lon:g.lon}));
  const iP=lon=>yay_(C,0,Ra-2,phi(lon));let ik="";
  trn.forEach(a=>nat.forEach(b=>{let d=Math.abs(a.lon-b.lon)%360;if(d>180)d=360-d;
