@@ -316,6 +316,9 @@ a.btn[hidden]{display:none}
 .scrim.open{opacity:1;visibility:visible;transition:opacity .28s}
 .drw{position:fixed;top:0;left:0;bottom:0;width:min(300px,82vw);background:linear-gradient(180deg,var(--bg1),var(--bg2));box-shadow:8px 0 30px rgba(40,30,90,.25);transform:translateX(-100%);visibility:hidden;transition:transform .28s ease,visibility 0s .28s;z-index:20;padding:calc(16px + env(safe-area-inset-top,0px)) 16px 16px;display:flex;flex-direction:column;gap:10px;box-sizing:border-box}
 .drw.open{transform:none;visibility:visible;transition:transform .28s ease}
+.drw{--ink:#2F2B4F;--muted:#8F8AA6;--card:rgba(255,255,255,.72);--line:#DAD3EE;--sel:#9B7AE0;color:var(--ink)} /* menü, gece moduna (Anın Haritası) bakmadan sabit ve okunur kalır */
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .drw{--ink:#ECE9FA;--muted:#9F9AC0;--card:rgba(255,255,255,.07);--line:#3A3566;--sel:#B79BF0}}
+:root[data-theme="dark"] .drw{--ink:#ECE9FA;--muted:#9F9AC0;--card:rgba(255,255,255,.07);--line:#3A3566;--sel:#B79BF0}
 .dh2{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:1.05rem}
 .mx{all:unset;width:40px;height:40px;display:grid;place-items:center;cursor:pointer;border-radius:12px;font-size:1.1rem;color:var(--muted)}
 .mx:focus-visible,.mi:focus-visible{outline:3px solid var(--sel);outline-offset:2px}
