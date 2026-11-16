@@ -162,13 +162,23 @@ body{transition:--ink 1.3s ease,--muted 1.3s ease,--card 1.3s ease,--line 1.3s e
 .anStars{position:absolute;top:0;bottom:0;left:50%;width:100vw;margin-left:-50vw;height:100%;z-index:1;pointer-events:none}
 .anStars .tw{animation:tw16 4s ease-in-out infinite}
 .app{overflow-x:clip}
-.anBand .cws svg .glow{pointer-events:all;opacity:.7;transform-box:fill-box;transform-origin:center;transition:opacity 3.2s ease-in-out,transform 3.2s ease-in-out;animation:gl16 20s ease-in-out infinite}
-.anBand .cws svg .glow.moon{opacity:.45;animation-duration:26s}
-.anBand .cws svg .glow.hot{opacity:1;transform:scale(1.55)}
-.anBand .cws svg .glow.moon.hot{opacity:.8;transform:scale(1.45)}
-@media(hover:hover){.anBand .cws svg .glow:hover{opacity:1;transform:scale(1.55)}.anBand .cws svg .glow.moon:hover{opacity:.8;transform:scale(1.45)}}
-@keyframes gl16{50%{scale:1.08}}
-@media(prefers-reduced-motion:reduce){.anBand .cws svg .glow{animation:none}}
+.anBand .cws svg .glow{pointer-events:all;opacity:.72;transform-box:fill-box;transform-origin:center;transition:opacity 1.6s ease-in-out,transform 1.6s ease-in-out;animation:gl16 14s ease-in-out infinite}
+.anBand .cws svg .glow.moon{opacity:.85;animation-duration:18s;transition:opacity 1.6s ease-in-out,transform 1.6s ease-in-out,filter 1s ease-out}
+.anBand .cws svg .glow.hot{opacity:1;transform:scale(1.4)}
+.anBand .cws svg .glow.moon.hot{opacity:1;transform:scale(1.3);filter:drop-shadow(0 0 16px rgba(255,255,255,.85)) brightness(1.5)}
+.anBand .cws svg g[data-p="Moon"]{transition:filter .6s ease-out}
+.anBand .cws svg .glow.moon.hot+g[data-p="Moon"]{filter:blur(2px) brightness(1.7) drop-shadow(0 0 7px rgba(255,255,255,.95))}
+@media(hover:hover){.anBand .cws svg .glow:hover{opacity:1;transform:scale(1.4)}.anBand .cws svg .glow.moon:hover{opacity:1;transform:scale(1.3);filter:drop-shadow(0 0 16px rgba(255,255,255,.85)) brightness(1.5)}.anBand .cws svg .glow.moon:hover+g[data-p="Moon"]{filter:blur(2px) brightness(1.7) drop-shadow(0 0 7px rgba(255,255,255,.95))}}
+/* güneş ışık çizgileri (yatay/dikey, gaussian blur) */
+.anBand .cws svg .flare{opacity:0;transform-box:fill-box;transform-origin:center;transition:opacity .3s ease-out,transform .3s ease-out}
+.anBand .cws svg .flare .flt{transform-box:fill-box;transform-origin:center;animation:tkl16 1.7s ease-in-out infinite}
+@keyframes tkl16{0%,100%{opacity:1;transform:scale(1)}18%{opacity:.5;transform:scale(.94)}36%{opacity:.95;transform:scale(1.03)}58%{opacity:.6;transform:scale(.97)}80%{opacity:1;transform:scale(1.02)}}
+.anBand .cws svg g[data-p="Sun"]{transition:opacity .4s ease-out,filter .4s ease-out}
+.anBand .cws svg .glow.sun.hot+.flareP+g[data-p="Sun"]{opacity:.3;filter:blur(1.2px)}
+.anBand .cws svg .glow.sun.hot+.flareP .flare{opacity:1;transform:scale(1.15)}
+@media(hover:hover){.anBand .cws svg .glow.sun:hover+.flareP+g[data-p="Sun"]{opacity:.3;filter:blur(1.2px)}.anBand .cws svg .glow.sun:hover+.flareP .flare{opacity:1;transform:scale(1.15)}}
+@keyframes gl16{50%{opacity:.55;scale:1.03}}
+@media(prefers-reduced-motion:reduce){.anBand .cws svg .glow,.anBand .cws svg .flare,.anBand .cws svg .flare .flt{animation:none}}
 #anSec .anBand .anTb{position:relative;z-index:1;width:100%;max-width:none;margin:10px 0 0;border-radius:0;box-shadow:none;border-top:1.5px solid rgba(255,255,255,.35);border-bottom:1.5px solid rgba(255,255,255,.35)}.anTb .tbN{display:none}.anTb .tbF{justify-content:center}.anTb{max-width:480px;margin:14px auto 0;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.35);text-align:left}
 .anTb .tbT i{color:rgba(255,255,255,.75)}.anTb .tbHi{background:rgba(255,255,255,.24);box-shadow:0 2px 12px rgba(0,0,0,.25),inset 0 0 0 1px rgba(255,255,255,.4)}.anTb .tbHi b,.anTb .tbHi small,.anTb .tbN,.anTb .tbSeg{color:#fff}.anTb .tbN span{color:rgba(255,255,255,.7)}.anTb .tbF{border-top-color:rgba(255,255,255,.3)}
 .anTb .lv{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 11px;border-radius:999px;border:1.5px solid rgba(255,255,255,.6);font:500 .78rem Lexend,sans-serif;color:#fff;cursor:pointer}.anTb .lv:focus-visible{outline:2px solid #fff;outline-offset:2px}.anTb .lv[aria-pressed="true"]{background:rgba(255,255,255,.3);border-color:#fff}.anTb .lv i{width:8px;height:8px;border-radius:50%;background:#7EF58A;box-shadow:0 0 8px #7EF58A;opacity:.45}.anTb .lv[aria-pressed="true"] i{opacity:1}
@@ -436,6 +446,7 @@ a.btn[hidden]{display:none}
 @media (min-width:1300px){
  #v2 #list{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 56px}
 }
+.cws svg .asp{pointer-events:none;transition:stroke-width .25s ease-out,filter .25s ease-out,opacity .25s}.cws svg .aspH:hover+.asp{stroke-width:1.7;opacity:1;filter:drop-shadow(0 0 2.5px rgba(255,255,255,.85))}
 .dtabs{margin:6px 0 4px}#v11.fam #mt,#v11.fam #nov,#v11.fam #rsc,#v11.fam #dz,#v11.fam #tc,#v11.fam .hcMan{display:none!important}
 #fForm textarea{width:100%;font:inherit;padding:12px;border:1.5px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink)}
 .nopay #v5 .cc,.nopay #hv,.nopay #v5 .lock,.nopay #v5 .refund,.nopay #hnote,.nopay #vnote,.nopay #pm{display:none!important}
@@ -1389,7 +1400,7 @@ const dm=(v,p,n)=>{const a=Math.abs(v),d=Math.floor(a),m=Math.round((a-d)*60);re
 const BURC_TR=["Koç","Boğa","İkizler","Yengeç","Aslan","Başak","Terazi","Akrep","Yay","Oğlak","Kova","Balık"],BURC_EN=["Aries","Taurus","Gemini","Cancer","Leo","Virgo","Libra","Scorpio","Sagittarius","Capricorn","Aquarius","Pisces"],BA=()=>LANG==="en"?BURC_EN:BURC_TR;
 const pad2=n=>String(n).padStart(2,"0");
 const blob2url=b=>new Promise(ok=>{const f=new FileReader();f.onload=()=>ok(f.result);f.readAsDataURL(b)});
-async function cwLibs(){await loadJs("astronomy.min.js?v=1");await loadJs("efemeris.js?v=1");await loadJs("harita.js?v=8")}
+async function cwLibs(){await loadJs("astronomy.min.js?v=1");await loadJs("efemeris.js?v=1");await loadJs("harita.js?v=9")}
 function cwKur(P,vis){
  const q=x=>$("#"+P+x);let S=null,viewOnly=false,room="h"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
  q("Tz").innerHTML=TZL.map(([v,t])=>`<option value="${v}">${T(t)}</option>`).join("");
@@ -1596,21 +1607,22 @@ function anGlow(root){
  const sv=root.querySelector("svg");if(!sv||sv.querySelector("#glS"))return;AN.gl={};
  const NS="http://www.w3.org/2000/svg";
  const df=document.createElementNS(NS,"defs");
- df.id="glDefs";df.innerHTML='<radialGradient id="glS"><stop offset="0" stop-color="#FFFBE6" stop-opacity=".95"/><stop offset=".38" stop-color="#FFF4B8" stop-opacity=".5"/><stop offset="1" stop-color="#FFEE99" stop-opacity="0"/></radialGradient><radialGradient id="glM"><stop offset="0" stop-color="#fff" stop-opacity=".85"/><stop offset=".4" stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>';
- sv.insertBefore(df,sv.firstChild);
- [["Sun","#FFE23A","glS",74,"sun"],["Moon","#FFFFFF","glM",56,"moon"]].forEach(([id,col,gr,r,cl])=>{
+ df.id="glDefs";df.innerHTML='<radialGradient id="glS"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".82"/><stop offset=".26" stop-color="#FFF8E0" stop-opacity=".46"/><stop offset=".5" stop-color="#FFF1C2" stop-opacity=".2"/><stop offset=".63" stop-color="#FFFBEA" stop-opacity=".24"/><stop offset=".76" stop-color="#FFF1C2" stop-opacity=".06"/><stop offset="1" stop-color="#FFF1C2" stop-opacity="0"/></radialGradient><filter id="glB" x="-20%" y="-200%" width="140%" height="500%"><feGaussianBlur stdDeviation="1.8"/></filter><radialGradient id="glC"><stop offset="0" stop-color="#FFFDF0" stop-opacity="1"/><stop offset=".35" stop-color="#FFF4B8" stop-opacity=".85"/><stop offset=".7" stop-color="#FFEA8A" stop-opacity=".32"/><stop offset="1" stop-color="#FFE57A" stop-opacity="0"/></radialGradient><radialGradient id="glF"><stop offset="0" stop-color="#FFFBE0" stop-opacity=".95"/><stop offset=".18" stop-color="#FFF1A8" stop-opacity=".55"/><stop offset=".6" stop-color="#FFE98A" stop-opacity=".15"/><stop offset="1" stop-color="#FFE57A" stop-opacity="0"/></radialGradient><radialGradient id="glM"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".8"/><stop offset=".28" stop-color="#F2F6FF" stop-opacity=".44"/><stop offset=".52" stop-color="#E4ECFC" stop-opacity=".16"/><stop offset=".63" stop-color="#FFFFFF" stop-opacity=".28"/><stop offset=".76" stop-color="#E4ECFC" stop-opacity=".07"/><stop offset="1" stop-color="#E4ECFC" stop-opacity="0"/></radialGradient>';
+ sv.insertBefore(df,sv.firstChild);AN.fl=null;
+ [["Sun","#FFF0A8","glS",84,"sun"],["Moon","#FFFFFF","glM",60,"moon"]].forEach(([id,col,gr,r,cl])=>{
   const g=sv.querySelector('[data-p="'+id+'"]');if(!g)return;
   g.querySelectorAll("[stroke]").forEach(e=>e.setAttribute("stroke",col));
   const b=g.getBBox(),c=document.createElementNS(NS,"circle");
   c.setAttribute("cx",b.x+b.width/2);c.setAttribute("cy",b.y+b.height/2);c.setAttribute("r",r);c.setAttribute("fill","url(#"+gr+")");c.setAttribute("class","glow "+cl);
-  g.parentNode.insertBefore(c,g);AN.gl[id]=c});
+  g.parentNode.insertBefore(c,g);AN.gl[id]=c;
+  if(id==="Sun"){const f=document.createElementNS(NS,"g");f.setAttribute("class","flareP");f.setAttribute("transform","translate("+(b.x+b.width/2)+" "+(b.y+b.height/2)+")");f.setAttribute("pointer-events","none");f.innerHTML='<g class="flare" opacity="0"><g class="flt" filter="url(#glB)"><ellipse rx="190" ry="3.4" fill="url(#glF)"/><ellipse rx="3.4" ry="190" fill="url(#glF)"/><circle r="34" fill="url(#glC)"/></g></g>';g.parentNode.insertBefore(f,g);AN.fl=f}});
  if(!root._gh){root._gh=1;const hv=()=>matchMedia("(hover:hover)").matches,id=e=>{const g=e.target.closest&&e.target.closest("[data-p]");return g&&g.getAttribute("data-p")};
   root.addEventListener("mouseover",e=>{const k=id(e);if(hv()&&AN.gl[k])AN.gl[k].classList.add("hot")});root.addEventListener("mouseout",e=>{const k=id(e);if(hv()&&AN.gl[k]&&!(e.relatedTarget&&e.relatedTarget.closest&&e.relatedTarget.closest("[data-p]")===e.target.closest("[data-p]")))AN.gl[k].classList.remove("hot")})}}
-function anGlowFix(sv){[["Sun","#FFE23A"],["Moon","#FFFFFF"]].forEach(([id,col])=>{
+function anGlowFix(sv){[["Sun","#FFF0A8"],["Moon","#FFFFFF"]].forEach(([id,col])=>{
   const g=sv.querySelector('[data-p="'+id+'"]'),c=AN.gl&&AN.gl[id];if(!g)return;
   g.querySelectorAll("[stroke]").forEach(e=>e.setAttribute("stroke",col));
-  if(c){if(c.nextElementSibling!==g)g.parentNode.insertBefore(c,g);const b=g.getBBox();c.setAttribute("cx",b.x+b.width/2);c.setAttribute("cy",b.y+b.height/2)}})}
-const anKids=el=>[...el.children].filter(c=>!c.classList.contains("glow")&&c.id!=="glDefs");
+  if(c){const f=id==="Sun"?AN.fl:null;if(f?g.previousElementSibling!==f:c.nextElementSibling!==g){g.parentNode.insertBefore(c,g);if(f)g.parentNode.insertBefore(f,g)}const b=g.getBBox();c.setAttribute("cx",b.x+b.width/2);c.setAttribute("cy",b.y+b.height/2);if(f)f.setAttribute("transform","translate("+(b.x+b.width/2)+" "+(b.y+b.height/2)+")")}})}
+const anKids=el=>[...el.children].filter(c=>!c.classList.contains("glow")&&!c.classList.contains("flareP")&&c.id!=="glDefs");
 function anMorph(a,b){
  if(a.tagName!==b.tagName)return false;
  const A=a.attributes,B=b.attributes;
@@ -1748,7 +1760,7 @@ function anPoster(){
  const W=2000,H=2500,esc=t=>String(t).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
  const live=$("#anSvg svg");if(!live)return null;
  const cl=live.cloneNode(true);
- cl.querySelectorAll(".glow").forEach(c=>{const m=c.classList.contains("moon");c.removeAttribute("class");c.setAttribute("opacity",m?".75":".95");c.setAttribute("r",m?"72":"96")});
+ cl.querySelectorAll(".glow").forEach(c=>{const m=c.classList.contains("moon");c.removeAttribute("class");c.setAttribute("opacity",m?".8":".9");c.setAttribute("r",m?"80":"99")});
  cl.setAttribute("x","100");cl.setAttribute("y","440");cl.setAttribute("width","1800");cl.setAttribute("height","1800");
  let r=11;const rnd=()=>(r=(r*16807)%2147483647)/2147483647;
  let st="";for(let i=0;i<260;i++){const x=rnd()*W,y=rnd()*H,b=rnd();st+=`<circle cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" r="${(1.2+b*3.2).toFixed(1)}" fill="#fff" opacity="${(.2+b*.6).toFixed(2)}"/>`}
@@ -1796,7 +1808,7 @@ $("#anNowBtn").onclick=()=>anStart();
   last=now;lx=e.clientX;ly=e.clientY;
   if(e.pointerType==="mouse")return;
   const g=e.target.closest&&e.target.closest("[data-p]"),c=g?AN.gl[g.getAttribute("data-p")]:(e.target.closest&&e.target.closest(".glow"));
-  if(c&&c.classList&&c.classList.contains("glow")){c.classList.add("hot");clearTimeout(ht);ht=setTimeout(()=>c.classList.remove("hot"),6000)}});
+  if(c&&c.classList&&c.classList.contains("glow")){c.classList.add("hot");clearTimeout(ht);ht=setTimeout(()=>c.classList.remove("hot"),1800)}});
  box.style.touchAction="manipulation"}
 const Z={s:1,x:0,y:0,p:new Map(),d0:0,s0:1};
 function zT(){$("#zi").style.transform="translate(-50%,-50%) translate("+Z.x+"px,"+Z.y+"px) scale("+Z.s+")"}
