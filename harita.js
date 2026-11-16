@@ -214,7 +214,7 @@ function ciz(h,o){
  const iP=(lon)=>yay_(C,0,Ri-2,phi(lon));
  let ik="";
  ac.forEach(a=>{const [x1,y1]=iP(a.la),[x2,y2]=iP(a.lb);
-  s+=`<line x1="${f2(x1)}" y1="${f2(y1)}" x2="${f2(x2)}" y2="${f2(y2)}" stroke="${a.renk}" stroke-width="1.15" opacity=".9"/>`;
+  s+=`<line class="aspH" x1="${f2(x1)}" y1="${f2(y1)}" x2="${f2(x2)}" y2="${f2(y2)}" stroke="#000" stroke-opacity="0" stroke-width="9" pointer-events="stroke"/><line class="asp" x1="${f2(x1)}" y1="${f2(y1)}" x2="${f2(x2)}" y2="${f2(y2)}" stroke="${a.renk}" stroke-width="1.15" opacity=".9"/>`;
   const mx=(x1+x2)/2,my=(y1+y2)/2,bs={sek:20,ucgen:15,kare:13,karsit:28}[a.tur];
   ik+=`<circle cx="${f2(mx)}" cy="${f2(my)}" r="${a.tur==="karsit"?15:10.5}" fill="#fff"/>`+glif_("ac",a.tur,mx,my,bs)});
  s+=ik;
