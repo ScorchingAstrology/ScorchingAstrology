@@ -417,7 +417,7 @@ a.btn[hidden]{display:none}
  #v15{max-width:1180px}
  .cwi{max-width:1280px}
  .cwWrap:not(.bi) .cws{max-width:min(100%,94vh);margin-left:auto;margin-right:auto}
- .anBand .cws{max-width:min(86vh,860px)}
+ .anBand .cws{max-width:min(100%,129vh,1290px)}
  .zod{max-width:1120px}
  .planets{max-width:720px;margin:34px auto 10px}
  .view{padding:10px 48px 44px}
@@ -1389,7 +1389,7 @@ const dm=(v,p,n)=>{const a=Math.abs(v),d=Math.floor(a),m=Math.round((a-d)*60);re
 const BURC_TR=["Koç","Boğa","İkizler","Yengeç","Aslan","Başak","Terazi","Akrep","Yay","Oğlak","Kova","Balık"],BURC_EN=["Aries","Taurus","Gemini","Cancer","Leo","Virgo","Libra","Scorpio","Sagittarius","Capricorn","Aquarius","Pisces"],BA=()=>LANG==="en"?BURC_EN:BURC_TR;
 const pad2=n=>String(n).padStart(2,"0");
 const blob2url=b=>new Promise(ok=>{const f=new FileReader();f.onload=()=>ok(f.result);f.readAsDataURL(b)});
-async function cwLibs(){await loadJs("astronomy.min.js?v=1");await loadJs("efemeris.js?v=1");await loadJs("harita.js?v=7")}
+async function cwLibs(){await loadJs("astronomy.min.js?v=1");await loadJs("efemeris.js?v=1");await loadJs("harita.js?v=8")}
 function cwKur(P,vis){
  const q=x=>$("#"+P+x);let S=null,viewOnly=false,room="h"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
  q("Tz").innerHTML=TZL.map(([v,t])=>`<option value="${v}">${T(t)}</option>`).join("");
@@ -1802,7 +1802,7 @@ const Z={s:1,x:0,y:0,p:new Map(),d0:0,s0:1};
 function zT(){$("#zi").style.transform="translate(-50%,-50%) translate("+Z.x+"px,"+Z.y+"px) scale("+Z.s+")"}
 function zAt(cx,cy,f){const s=Math.min(8,Math.max(1,Z.s*f)),k=s/Z.s;Z.x=cx-(cx-Z.x)*k;Z.y=cy-(cy-Z.y)*k;Z.s=s;if(s===1){Z.x=0;Z.y=0}zT()}
 function zRect(){const b=$("#zs").getBoundingClientRect();return{x:b.left+b.width/2,y:b.top+b.height/2}}
-function zmOpen(src){Z.s=1;Z.x=0;Z.y=0;Z.p.clear();$("#zi").src=src;zT();$("#zm").hidden=false;document.body.style.overflow="hidden";$("#zx").focus()}
+function zmOpen(src){Z.s=1.5;Z.x=0;Z.y=0;Z.p.clear();$("#zi").src=src;zT();$("#zm").hidden=false;document.body.style.overflow="hidden";$("#zx").focus()}
 function zmClose(){$("#zm").hidden=true;document.body.style.overflow="";$("#zi").removeAttribute("src");const o=$("#hcOpen");if(o)o.focus()}
 $("#zx").onclick=zmClose;$("#zin").onclick=()=>zAt(0,0,1.4);$("#zout").onclick=()=>zAt(0,0,1/1.4);$("#zrs").onclick=()=>{Z.s=1;Z.x=0;Z.y=0;zT()};
 document.addEventListener("keydown",e=>{if($("#zm").hidden)return;if(e.key==="Escape")zmClose();else if(e.key==="+"||e.key==="=")zAt(0,0,1.4);else if(e.key==="-")zAt(0,0,1/1.4)});

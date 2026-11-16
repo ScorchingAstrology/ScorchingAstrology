@@ -121,8 +121,9 @@ const AC_TUR=[{id:"sek",der:60,orb:5,ad:"Sekstil",renk:"#548FC5"},{id:"kare",der
  {id:"ucgen",der:120,orb:8,ad:"Üçgen",renk:"#548FC5"},{id:"karsit",der:180,orb:8,ad:"Karşıt",renk:"#C55454"}];
 const KUCUK=new Set(["Chiron","Vertex","NNode","SNode"]); // bu noktalar için dar orb
 const ACI_NOKTA=new Set(["ASC","MC","Vertex","NNode","SNode"]);
+const NOASP=new Set(["Chiron","Vertex","NNode","SNode","Fortune"]); // gök cismi olmayan/özel noktalar: açıları gösterilmez
 function acilar_(h,orbKucuk){
- const P=h.govdeler.filter(g=>g.id!=="Fortune").map(g=>({id:g.id,lon:g.lon}));
+ const P=h.govdeler.filter(g=>!NOASP.has(g.id)).map(g=>({id:g.id,lon:g.lon}));
  // ASC/DSC/MC/IC eksenlerine yapılan açılar gösterilmez (Chiron/düğüm/Vertex gibi noktalar dahil gezegenler arası açılar kalır)
  const out=[];
  for(let i=0;i<P.length;i++)for(let j=i+1;j<P.length;j++){
@@ -262,7 +263,7 @@ function cizBi(h,t,o){
    if(tx==="ASC")s+=glif_("eks","asc",x,y,40);else if(tx==="DSC")s+=glif_("eks","dsc",x,y,40);
    else s+=`<text x="${f2(x)}" y="${f2(y+5)}" font-size="14" font-weight="700" text-anchor="middle" fill="#555">${tx}</text>`})}
  // transit → natal açılar
- const OR=Object.assign({sek:3,kare:4,ucgen:4,karsit:4},o.orb||{}),KU=2,AN_=["Sun","Moon","Mercury","Venus","Mars","Jupiter","Saturn","Uranus","Neptune","Pluto","Chiron","NNode"];
+ const OR=Object.assign({sek:3,kare:4,ucgen:4,karsit:4},o.orb||{}),KU=2,AN_=["Sun","Moon","Mercury","Venus","Mars","Jupiter","Saturn","Uranus","Neptune","Pluto"];
  const nat=h.govdeler.filter(g=>AN_.includes(g.id)).map(g=>({id:g.id,lon:g.lon}));
  const trn=t.govdeler.filter(g=>AN_.includes(g.id)).map(g=>({id:g.id,lon:g.lon}));
  const iP=lon=>yay_(C,0,Ra-2,phi(lon));let ik="";
