@@ -413,11 +413,15 @@ a.btn[hidden]{display:none}
 @media (min-width:900px){
  .top{padding-top:30px;padding-bottom:30px;font-size:1.15rem}
  #v2,#v9{max-width:1120px}
- #v11{max-width:900px}
+ #v11{max-width:1280px}
+ #v15{max-width:1180px}
+ .cwi{max-width:1280px}
+ .cwWrap:not(.bi) .cws{max-width:min(100%,94vh);margin-left:auto;margin-right:auto}
+ .anBand .cws{max-width:min(86vh,860px)}
  .zod{max-width:1120px}
  .planets{max-width:720px;margin:34px auto 10px}
  .view{padding:10px 48px 44px}
- .view:not(#v2):not(#v9):not(#v11){max-width:780px;width:100%;margin-left:auto;margin-right:auto}
+ .view:not(#v2):not(#v9):not(#v11):not(#v15){max-width:780px;width:100%;margin-left:auto;margin-right:auto}
  #v1 h1{font-size:2.4rem;margin-bottom:30px}
  #v1 .row p,#v1 .row div{font-size:1.15rem}
  #v2 #list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 36px;margin-top:10px}
@@ -432,6 +436,8 @@ a.btn[hidden]{display:none}
 @media (min-width:1300px){
  #v2 #list{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 56px}
 }
+.dtabs{margin:6px 0 4px}#v11.fam #mt,#v11.fam #nov,#v11.fam #rsc,#v11.fam #dz,#v11.fam #tc,#v11.fam .hcMan{display:none!important}
+#fForm textarea{width:100%;font:inherit;padding:12px;border:1.5px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink)}
 .nopay #v5 .cc,.nopay #hv,.nopay #v5 .lock,.nopay #v5 .refund,.nopay #hnote,.nopay #vnote,.nopay #pm{display:none!important}
 #v1>h1{text-align:center}
 .tbS.arm,.tbSeg.arm{touch-action:none}.tbS.arm{box-shadow:inset 0 0 0 2px var(--lav)}.tbSeg.arm{background:var(--lav);color:var(--btnt)}.anTb .tbS.arm{box-shadow:inset 0 0 0 2px rgba(255,255,255,.85)}.anTb .tbSeg.arm{background:rgba(255,255,255,.3);color:#fff}
@@ -702,7 +708,7 @@ a.btn[hidden]{display:none}
       <div id="cwRes" hidden>
         <div class="cwWrap" id="cwWrap"><div class="cws" id="cwSvg"></div><div class="tbar" id="cwTb"><div class="tbS sm" id="cwTbYS"><div class="tbT" id="cwTbYT"></div><div class="tbHi sm" aria-hidden="true"><b id="cwTbYV"></b></div></div><div class="tbS" id="cwTbS"><div class="tbT" id="cwTbT"></div><div class="tbHi" aria-hidden="true"><small id="cwTbW"></small><b id="cwTbD"></b><small id="cwTbL"></small></div></div><div class="tbS sm" id="cwTbHS"><div class="tbT" id="cwTbHT"></div><div class="tbHi sm" aria-hidden="true"><b id="cwTbHV"></b></div></div><div class="tbS sm" id="cwTbMS"><div class="tbT" id="cwTbMT"></div><div class="tbHi sm" aria-hidden="true"><b id="cwTbMV"></b></div></div><div class="tbF"><span class="tbN" id="cwTbN"></span><span class="tbR"><button type="button" id="cwBiNow" class="lv" aria-pressed="true"><i></i><span>Canlı</span></button><input id="cwBiD" type="datetime-local" tabindex="-1" aria-hidden="true" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none"></span></div></div></div>
         <p class="msg">Çarkı büyütüp yakınlaştırmak için üzerine dokun.</p>
-        <div class="acts"><button class="btn l" type="button" id="cwPng">Görseli indir (PNG)</button><button class="btn g" type="button" id="cwEd">Bilgileri düzenle</button></div>
+        <div class="acts"><button class="btn l" type="button" id="cwPng">Görseli indir (PNG)</button><button class="btn g" type="button" id="cwEd">Bilgileri düzenle</button><button class="btn g" type="button" id="cwFam" hidden>Kaydı düzenle</button></div>
         <div id="cwNote"></div>
         <details class="cwd"><summary>Konumlar ve majör açılar</summary>
           <table class="cwt" id="cwTbl"></table>
@@ -719,11 +725,11 @@ a.btn[hidden]{display:none}
         <div id="cwOffW" hidden><label for="cwOff">UTC farkı (saat)</label><input id="cwOff" type="text" inputmode="decimal" placeholder="3 / -5"></div>
         <div class="acts"><button class="btn g" type="button" id="cwGo">Yeniden hesapla</button></div>
       </div>
-      <p class="msg" style="margin-top:18px"><b>Elle yüklenen görsel (isteğe bağlı)</b></p>
+      <div class="hcMan"><p class="msg" style="margin-top:18px"><b>Elle yüklenen görsel (isteğe bağlı)</b></p>
       <div id="hcBox"></div>
       <input type="file" id="hcFile" accept="image/*" hidden>
       <div class="acts"><button class="btn l" type="button" id="hcAdd">Harita görseli ekle</button><button class="btn g" type="button" id="hcDel" hidden>Görseli sil</button></div>
-      <p class="msg" id="hcSt" role="status"></p>
+      <p class="msg" id="hcSt" role="status"></p></div>
     </div>
     <div class="card" id="tc" hidden>
       <h3>Metin dosyası</h3>
@@ -784,6 +790,8 @@ a.btn[hidden]{display:none}
     <div id="dash" hidden>
       <div class="dh"><h2>Panel</h2><button class="btn l" type="button" id="out2">Çıkış yap</button></div>
       <p class="msg" id="dm"></p>
+      <div class="chips dtabs" id="dTabs" role="tablist"><button type="button" class="chip" data-tab="c" aria-pressed="true">Müşteriler</button><button type="button" class="chip" data-tab="f" aria-pressed="false">Tanınmış Kişiler</button></div>
+      <div id="dCus">
       <div class="stats" id="stats"></div>
       <h3 class="sh">Hangi haritalara baktım</h3>
       <div class="card" id="bars"></div>
@@ -794,6 +802,27 @@ a.btn[hidden]{display:none}
       <p class="msg" id="ac"></p>
       <div class="cl" id="at"></div>
       <div class="c"><button class="btn l" type="button" id="more" hidden>Daha fazla göster</button></div>
+      </div>
+      <div id="dFam" hidden>
+        <div class="dh"><h3 class="sh" style="margin:6px 0">Tanınmış Kişiler</h3><button class="btn g" type="button" id="fNew">+ Yeni kişi ekle</button></div>
+        <p class="msg" id="fWarn" hidden>Apps Script henüz güncellenmemiş görünüyor. Yeni apps-script.gs dosyasını yükleyip yeniden dağıtmadan kayıtlar kalıcı olmaz.</p>
+        <div class="card" id="fForm" hidden>
+          <h3 id="fFt">Yeni kişi</h3>
+          <label for="fAd">Ad Soyad</label><input id="fAd" autocomplete="off">
+          <label for="fKat">Kategori (isteğe bağlı)</label><input id="fKat" autocomplete="off" placeholder="Şarkıcı, sporcu, siyasetçi…">
+          <div class="two"><div><label for="fT">Doğum tarihi</label><input id="fT" type="date"></div><div><label for="fS">Doğum saati</label><input id="fS" type="time"></div></div>
+          <label class="cb"><input type="checkbox" id="fB"> Doğum saatini bilmiyor</label>
+          <label for="fY">Doğum yeri (Şehir)</label><input id="fY" autocomplete="off" placeholder="Şehir yaz, listeden seç">
+          <div class="two"><div><label for="fLa">Enlem (kuzey +)</label><input id="fLa" type="text" inputmode="decimal"></div><div><label for="fLo">Boylam (doğu +)</label><input id="fLo" type="text" inputmode="decimal"></div></div>
+          <label for="fTz">Saat dilimi</label><select id="fTz"></select>
+          <label for="fNot">Not (kaynak, Rodden derecesi…)</label><textarea id="fNot" rows="2"></textarea>
+          <div class="acts"><button class="btn g" type="button" id="fSave">Kaydet</button><button class="btn l" type="button" id="fCancel">Vazgeç</button><button class="btn g" type="button" id="fDel" hidden>Sil</button></div>
+          <p class="msg" id="fSt" role="status"></p>
+        </div>
+        <div class="ah"><input id="fqs" placeholder="Ara: ad, kategori, şehir…" aria-label="Ara"></div>
+        <p class="msg" id="fc"></p>
+        <div class="cl" id="fa"></div>
+      </div>
     </div>
     <div class="c"><button class="btn g" type="button" data-go="v1">Siteye dön</button></div>
   </section>
@@ -1120,8 +1149,8 @@ function makeSample(){
   out.push(row)}
  return out.sort((a,b)=>a.zaman<b.zaman?1:-1)}
 async function adminLogin(u,k){
- if(!CFG.endpoint){AR=[...lsGet(),...makeSample()];demo=true;return true}
- try{const r=await fetch(CFG.endpoint+"?user="+encodeURIComponent(u)+"&key="+encodeURIComponent(k)),j=await r.json();if(!j.ok)return false;AR=j.rows;demo=false;return true}catch(_){return "net"}}
+ if(!CFG.endpoint){AR=[...lsGet(),...makeSample()];AF=fLs();demo=true;return true}
+ try{const r=await fetch(CFG.endpoint+"?user="+encodeURIComponent(u)+"&key="+encodeURIComponent(k)),j=await r.json();if(!j.ok)return false;AR=j.rows;AF=Array.isArray(j.tanin)?j.tanin:null;demo=false;return true}catch(_){return "net"}}
 function drawDash(){
  const rows=AR,cnt={};P.forEach(p=>cnt[p.n]=0);rows.forEach(r=>pk(r).forEach(n=>{if(n in cnt)cnt[n]++}));
  const maps=Object.values(cnt).reduce((a,b)=>a+b,0),gain=rows.filter(paid).reduce((a,r)=>a+(+r.toplam||0),0),done=rows.filter(r=>durOf(r)==="Tamamlandı").length;
@@ -1140,7 +1169,7 @@ async function doLogin(){
  const lr=await adminLogin(AU,AK);if(lr==="net"){$("#am").textContent="Sunucuya bağlanılamadı. İnternetini kontrol edip tekrar dene.";return}if(!lr){$("#am").textContent="Kullanıcı adı veya şifre hatalı.";return}
  $("#am").textContent="";$("#lg").hidden=true;$("#dash").hidden=false;
  $("#dm").textContent=demo?"Örnek veri gösteriliyor. Kayıt adresi bağlanınca gerçek müşterilerin burada görünür.":"";
- flt="";shown=20;$("#aq").value="";$("#ak").value="";setEye(false);drawDash()}
+ flt="";shown=20;$("#aq").value="";$("#ak").value="";setEye(false);dTab("c");drawDash()}
 $("#alog").onclick=doLogin;onEnter($("#af"),doLogin);
 $("#out2").onclick=()=>{SEL.clear();selMode=false;AK="";AU="";AR=[];$("#dash").hidden=true;$("#lg").hidden=false;$("#au").value=""};
 $("#fl").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;flt=b.dataset.f;shown=20;drawDash()});
@@ -1179,7 +1208,7 @@ function infoRows(){
  rows.push(["Durum",`<button type="button" class="sb s${DUR.indexOf(d)}" id="cst" aria-pressed="true" title="Durumu değiştirmek için dokun">${d}</button>`]);
  $("#cinfo").innerHTML=rows.map(([a,b])=>`<div><span>${a}</span><span>${b||"—"}</span></div>`).join("")}
 function openCust(id){
- const r=AR.find(x=>String(x.room)===String(id));if(!r)return;CU=r;
+ const r=AR.find(x=>String(x.room)===String(id));if(!r)return;CU=r;$("#v11").classList.remove("fam");$("#cwFam").hidden=true;
  $("#cn").textContent=r.ad||"Müşteri";infoRows();
  const v=hasV(r);$("#mt").hidden=!v;$("#nov").hidden=v;
  $("#mlink").value=r.meet||"";$("#mst").textContent="";meetUI();rscUI();hcUI();tcUI();go("v11");cwAuto(r)}
@@ -1878,7 +1907,52 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("#drw").classList
 $("#drw").addEventListener("keydown",e=>{if(e.key!=="Tab")return;const f=[...$("#drw").querySelectorAll("button")],i=f.indexOf(document.activeElement);if(e.shiftKey&&i<=0){e.preventDefault();f[f.length-1].focus()}else if(!e.shiftKey&&i===f.length-1){e.preventDefault();f[0].focus()}});
 $("#mhome").onclick=()=>{menu(false);go("v1")};
 $("#mprof").onclick=()=>{menu(false);if(cur&&cur.kod)profMine();else{profFrom();profAsk()}};
-$("#cb").onclick=()=>{drawDash();go("v9")};
+let AF=[],fEd="";
+function fLs(){try{return JSON.parse(localStorage.getItem("sa_fam")||"[]")}catch(_){return[]}}
+function fLsSet(){try{localStorage.setItem("sa_fam",JSON.stringify(AF))}catch(_){}}
+function dTab(t){$("#dCus").hidden=t!=="c";$("#dFam").hidden=t!=="f";document.querySelectorAll("#dTabs .chip").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.tab===t)));if(t==="f")drawFam()}
+$("#dTabs").addEventListener("click",e=>{const b=e.target.closest(".chip");if(b)dTab(b.dataset.tab)});
+$("#fTz").innerHTML=TZL.filter(x=>x[0]!=="manuel").map(([v,t])=>`<option value="${v}">${t}</option>`).join("");
+$("#fB").onchange=()=>{$("#fS").disabled=$("#fB").checked};
+yerOto($("#fY"),x=>{$("#fLa").value=x.la;$("#fLo").value=x.lo;tzSet($("#fTz"),x.tz||"Europe/Istanbul");$("#fSt").textContent="Doğum yeri "+x.ad+" olarak bulundu."});
+const fSend=p=>{if(!demo&&CFG.endpoint)fetch(CFG.endpoint,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain"},body:JSON.stringify({...p,kullanici:AU,anahtar:AK})}).catch(()=>{})};
+function drawFam(){
+ $("#fWarn").hidden=!(AF===null&&!demo);const L0=AF||[],q=$("#fqs").value.toLowerCase().trim();
+ const f=L0.filter(r=>!q||[r.ad,r.kategori,r.yer,r.aciklama].join(" ").toLowerCase().includes(q)).sort((a,b)=>String(a.ad).localeCompare(String(b.ad),"tr"));
+ $("#fc").textContent=f.length+" kişi"+(demo?" · örnek veri: tarayıcıda saklanır":"")+" · Çarkı açmak için karta dokun";
+ $("#fa").innerHTML=f.map(r=>`<div class="uc"><button type="button" class="nm" data-fo="${ea(r.id)}"><b>${esc(r.ad||"")}</b><span>${esc([r.kategori,dt(r.tarih)+(r.saat&&r.saat!=="bilmiyor"?" "+r.saat:""),r.yer].filter(Boolean).join(" · "))}</span></button><button type="button" class="sb s0" aria-pressed="true" data-fe="${ea(r.id)}">Düzenle</button></div>`).join("")||'<p class="msg c">Henüz kimse eklenmedi. “Yeni kişi ekle”ye bas.</p>'}
+$("#fqs").addEventListener("input",drawFam);
+function fOpenForm(r){
+ fEd=r?r.id:"";$("#fFt").textContent=r?"Kişiyi düzenle":"Yeni kişi";
+ $("#fAd").value=r?r.ad:"";$("#fKat").value=r?r.kategori:"";$("#fT").value=r?r.tarih:"";const bil=!!r&&r.saat==="bilmiyor";$("#fB").checked=bil;$("#fS").disabled=bil;$("#fS").value=r&&!bil?r.saat:"";
+ $("#fY").value=r?r.yer:"";$("#fLa").value=r?r.enlem:"";$("#fLo").value=r?r.boylam:"";tzSet($("#fTz"),(r&&r.tz)||"Europe/Istanbul");$("#fNot").value=r?r.aciklama:"";$("#fSt").textContent="";
+ $("#fDel").hidden=!r;$("#fForm").hidden=false;$("#fForm").scrollIntoView({behavior:"smooth",block:"start"})}
+$("#fNew").onclick=()=>fOpenForm(null);
+$("#fCancel").onclick=()=>{$("#fForm").hidden=true};
+$("#fSave").onclick=async()=>{
+ const st=$("#fSt"),ad=$("#fAd").value.trim(),t=$("#fT").value,bil=$("#fB").checked,sa=bil?"bilmiyor":$("#fS").value;
+ if(!ad||!t){st.textContent="Ad Soyad ve doğum tarihi gerekli.";return}
+ if(!bil&&!sa){st.textContent="Doğum saatini yaz ya da “bilmiyor”u işaretle.";return}
+ if(!$("#fY").value.trim()){st.textContent="Doğum yerini yaz.";return}
+ if(!($("#fLa").value&&$("#fLo").value)){st.textContent="Yer aranıyor…";const y=await yerCoz($("#fY"));if(y){$("#fLa").value=y.la;$("#fLo").value=y.lo;tzSet($("#fTz"),y.tz||"Europe/Istanbul")}}
+ if(!($("#fLa").value&&$("#fLo").value)){st.textContent="Yer bulunamadı. Listeden bir şehir seç ya da enlem ve boylamı elle yaz.";return}
+ const id=fEd||("tk"+Date.now().toString(36)+Math.random().toString(36).slice(2,5));
+ const k={id,zaman:new Date().toISOString(),ad,kategori:$("#fKat").value.trim(),tarih:t,saat:sa,yer:$("#fY").value.trim(),enlem:$("#fLa").value.trim(),boylam:$("#fLo").value.trim(),tz:$("#fTz").value,aciklama:$("#fNot").value.trim()};
+ if(!AF)AF=[];const i=AF.findIndex(x=>x.id===id);if(i<0)AF.unshift(k);else AF[i]=k;
+ if(demo)fLsSet();fSend({islem:"tkKaydet",kayit:k});
+ $("#fForm").hidden=true;drawFam();toast("Kaydedildi")};
+$("#fDel").onclick=()=>{if(!fEd||!confirm("Bu kişi silinsin mi? Geri alınamaz."))return;AF=(AF||[]).filter(x=>x.id!==fEd);if(demo)fLsSet();fSend({islem:"tkSil",id:fEd});$("#fForm").hidden=true;drawFam();toast("Silindi")};
+function fRec(id){return(AF||[]).find(x=>x.id===id)}
+function openFam(id){
+ const f=fRec(id);if(!f)return;
+ CU={_fam:true,room:"tk_"+f.id,famId:f.id,ad:f.ad,tarih:f.tarih,saat:f.saat,yer:f.yer,not:"Saat dilimi: "+f.tz+"; Enlem: "+f.enlem+"; Boylam: "+f.boylam};
+ $("#v11").classList.add("fam");$("#cwFam").hidden=false;$("#cn").textContent=f.ad;
+ const rows=[["Kategori",esc(f.kategori||"")],["Doğum tarihi",esc(dt(f.tarih))],["Doğum saati",f.saat==="bilmiyor"?'<span class="tg nk">Saati bilinmiyor</span>':esc(f.saat||"")],["Doğum yeri",esc(f.yer||"")],["Enlem / Boylam",esc(f.enlem+" / "+f.boylam)],["Saat dilimi",esc(f.tz||"")],["Not",esc(f.aciklama||"")]];
+ $("#cinfo").innerHTML=rows.map(([a,b])=>`<div><span>${a}</span><span>${b||"—"}</span></div>`).join("");
+ go("v11");cwAuto(CU)}
+$("#fa").addEventListener("click",e=>{const o=e.target.closest(".nm");if(o){openFam(o.dataset.fo);return}const b=e.target.closest(".sb");if(b){const r=fRec(b.dataset.fe);if(r)fOpenForm(r)}});
+$("#cwFam").onclick=()=>{const f=CU&&CU._fam?fRec(CU.famId):null;$("#v11").classList.remove("fam");drawDash();go("v9");dTab("f");if(f)fOpenForm(f)};
+$("#cb").onclick=()=>{const f=CU&&CU._fam;$("#v11").classList.remove("fam");drawDash();go("v9");if(f){dTab("f")}};
 function openAdmin(){
  if(AR.length){drawDash();$("#dash").hidden=false;$("#lg").hidden=true}
  else{$("#dash").hidden=true;$("#lg").hidden=false;$("#am").textContent=""}
