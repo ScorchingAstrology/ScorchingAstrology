@@ -447,6 +447,7 @@ a.btn[hidden]{display:none}
  #v2 #list{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 56px}
 }
 .cws svg .asp{pointer-events:none;transition:stroke-width .25s ease-out,filter .25s ease-out,opacity .25s}.cws svg .aspH:hover+.asp{stroke-width:1.7;opacity:1;filter:drop-shadow(0 0 2.5px rgba(255,255,255,.85))}
+@media(min-width:900px){#anSec .anBand .cws{transition:max-width .45s ease}#anSec.scr .anBand .cws{max-width:min(100%,129vh,1290px,var(--scw,1290px))}}
 .dtabs{margin:6px 0 4px}#v11.fam #mt,#v11.fam #nov,#v11.fam #rsc,#v11.fam #dz,#v11.fam #tc,#v11.fam .hcMan{display:none!important}
 #fForm textarea{width:100%;font:inherit;padding:12px;border:1.5px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink)}
 .nopay #v5 .cc,.nopay #hv,.nopay #v5 .lock,.nopay #v5 .refund,.nopay #hnote,.nopay #vnote,.nopay #pm{display:none!important}
@@ -1794,6 +1795,18 @@ $("#anSvc").onclick=()=>smoothTo(Math.max(0,$("#v1 > h1").getBoundingClientRect(
 const anOpen=()=>{if($("#v1").hidden)go("v1");anOnce();setTimeout(()=>smoothTo($("#anSec").getBoundingClientRect().top+scrollY+8,1400),60)};
 $("#manow").onclick=()=>{menu(false);anOpen()};
 if("IntersectionObserver" in window)new IntersectionObserver(e=>{if(e.some(x=>x.isIntersecting))anOnce()},{rootMargin:"400px"}).observe($("#anSec"));else anOnce();
+/* geniş ekranda alttaki tarih çubuğuyla oynarken çark küçülür, bırakınca büyür */
+{const sec=$("#anSec"),bar=$("#anTb"),desk=()=>matchMedia("(min-width:900px)").matches;let down=0,tm=0,on=false;
+ const busy=()=>down||bar.querySelector(".flow,.on");
+ const fit=()=>{const h=Math.max(260,innerHeight-bar.offsetHeight-60);sec.style.setProperty("--scw",h+"px")};
+ const start=()=>{if(!desk())return;if(!on){on=true;fit();const y0=bar.getBoundingClientRect().top,tT=Math.min(y0,innerHeight-bar.offsetHeight-12),t0=performance.now();sec.classList.add("scr");(function f(){const k=Math.min(1,(performance.now()-t0)/450),e=1-Math.pow(1-k,3),d=bar.getBoundingClientRect().top-(y0+(tT-y0)*e);if(Math.abs(d)>.5)scrollBy(0,d);if(k<1||Math.abs(d)>1)requestAnimationFrame(f)})()}};
+ const stop=()=>{clearTimeout(tm);tm=setTimeout(function chk(){if(busy()){tm=setTimeout(chk,400);return}on=false;const y0=bar.getBoundingClientRect().top,t0=performance.now();sec.classList.remove("scr");(function f(){const d=bar.getBoundingClientRect().top-y0;if(Math.abs(d)>1)scrollBy(0,d);if(performance.now()-t0<520)requestAnimationFrame(f)})()},700)};
+ let px=0,py=0,hold=0;
+ bar.addEventListener("pointerdown",e=>{if(!e.target.closest(".tbS"))return;down=1;px=e.clientX;py=e.clientY;clearTimeout(hold);hold=setTimeout(()=>{if(down)start()},450)},true);
+ document.addEventListener("pointermove",e=>{if(down&&!on&&Math.hypot(e.clientX-px,e.clientY-py)>8){clearTimeout(hold);start()}},true);
+ const up=()=>{clearTimeout(hold);if(down){down=0;if(on)stop()}};
+ document.addEventListener("pointerup",up,true);document.addEventListener("pointercancel",up,true);
+ addEventListener("resize",()=>{if(on)fit()})}
 yerOto($("#anYer"),x=>{anPlace(x);$("#anYer").value=x.ad;anStart()});
 $("#anYer").addEventListener("change",async()=>{const il=await yerCoz($("#anYer"));if(!il){$("#anSt").textContent=L("Bu yeri bulamadım. Şehir adını listeden seçmeyi ya da “Konumumu Kullan” düğmesini deneyebilirsin.","I could not find this place. Try picking a city from the list or the “Use My Location” button.");return}anPlace(il);$("#anYer").value=il.ad;anStart()});
 $("#anGeo").onclick=()=>{if(!navigator.geolocation){$("#anSt").textContent=L("Bu cihaz konum vermiyor.","This device does not provide location.");return}
